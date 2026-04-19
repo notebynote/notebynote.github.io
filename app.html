@@ -230,7 +230,7 @@ canvas.viz{width:100%;height:72px;margin-top:6px;display:block}
 </div>
 </div>
 
-<div style="font-size:10px;color:var(--text3);padding:4px 0 0;text-align:center">v1.0.42 · <a href="index.html" style="color:var(--text3);text-decoration:none">haakemusic.com</a></div>
+<div style="font-size:10px;color:var(--text3);padding:4px 0 0;text-align:center">v1.0.43 · <a href="index.html" style="color:var(--text3);text-decoration:none">haakemusic.com</a></div>
 <div class="logo-bar">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;700&display=swap">
   <span style="font-family:'Barlow',sans-serif;font-weight:700;font-size:22px;color:var(--text);letter-spacing:0.5px">haake</span><span style="font-family:'Barlow',sans-serif;font-weight:300;font-size:22px;color:var(--text2);letter-spacing:0.5px">music</span><span style="font-family:'Barlow',sans-serif;font-weight:300;font-size:13px;color:var(--text3)">.com</span>
@@ -451,9 +451,11 @@ function buildTable(){
     const octCell=hasOctShift
       ? `<label class="oct-shift" title="+1 Oktave"><input type="checkbox" id="oct-${vd.id}">+Oct</label>`
       : ``;
+    const BOLD_IDS = ['p1','p4','p5','oct'];
+    const boldStyle = BOLD_IDS.includes(vd.id) ? 'font-weight:700' : 'font-weight:500';
     const tr=document.createElement('tr');
     tr.innerHTML=`
-      <td style="font-size:12px;font-weight:500;white-space:nowrap" class="vname-cell" data-id="${vd.id}">${vd.de}</td>
+      <td style="font-size:12px;${boldStyle};white-space:nowrap" class="vname-cell" data-id="${vd.id}">${vd.de}</td>
       <td style="font-size:11px;color:var(--text3);white-space:nowrap" class="vint-cell" data-id="${vd.id}">${vd.id==='p1'?'Prime':vd.id==='oct'?'Okt.':vd.short}</td>
       <td class="c"><button class="tog${vd.defOn?' on':''}" id="tog-${vd.id}"></button></td>
       <td><div class="srow"><input type="range" id="vol-${vd.id}" min="0" max="100" value="${vd.defVol}"><span class="sv" id="vol-v-${vd.id}">${vd.defVol}%</span></div></td>
@@ -582,6 +584,8 @@ const LANG = {
     lfo:'LFO — Amplitudenmodulation', rate:'Rate', depth:'Tiefe',
     master:'Master', tuning_eq:'Gleichstufig', tuning_just:'Reine Stimmung',
     theme:'Theme',
+    preset_major:'Dur', preset_minor:'Moll', preset_aug:'Übermäßig', preset_dim:'Vermindert', preset_dom7:'Septakkord',
+    wf_saw:'Sägezahn', wf_sin:'Sinus', wf_tri:'Dreieck', wf_sqr:'Rechteck',
     themes:{dark:'Schwarz',gray:'Grau',light:'Hell',neutral:'Neutral',green:'Grün',blue:'Blau',red:'Rot',yellow:'Gelb',ocker:'Ocker',pastel:'Pastell'},
   },
   en: {
@@ -593,6 +597,8 @@ const LANG = {
     lfo:'LFO — Amplitude Modulation', rate:'Rate', depth:'Depth',
     master:'Master', tuning_eq:'Equal temperament', tuning_just:'Just intonation',
     theme:'Theme',
+    preset_major:'Major', preset_minor:'Minor', preset_aug:'Augmented', preset_dim:'Diminished', preset_dom7:'Dominant 7th',
+    wf_saw:'Sawtooth', wf_sin:'Sine', wf_tri:'Triangle', wf_sqr:'Square',
     themes:{dark:'Black',gray:'Gray',light:'Light',neutral:'Neutral',green:'Green',blue:'Blue',red:'Red',yellow:'Yellow',ocker:'Ochre',pastel:'Pastel'},
   }
 };
@@ -603,24 +609,68 @@ function setLang(lang, btn) {
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
   if(btn) btn.classList.add('active');
   const L = LANG[lang];
+
+  // Start button
   const sb = document.getElementById('start-btn');
   if(sb) sb.textContent = running ? L.stop : L.start;
+
+  // data-i18n elements
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if(L[key]) el.textContent = L[key];
   });
+
+  // Tuning options
   const eq = document.querySelector('#tuning option[value="equal"]');
   const jt = document.querySelector('#tuning option[value="just"]');
   if(eq) eq.textContent = L.tuning_eq;
   if(jt) jt.textContent = L.tuning_just;
+
+  // Preset options
+  const presetMap = {major:'preset_major',minor:'preset_minor',aug:'preset_aug',dim:'preset_dim',dom7:'preset_dom7'};
+  Object.entries(presetMap).forEach(([val,key])=>{
+    const opt = document.querySelector('#preset option[value="'+val+'"]');
+    if(opt) opt.textContent = L[key];
+  });
+
+  // Waveform global select
+  const wfMap = {sawtooth:'wf_saw',sine:'wf_sin',triangle:'wf_tri',square:'wf_sqr'};
+  Object.entries(wfMap).forEach(([val,key])=>{
+    const opt = document.querySelector('#wf-global option[value="'+val+'"]');
+    if(opt && L[key]) opt.textContent = L[key];
+  });
+
+  // Per-voice waveform selects
+  VOICES_DEF.forEach(vd=>{
+    const sel = document.getElementById('wf-'+vd.id);
+    if(!sel) return;
+    Object.entries(wfMap).forEach(([val,key])=>{
+      const opt = sel.querySelector('option[value="'+val+'"]');
+      if(opt && L[key]) opt.textContent = L[key];
+    });
+  });
+
+  // Pad card title
+  const padTitle = document.querySelector('.card-head span:not([data-i18n])');
+  if(padTitle) padTitle.textContent = L.pad;
+
+  // Voice name cells — bold for p1, p4, p5, oct
+  const BOLD_IDS = ['p1','p4','p5','oct'];
   document.querySelectorAll('.vname-cell').forEach(el => {
     const vd = VOICES_DEF.find(v => v.id === el.getAttribute('data-id'));
-    if(vd) el.textContent = lang === 'en' ? vd.en : vd.de;
+    if(!vd) return;
+    const name = lang === 'en' ? vd.en : vd.de;
+    el.style.fontWeight = BOLD_IDS.includes(vd.id) ? '700' : '500';
+    el.textContent = name;
   });
+
+  // Interval cells
   document.querySelectorAll('.vint-cell').forEach(el => {
     const vd = VOICES_DEF.find(v => v.id === el.getAttribute('data-id'));
     if(vd) el.textContent = (lang==='en'||!['p1','oct'].includes(vd.id)) ? vd.short : vd.de;
   });
+
+  // Theme buttons
   document.querySelectorAll('.theme-btn').forEach(btn2 => {
     const key = btn2.getAttribute('data-theme');
     if(key && L.themes[key]) btn2.textContent = L.themes[key];
