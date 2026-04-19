@@ -608,6 +608,12 @@ function setTheme(theme,btn){
   document.querySelectorAll('.theme-btn').forEach(b=>b.classList.remove('active'));
   if(btn)btn.classList.add('active');
 }
+
+document.addEventListener('visibilitychange', function() {
+  if (document.visibilityState === 'visible' && ctx && ctx.state === 'suspended') {
+    ctx.resume();
+  }
+});
 </script>
 </body>
 </html>
