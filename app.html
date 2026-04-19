@@ -97,6 +97,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 .cl{font-size:11px;color:var(--text2);min-width:76px}
 .cv{font-size:11px;color:var(--text2);min-width:44px;text-align:right;font-variant-numeric:tabular-nums}
 canvas.viz{width:100%;height:72px;margin-top:6px;display:block}
+.navbtn{width:26px;height:26px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);background:var(--surface2);color:var(--text);font-size:11px;cursor:pointer;transition:background .15s;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0}
+.navbtn:hover{background:var(--border2)}
+.oct-shift{display:flex;align-items:center;gap:3px;font-size:10px;color:var(--text2);white-space:nowrap;cursor:pointer}
+.oct-shift input[type=checkbox]{accent-color:var(--green);width:12px;height:12px;cursor:pointer;margin:0}
 .lang-bar{display:flex;justify-content:flex-end;align-items:center;gap:4px;margin-bottom:8px}
 .lang-btn{padding:3px 8px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);background:transparent;color:var(--text2);font-size:11px;cursor:pointer;transition:background .15s,color .15s}
 .lang-btn.active{background:var(--surface2);color:var(--text)}
@@ -134,24 +138,46 @@ canvas.viz{width:100%;height:72px;margin-top:6px;display:block}
 </div>
 
 <div class="topbar">
-  <select id="root-note">
-    <option value="55">A2</option><option value="58.27">B♭2</option>
-    <option value="61.74">B2</option><option value="65.41">C3</option>
-    <option value="69.3">C#3</option><option value="73.42">D3</option>
-    <option value="77.78">E♭3</option><option value="82.41">E3</option>
-    <option value="87.31">F3</option><option value="92.5">F#3</option>
-    <option value="98">G3</option><option value="103.83">G#3</option>
-    <option value="110">A3</option><option value="116.54">B♭3</option>
-    <option value="123.47">B3</option><option value="130.81" selected>C4</option>
-    <option value="138.59">C#4</option><option value="146.83">D4</option>
-    <option value="155.56">E♭4</option><option value="164.81">E4</option>
-    <option value="174.61">F4</option><option value="185">F#4</option>
-    <option value="196">G4</option><option value="207.65">G#4</option>
-    <option value="220">A4</option>
-  </select>
   <select id="tuning">
     <option value="equal">Gleichstufig</option>
     <option value="just">Reine Stimmung</option>
+  </select>
+  <button class="navbtn" id="root-down" title="Grundton tiefer">&#9660;</button>
+  <select id="root-note">
+    <option value="220">A4</option>
+    <option value="207.65">G#4</option>
+    <option value="196">G4</option>
+    <option value="185">F#4</option>
+    <option value="174.61">F4</option>
+    <option value="164.81">E4</option>
+    <option value="155.56">E♭4</option>
+    <option value="146.83">D4</option>
+    <option value="138.59">C#4</option>
+    <option value="130.81" selected>C4</option>
+    <option value="123.47">B3</option>
+    <option value="116.54">B♭3</option>
+    <option value="110">A3</option>
+    <option value="103.83">G#3</option>
+    <option value="98">G3</option>
+    <option value="92.5">F#3</option>
+    <option value="87.31">F3</option>
+    <option value="82.41">E3</option>
+    <option value="77.78">E♭3</option>
+    <option value="73.42">D3</option>
+    <option value="69.3">C#3</option>
+    <option value="65.41">C3</option>
+    <option value="61.74">B2</option>
+    <option value="58.27">B♭2</option>
+    <option value="55">A2</option>
+  </select>
+  <button class="navbtn" id="root-up" title="Grundton höher">&#9650;</button>
+  <select id="preset" style="min-width:110px">
+    <option value="">— Preset —</option>
+    <option value="major">Dur</option>
+    <option value="minor">Moll</option>
+    <option value="aug">Übermäßig</option>
+    <option value="dim">Vermindert</option>
+    <option value="dom7">Septakkord</option>
   </select>
   <div class="mvol">
     <span data-i18n="master">Master</span>
@@ -170,7 +196,7 @@ canvas.viz{width:100%;height:72px;margin-top:6px;display:block}
 <table class="vt">
   <thead>
     <tr>
-      <th data-i18n="voice">Stimme</th><th data-i18n="interval">Int.</th><th class="c" data-i18n="on">An</th><th data-i18n="vol">Lautstärke</th><th style="min-width:60px" data-i18n="wave">Welle</th><th class="c" data-i18n="hz">Hz</th>
+      <th data-i18n="voice">Stimme</th><th data-i18n="interval">Int.</th><th class="c" data-i18n="on">An</th><th data-i18n="vol">Lautstärke</th><th style="font-size:10px;color:var(--text2)">+Oct</th><th style="min-width:60px" data-i18n="wave">Welle</th><th class="c" data-i18n="hz">Hz</th>
     </tr>
   </thead>
   <tbody id="vtbody"></tbody>
@@ -295,7 +321,7 @@ function rebuildAllVoices(){
   VOICES_DEF.forEach(vd=>{
     const old=nodes[vd.id];
     if(old){old.oscs.forEach(o=>{try{o.stop()}catch(e){}});old.voiceGain.disconnect();}
-    nodes[vd.id]=createVoice(vd,root*vd.ratio[tuning]);
+    nodes[vd.id]=createVoice(vd,root*getVoiceRatio(vd));
     const on=document.getElementById('tog-'+vd.id).classList.contains('on');
     if(!on){nodes[vd.id].voiceGain.gain.cancelScheduledValues(ctx.currentTime);nodes[vd.id].voiceGain.gain.value=0;}
   });
@@ -407,16 +433,31 @@ function drawViz(t,rate,depth,lfoOn){
   dc.beginPath();dc.moveTo(W/2,0);dc.lineTo(W/2,H);dc.stroke();dc.setLineDash([]);
 }
 
+const OCT_SHIFT_IDS = ['m3','M3','p5'];
+const octShift = {m3:false, M3:false, p5:false};
+
+function getVoiceRatio(vd){
+  const tuning=document.getElementById('tuning').value;
+  let ratio=vd.ratio[tuning];
+  if(OCT_SHIFT_IDS.includes(vd.id) && octShift[vd.id]) ratio*=2;
+  return ratio;
+}
+
 function buildTable(){
   const tb=document.getElementById('vtbody');
   VOICES_DEF.forEach(vd=>{
     phases[vd.id]=Math.random()*2*Math.PI;
+    const hasOctShift=OCT_SHIFT_IDS.includes(vd.id);
+    const octCell=hasOctShift
+      ? `<label class="oct-shift" title="+1 Oktave"><input type="checkbox" id="oct-${vd.id}">+Oct</label>`
+      : ``;
     const tr=document.createElement('tr');
     tr.innerHTML=`
       <td style="font-size:12px;font-weight:500;white-space:nowrap" class="vname-cell" data-id="${vd.id}">${vd.de}</td>
       <td style="font-size:11px;color:var(--text3);white-space:nowrap" class="vint-cell" data-id="${vd.id}">${vd.id==='p1'?'Prime':vd.id==='oct'?'Okt.':vd.short}</td>
       <td class="c"><button class="tog${vd.defOn?' on':''}" id="tog-${vd.id}"></button></td>
       <td><div class="srow"><input type="range" id="vol-${vd.id}" min="0" max="100" value="${vd.defVol}"><span class="sv" id="vol-v-${vd.id}">${vd.defVol}%</span></div></td>
+      <td style="white-space:nowrap">${octCell}</td>
       <td><select style="font-size:10px;padding:2px 4px;border:0.5px solid var(--border2);border-radius:4px;background:var(--surface2);color:var(--text);width:100%" id="wf-${vd.id}"><option value="sawtooth" selected>Saw</option><option value="sine">Sin</option><option value="triangle">Tri</option><option value="square">Sqr</option></select></td>
       <td class="c"><span style="font-size:10px;color:var(--text3);display:inline-block;min-width:44px;text-align:right" id="hz-${vd.id}">–</span></td>
     `;
@@ -430,6 +471,23 @@ function buildTable(){
       if(val===0 && tog.classList.contains('on')) tog.classList.remove('on');
       if(val>0 && !tog.classList.contains('on')) tog.classList.add('on');
     });
+    if(hasOctShift){
+      document.getElementById('oct-'+vd.id).addEventListener('change',e=>{
+        octShift[vd.id]=e.target.checked;
+        if(running){
+          const root=parseFloat(document.getElementById('root-note').value);
+          const v=nodes[vd.id]; if(!v) return;
+          const freq=root*getVoiceRatio(vd);
+          const dc=parseFloat(document.getElementById('detune').value);
+          v.oscs.forEach((osc,i)=>{
+            const uc=v.oscs.length;
+            const sp=uc===1?0:(i/(uc-1)-0.5)*2*dc;
+            osc.frequency.setTargetAtTime(freq*Math.pow(2,sp/1200),ctx.currentTime,.05);
+          });
+          document.getElementById('hz-'+vd.id).textContent=freq.toFixed(1);
+        }
+      });
+    }
   });
 }
 document.addEventListener('DOMContentLoaded',()=>{
@@ -461,11 +519,10 @@ document.getElementById('rev-size').addEventListener('input',e=>{
 document.getElementById('root-note').addEventListener('change',()=>{
   if(!running)return;
   const root=parseFloat(document.getElementById('root-note').value);
-  const tuning=document.getElementById('tuning').value;
   const dc=parseFloat(document.getElementById('detune').value);
   VOICES_DEF.forEach(vd=>{
     const v=nodes[vd.id];if(!v)return;
-    const freq=root*vd.ratio[tuning];
+    const freq=root*getVoiceRatio(vd);
     v.oscs.forEach((osc,i)=>{const uc=v.oscs.length;const sp=uc===1?0:(i/(uc-1)-0.5)*2*dc;osc.frequency.setTargetAtTime(freq*Math.pow(2,sp/1200),ctx.currentTime,.05);});
     document.getElementById('hz-'+vd.id).textContent=freq.toFixed(1);
   });
@@ -480,9 +537,8 @@ document.getElementById('start-btn').addEventListener('click',()=>{
     masterGain.connect(ctx.destination);
     setupFx();
     const root=parseFloat(document.getElementById('root-note').value);
-    const tuning=document.getElementById('tuning').value;
     VOICES_DEF.forEach(vd=>{
-      const freq=root*vd.ratio[tuning];
+      const freq=root*getVoiceRatio(vd);
       nodes[vd.id]=createVoice(vd,freq);
       const on=document.getElementById('tog-'+vd.id).classList.contains('on');
       if(!on){nodes[vd.id].voiceGain.gain.cancelScheduledValues(ctx.currentTime);nodes[vd.id].voiceGain.gain.value=0;}
@@ -600,6 +656,53 @@ document.addEventListener('DOMContentLoaded',function(){
       if(v&&v.oscs) v.oscs.forEach(function(o){try{o.type=e.target.value;}catch(x){}});
     });
   });
+  // Root nav buttons
+  document.getElementById('root-down').addEventListener('click',function(){
+    const sel=document.getElementById('root-note');
+    if(sel.selectedIndex < sel.options.length-1){
+      sel.selectedIndex++;
+      sel.dispatchEvent(new Event('change'));
+    }
+  });
+  document.getElementById('root-up').addEventListener('click',function(){
+    const sel=document.getElementById('root-note');
+    if(sel.selectedIndex > 0){
+      sel.selectedIndex--;
+      sel.dispatchEvent(new Event('change'));
+    }
+  });
+
+  // Preset logic
+  // voice IDs per preset: [id, vol, on]
+  const PRESETS = {
+    major:  [{id:'p1',vol:80},{id:'M3',vol:65},{id:'p5',vol:65},{id:'oct',vol:70}],
+    minor:  [{id:'p1',vol:80},{id:'m3',vol:65},{id:'p5',vol:65},{id:'oct',vol:70}],
+    aug:    [{id:'p1',vol:80},{id:'M3',vol:65},{id:'m6',vol:65},{id:'oct',vol:70}],
+    dim:    [{id:'p1',vol:80},{id:'m3',vol:65},{id:'tt',vol:65},{id:'oct',vol:70}],
+    dom7:   [{id:'p1',vol:80},{id:'M3',vol:65},{id:'p5',vol:65},{id:'m7',vol:65},{id:'oct',vol:70}],
+  };
+  document.getElementById('preset').addEventListener('change',function(){
+    const val=this.value; if(!val) return;
+    const activeIds=new Set(PRESETS[val].map(x=>x.id));
+    // Turn off all voices first
+    VOICES_DEF.forEach(function(vd){
+      const tog=document.getElementById('tog-'+vd.id);
+      const vol=document.getElementById('vol-'+vd.id);
+      const volV=document.getElementById('vol-v-'+vd.id);
+      if(activeIds.has(vd.id)){
+        const entry=PRESETS[val].find(x=>x.id===vd.id);
+        vol.value=entry.vol;
+        volV.textContent=entry.vol+'%';
+        if(!tog.classList.contains('on')) tog.classList.add('on');
+      } else {
+        vol.value=0;
+        volV.textContent='0%';
+        if(tog.classList.contains('on')) tog.classList.remove('on');
+      }
+    });
+    // Reset to empty after applying so it can be re-selected
+    setTimeout(function(){document.getElementById('preset').value='';},50);
+  });
 });
 
 
@@ -609,7 +712,7 @@ function setTheme(theme,btn){
   if(btn)btn.classList.add('active');
 }
 
-document.addEventListener('visibilitychange', function() {
+document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible' && ctx && ctx.state === 'suspended') {
     ctx.resume();
   }
