@@ -69,8 +69,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 .tech-card{background:rgba(255,255,255,.05);border:1px solid rgba(120,170,230,.14);border-radius:16px;padding:26px 22px}
 .tech-card h3{font-size:16px;font-weight:700;color:#a8d0f8;margin-bottom:10px}
 .tech-card p{font-size:14px;color:#88aed0;line-height:1.6}
-.download-btn{display:inline-flex;align-items:center;gap:10px;background:#2a6fd6;color:#fff;border:2px solid #4a8af0;padding:14px 28px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;transition:background .2s;margin-top:16px;text-decoration:none}
+.download-btn{display:inline-flex;align-items:center;gap:10px;background:#2a6fd6;color:#fff;border:2px solid #4a8af0;padding:14px 28px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;transition:background .2s,opacity .2s;margin-top:16px;text-decoration:none}
 .download-btn:hover{background:#3a80e6}
+.download-btn-disabled{opacity:.35;pointer-events:none;cursor:not-allowed}
+.security-confirm{display:flex;align-items:center;gap:10px;margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,200,50,.15);cursor:pointer;font-size:14px;color:#d0b870;font-style:normal;font-weight:600}
+.security-confirm input[type=checkbox]{width:17px;height:17px;accent-color:#f0d060;cursor:pointer;flex-shrink:0}
 .platform-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.06);border:1px solid rgba(120,170,230,.2);color:#7ab0e8;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:500;margin:6px 4px 0 0}
 .platform-tag.coming-soon{opacity:.55;position:relative}
 .platform-tag.coming-soon::after{content:'In Entwicklung';position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);font-size:10px;color:#5a7a9a;white-space:nowrap}
@@ -628,10 +631,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
   <div class="tech-card" style="margin-top:28px;max-width:560px">
     <h3>🍎 Mac-App — jetzt verfügbar</h3>
     <p id="l-mac-lead">Apple Silicon &amp; Intel · macOS 12 oder neuer · Kostenlos</p>
-    <a class="download-btn" href="https://github.com/notebynote/drone-pad/releases/download/V44/DronePad_1.0_universal.zip" id="l-mac-btn" download>
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/></svg>
-      Mac-App herunterladen
-    </a>
     <div class="security-note" id="l-mac-security">
       <strong>⚠️ Hinweis beim ersten Öffnen</strong>
       Da die App nicht im Mac App Store vertrieben wird, zeigt macOS beim ersten Start einen Sicherheitshinweis. So gehst du vor:
@@ -642,7 +641,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
         <li>Bestätige mit deinem Passwort oder Touch ID</li>
       </ol>
       Dies ist ein einmaliger Vorgang. Die App selbst ist sicher — sie läuft vollständig lokal ohne Internetverbindung.
+      <label class="security-confirm" id="l-mac-confirm-label">
+        <input type="checkbox" id="security-confirm-cb" onchange="updateDownloadBtn()">
+        <span id="l-mac-confirm-text">Ich habe den Hinweis gelesen und verstanden</span>
+      </label>
     </div>
+    <a class="download-btn download-btn-disabled" href="https://github.com/notebynote/drone-pad/releases/download/V44/DronePad_1.0_universal.zip" id="l-mac-btn" download>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/></svg>
+      Mac-App herunterladen
+    </a>
   </div>
 
   <!-- Other platforms -->
@@ -747,7 +754,8 @@ const T = {
     'l-tech-lead':'Drone Pad läuft direkt im Browser — ohne Installation. Zusätzlich gibt es eine native Mac-App für Apple Silicon und Intel. Weitere Plattformen folgen.',
     'l-mac-lead':'Apple Silicon & Intel · macOS 12 oder neuer · Kostenlos',
     'l-mac-btn':'Mac-App herunterladen',
-    'l-mac-security':'<strong>⚠️ Hinweis beim ersten Öffnen</strong> Da die App nicht im Mac App Store vertrieben wird, zeigt macOS beim ersten Start einen Sicherheitshinweis. So gehst du vor:<ol><li>Öffne die <strong>Systemeinstellungen</strong> → <strong>Datenschutz & Sicherheit</strong></li><li>Scrolle nach unten zum Abschnitt <em>Sicherheit</em></li><li>Klicke auf <strong>„Trotzdem öffnen"</strong> neben dem Hinweis zu Drone Pad</li><li>Bestätige mit deinem Passwort oder Touch ID</li></ol>Dies ist ein einmaliger Vorgang. Die App selbst ist sicher — sie läuft vollständig lokal ohne Internetverbindung.',
+    'l-mac-confirm-text':'Ich habe den Hinweis gelesen und verstanden',
+    'l-mac-security':'<strong>⚠️ Hinweis beim ersten Öffnen</strong> Da die App nicht im Mac App Store vertrieben wird, zeigt macOS beim ersten Start einen Sicherheitshinweis. So gehst du vor:<ol><li>Öffne die <strong>Systemeinstellungen</strong> → <strong>Datenschutz & Sicherheit</strong></li><li>Scrolle nach unten zum Abschnitt <em>Sicherheit</em></li><li>Klicke auf <strong>„Trotzdem öffnen"</strong> neben dem Hinweis zu Drone Pad</li><li>Bestätige mit deinem Passwort oder Touch ID</li></ol>Dies ist ein einmaliger Vorgang. Die App selbst ist sicher — sie läuft vollständig lokal ohne Internetverbindung.<label class="security-confirm" id="l-mac-confirm-label"><input type="checkbox" id="security-confirm-cb" onchange="updateDownloadBtn()"><span id="l-mac-confirm-text">Ich habe den Hinweis gelesen und verstanden</span></label>',
     'l-platforms-label':'Weitere Plattformen',
     'l-s1':'Stimmen / Intervalle','l-s2':'Unison-Oszillatoren','l-s3':'Wellenformen','l-s4':'Farbthemes','l-s5':'Stimmungssysteme','l-s6':'Kostenlos',
     'l-con-label':'Kontakt','l-con-h2':'Schreib uns','l-con-lead':'Fragen, Feedback oder Kooperationsanfragen — wir freuen uns über deine Nachricht.',
@@ -797,7 +805,8 @@ const T = {
     'l-tech-lead':'Drone Pad runs directly in the browser — no installation needed. A native Mac app is also available for Apple Silicon and Intel. More platforms coming soon.',
     'l-mac-lead':'Apple Silicon & Intel · macOS 12 or later · Free',
     'l-mac-btn':'Download Mac App',
-    'l-mac-security':'<strong>⚠️ Note on first launch</strong> Since the app is not distributed via the Mac App Store, macOS will show a security warning on first launch. Here\'s what to do:<ol><li>Open <strong>System Settings</strong> → <strong>Privacy & Security</strong></li><li>Scroll down to the <em>Security</em> section</li><li>Click <strong>"Open Anyway"</strong> next to the Drone Pad warning</li><li>Confirm with your password or Touch ID</li></ol>This is a one-time step. The app itself is safe — it runs entirely locally without an internet connection.',
+    'l-mac-confirm-text':'I have read and understood the notice',
+    'l-mac-security':'<strong>⚠️ Note on first launch</strong> Since the app is not distributed via the Mac App Store, macOS will show a security warning on first launch. Here\'s what to do:<ol><li>Open <strong>System Settings</strong> → <strong>Privacy & Security</strong></li><li>Scroll down to the <em>Security</em> section</li><li>Click <strong>"Open Anyway"</strong> next to the Drone Pad warning</li><li>Confirm with your password or Touch ID</li></ol>This is a one-time step. The app itself is safe — it runs entirely locally without an internet connection.<label class="security-confirm" id="l-mac-confirm-label"><input type="checkbox" id="security-confirm-cb" onchange="updateDownloadBtn()"><span id="l-mac-confirm-text">I have read and understood the notice</span></label>',
     'l-platforms-label':'More Platforms',
     'l-s1':'Voices / Intervals','l-s2':'Unison oscillators','l-s3':'Waveforms','l-s4':'Color themes','l-s5':'Tuning systems','l-s6':'Free',
     'l-con-label':'Contact','l-con-h2':'Get in touch','l-con-lead':'Questions, feedback, or collaboration — we look forward to hearing from you.',
@@ -820,6 +829,14 @@ function setLang(lang){
   document.getElementById('con-subject').placeholder=t.ps;
   document.getElementById('con-msg').placeholder=t.pm;
   document.getElementById('con-success').innerHTML=t.suc;
+  // After lang switch, security note is re-rendered → checkbox unchecked → disable btn
+  updateDownloadBtn();
+}
+
+function updateDownloadBtn(){
+  const cb=document.getElementById('security-confirm-cb');
+  const btn=document.getElementById('l-mac-btn');
+  if(cb&&btn) btn.classList.toggle('download-btn-disabled',!cb.checked);
 }
 
 function submitContact(){
