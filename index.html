@@ -102,8 +102,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 <body>
 
 <div class="lang-bar">
-  <button class="lang-btn active" id="btn-de" onclick="setLang('de')">DE</button>
-  <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" id="btn-de" onclick="setLang('de')">DE</button>
+  <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
 </div>
 
 <div class="hero">
@@ -113,8 +113,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
   <h1>Drone Pad<br><span id="l-h1">Dein persönlicher<br>Intonations-Assistent</span></h1>
   <p class="hero-sub" id="l-sub">Ein stimmreiner Drohnen-Synthesizer für Musiker, die auf genaue Intonation angewiesen sind — und für alle, die Klang als Meditation erleben.</p>
   <div class="cta-row">
-    <a class="btn-primary" id="l-cta-dl" href="#sec-download">Download App</a>
-    <a class="btn-primary" id="l-cta1" href="app.html">App starten (Browser)</a>
+    <a class="btn-primary" id="l-cta1" href="app.html">App starten</a>
     <button class="btn-ghost" id="l-cta2" onclick="document.getElementById('sec-contact').scrollIntoView({behavior:'smooth'})">Kontakt</button>
   </div>
 </div>
@@ -619,31 +618,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 </div>
 
 <!-- TECH / DOWNLOAD -->
-<div class="section" id="sec-download">
+<div class="section">
   <div class="section-label" id="l-tech-label">Technische Details</div>
   <div class="divider"></div>
   <h2 id="l-tech-h2">Entweder im Browser<br>oder als App.</h2>
   <p class="lead" id="l-tech-lead">Drone Pad läuft direkt im Browser — ohne Installation. Zusätzlich gibt es eine native Mac-App für Apple Silicon und Intel. Weitere Plattformen folgen.</p>
 
-  <!-- Mac Download -->
+  <!-- Mac Coming Soon -->
   <div class="tech-card" style="margin-top:28px;max-width:560px">
-    <h3>🍎 Mac-App — jetzt verfügbar</h3>
+    <h3 id="l-mac-head">🍎 Mac-App — demnächst im Mac App Store</h3>
     <p id="l-mac-lead">Apple Silicon &amp; Intel · macOS 12 oder neuer · Kostenlos</p>
-    <a class="download-btn" href="https://github.com/notebynote/drone-pad/releases/download/V44/DronePad_1.0_universal.zip" id="l-mac-btn" download>
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/></svg>
-      Mac-App herunterladen
-    </a>
-    <div class="security-note" id="l-mac-security">
-      <strong>⚠️ Hinweis beim ersten Öffnen</strong>
-      Da die App nicht im Mac App Store vertrieben wird, zeigt macOS beim ersten Start einen Sicherheitshinweis. So gehst du vor:
-      <ol>
-        <li>Öffne die <strong>Systemeinstellungen</strong> → <strong>Datenschutz &amp; Sicherheit</strong></li>
-        <li>Scrolle nach unten zum Abschnitt <em>Sicherheit</em></li>
-        <li>Klicke auf <strong>„Trotzdem öffnen"</strong> neben dem Hinweis zu Drone Pad</li>
-        <li>Bestätige mit deinem Passwort oder Touch ID</li>
-      </ol>
-      Dies ist ein einmaliger Vorgang. Die App selbst ist sicher — sie läuft vollständig lokal ohne Internetverbindung.
+    <div class="security-note" style="background:rgba(42,111,214,.1);border-color:rgba(42,111,214,.3);color:#a0c8f0;margin-top:16px" id="l-mac-soon">
+      <strong style="color:#7ab0e8">ℹ️ App Store-Version in Vorbereitung</strong>
+      Die native Mac-App befindet sich derzeit im Review-Prozess für den Mac App Store. Bis zur Veröffentlichung steht Drone Pad vollständig als Browser-App zur Verfügung — ohne Installation, direkt im Browser nutzbar.
     </div>
+    <a class="btn-primary" href="app.html" id="l-mac-app-btn" style="margin-top:16px;display:inline-flex;align-items:center;gap:8px;padding:12px 28px;font-size:15px">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 8 16 12 12 16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+      <span id="l-mac-app-btn-label">Browser-App starten</span>
+    </a>
   </div>
 
   <!-- Other platforms -->
@@ -710,7 +702,7 @@ const T = {
   de:{
     'l-h1':'Dein persönlicher<br>Intonations-Assistent',
     'l-sub':'Ein stimmreiner Drohnen-Synthesizer für Musiker, die auf genaue Intonation angewiesen sind — und für alle, die Klang als Meditation erleben.',
-    'l-cta1':'App starten (Browser)','l-cta2':'Kontakt',
+    'l-cta1':'App starten','l-cta2':'Kontakt',
     'l-feat-label':'Funktionen','l-feat-h2':'Stimmreine Töne. Jederzeit. Überall.',
     'l-feat-lead':'Drone Pad erzeugt einen oder mehrere gehaltene Referenztöne — in Gleichstufiger oder Reiner Stimmung — mit vollständig anpassbarem Klangbild.',
     'l-f1h':'16 Intervalle','l-f1p':'Von der Prime bis zur Duodezime — einzeln aktivierbar, mit eigenem Lautstärkeregler und Wellenform.',
@@ -746,9 +738,10 @@ const T = {
     'l-quote':'„Ein Instrument zum Hören. Ein Werkzeug zum Üben. Ein Raum zum Sein."',
     'l-tech-label':'Technische Details','l-tech-h2':'Entweder im Browser<br>oder als App.',
     'l-tech-lead':'Drone Pad läuft direkt im Browser — ohne Installation. Zusätzlich gibt es eine native Mac-App für Apple Silicon und Intel. Weitere Plattformen folgen.',
-    'l-mac-lead':'Apple Silicon & Intel · macOS 12 oder neuer · Kostenlos',
-    'l-mac-btn':'Mac-App herunterladen',
-    'l-mac-security':'<strong>⚠️ Hinweis beim ersten Öffnen</strong> Da die App nicht im Mac App Store vertrieben wird, zeigt macOS beim ersten Start einen Sicherheitshinweis. So gehst du vor:<ol><li>Öffne die <strong>Systemeinstellungen</strong> → <strong>Datenschutz & Sicherheit</strong></li><li>Scrolle nach unten zum Abschnitt <em>Sicherheit</em></li><li>Klicke auf <strong>„Trotzdem öffnen"</strong> neben dem Hinweis zu Drone Pad</li><li>Bestätige mit deinem Passwort oder Touch ID</li></ol>Dies ist ein einmaliger Vorgang. Die App selbst ist sicher — sie läuft vollständig lokal ohne Internetverbindung.',
+    'l-mac-head':'🍎 Mac-App — demnächst im Mac App Store',
+    'l-mac-lead':'Apple Silicon &amp; Intel · macOS 12 oder neuer · Kostenlos',
+    'l-mac-soon':'<strong style="color:#7ab0e8">ℹ️ App Store-Version in Vorbereitung</strong> Die native Mac-App befindet sich derzeit im Review-Prozess für den Mac App Store. Bis zur Veröffentlichung steht Drone Pad vollständig als Browser-App zur Verfügung — ohne Installation, direkt im Browser nutzbar.',
+    'l-mac-app-btn-label':'Browser-App starten',
     'l-platforms-label':'Weitere Plattformen',
     'l-s1':'Stimmen / Intervalle','l-s2':'Unison-Oszillatoren','l-s3':'Wellenformen','l-s4':'Farbthemes','l-s5':'Stimmungssysteme','l-s6':'Kostenlos',
     'l-con-label':'Kontakt','l-con-h2':'Schreib uns','l-con-lead':'Fragen, Feedback oder Kooperationsanfragen — wir freuen uns über deine Nachricht.',
@@ -760,7 +753,7 @@ const T = {
   en:{
     'l-h1':'Your Personal<br>Intonation Assistant',
     'l-sub':'A pitch-pure drone synthesizer for musicians who depend on precise intonation — and for everyone who experiences sound as meditation.',
-    'l-cta1':'Open App (Browser)','l-cta2':'Contact',
+    'l-cta1':'Open App','l-cta2':'Contact',
     'l-feat-label':'Features','l-feat-h2':'Pure Tones. Anytime. Anywhere.',
     'l-feat-lead':'Drone Pad generates one or more sustained reference tones — in equal or just intonation — with a fully customizable sound profile.',
     'l-f1h':'16 Intervals','l-f1p':'From root to perfect twelfth — each individually switchable, with its own volume and waveform.',
@@ -796,9 +789,10 @@ const T = {
     'l-quote':'"An instrument for listening. A tool for practicing. A space for being."',
     'l-tech-label':'Technical Details','l-tech-h2':'In the browser<br>or as an app.',
     'l-tech-lead':'Drone Pad runs directly in the browser — no installation needed. A native Mac app is also available for Apple Silicon and Intel. More platforms coming soon.',
+    'l-mac-head':'🍎 Mac App — coming soon to the Mac App Store',
     'l-mac-lead':'Apple Silicon & Intel · macOS 12 or later · Free',
-    'l-mac-btn':'Download Mac App',
-    'l-mac-security':'<strong>⚠️ Note on first launch</strong> Since the app is not distributed via the Mac App Store, macOS will show a security warning on first launch. Here\'s what to do:<ol><li>Open <strong>System Settings</strong> → <strong>Privacy & Security</strong></li><li>Scroll down to the <em>Security</em> section</li><li>Click <strong>"Open Anyway"</strong> next to the Drone Pad warning</li><li>Confirm with your password or Touch ID</li></ol>This is a one-time step. The app itself is safe — it runs entirely locally without an internet connection.',
+    'l-mac-soon':'<strong style="color:#7ab0e8">ℹ️ App Store version in preparation</strong> The native Mac app is currently going through the Mac App Store review process. In the meantime, Drone Pad is fully available as a browser app — no installation required, ready to use directly in your browser.',
+    'l-mac-app-btn-label':'Open Browser App',
     'l-platforms-label':'More Platforms',
     'l-s1':'Voices / Intervals','l-s2':'Unison oscillators','l-s3':'Waveforms','l-s4':'Color themes','l-s5':'Tuning systems','l-s6':'Free',
     'l-con-label':'Contact','l-con-h2':'Get in touch','l-con-lead':'Questions, feedback, or collaboration — we look forward to hearing from you.',
@@ -822,6 +816,8 @@ function setLang(lang){
   document.getElementById('con-msg').placeholder=t.pm;
   document.getElementById('con-success').innerHTML=t.suc;
 }
+
+document.addEventListener('DOMContentLoaded', () => setLang('en'));
 
 function submitContact(){
   const s=document.getElementById('con-subject').value.trim();
