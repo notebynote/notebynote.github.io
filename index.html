@@ -22,10 +22,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 .hero h1 span{color:#7ab0e8}
 .hero-sub{font-size:clamp(17px,2.2vw,20px);color:#c0d8f0;max-width:600px;margin:0 auto 36px;line-height:1.65;font-weight:300}
 .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.btn-primary{background:#2a6fd6;color:#fff;border:2px solid #4a8af0;padding:14px 34px;border-radius:50px;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:.01em;transition:background .2s;text-decoration:none;display:inline-block}
+.btn-primary{background:#2a6fd6;color:#fff;border:2px solid #4a8af0;padding:14px 34px;border-radius:50px;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:.01em;transition:all .2s;text-decoration:none;display:inline-block}
 .btn-primary:hover{background:#3a80e6}
 .btn-ghost{background:rgba(255,255,255,.13);color:#fff;border:2px solid rgba(180,210,255,.5);padding:14px 34px;border-radius:50px;font-size:16px;font-weight:600;cursor:pointer;transition:all .2s}
 .btn-ghost:hover{background:rgba(255,255,255,.22);border-color:rgba(180,210,255,.9)}
+.btn-store{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(160deg,rgba(255,255,255,.07) 0%,rgba(255,255,255,.02) 100%);color:#7aa8cc;border:1.5px solid rgba(80,130,190,.25);padding:13px 26px;border-radius:50px;font-size:15px;font-weight:600;cursor:pointer;letter-spacing:.01em;transition:all .25s;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.08)}
+.btn-store:hover{background:linear-gradient(160deg,#2e7de0 0%,#1e5ab8 100%);color:#fff;border-color:#4a8af0;box-shadow:0 0 28px rgba(60,140,255,.45),0 6px 22px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.2)}
+.btn-store--active{background:linear-gradient(160deg,#2a6fd6 0%,#1a4fb0 100%);color:#fff;border-color:#4a8af0;box-shadow:0 4px 18px rgba(30,90,200,.45),inset 0 1px 0 rgba(255,255,255,.18)}
+.btn-store--active:hover{background:linear-gradient(160deg,#3a80e6 0%,#2a60d0 100%);box-shadow:0 0 32px rgba(60,140,255,.55),0 6px 22px rgba(30,90,200,.45),inset 0 1px 0 rgba(255,255,255,.22)}
+.btn-store--dim{background:linear-gradient(160deg,rgba(255,255,255,.03) 0%,rgba(255,255,255,.01) 100%);color:#4a6a88;border-color:rgba(80,130,190,.12);box-shadow:0 2px 8px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.04);transition:all .25s}
+.btn-store--sm{padding:9px 20px;font-size:13px;gap:7px}
 .section{max-width:960px;margin:0 auto;padding:64px 24px 0}
 .section-label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#7ab0e8;margin-bottom:10px;font-weight:700}
 .divider{width:44px;height:3px;background:linear-gradient(to right,#2a6fd6,#7ab0e8);border-radius:3px;margin:0 0 24px}
@@ -71,7 +77,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 .tech-card p{font-size:14px;color:#88aed0;line-height:1.6}
 .download-btn{display:inline-flex;align-items:center;gap:10px;background:#2a6fd6;color:#fff;border:2px solid #4a8af0;padding:14px 28px;border-radius:50px;font-size:15px;font-weight:700;cursor:pointer;transition:background .2s;margin-top:16px;text-decoration:none}
 .download-btn:hover{background:#3a80e6}
-.platform-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.06);border:1px solid rgba(120,170,230,.2);color:#7ab0e8;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:500;margin:6px 4px 0 0}
+.platform-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.06);border:1px solid rgba(120,170,230,.2);color:#7ab0e8;border-radius:10px;padding:12px 18px;font-size:15px;font-weight:500;margin:6px 4px 0 0;text-decoration:none;transition:all .25s}
+.platform-tag--link:hover{background:rgba(42,111,214,.18);border-color:rgba(90,154,240,.5);color:#c8dff8;box-shadow:0 0 18px rgba(60,140,255,.25),inset 0 1px 0 rgba(255,255,255,.1)}
+.platform-tag--soon{opacity:.45;cursor:default}
 .platform-tag.coming-soon{opacity:.55;position:relative}
 .platform-tag.coming-soon::after{content:'In Entwicklung';position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);font-size:10px;color:#5a7a9a;white-space:nowrap}
 .platform-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px;margin-bottom:16px}
@@ -104,6 +112,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 <div class="lang-bar">
   <button class="lang-btn" id="btn-de" onclick="setLang('de')">DE</button>
   <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" id="btn-es" onclick="setLang('es')">ES</button>
 </div>
 
 <div class="hero">
@@ -113,12 +122,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
   <h1>Drone Pad<br><span id="l-h1">Dein persönlicher<br>Intonations-Assistent</span></h1>
   <p class="hero-sub" id="l-sub">Ein stimmreiner Drohnen-Synthesizer für Musiker, die auf genaue Intonation angewiesen sind — und für alle, die Klang als Meditation erleben.</p>
   <div class="cta-row">
-    <a class="btn-primary" id="l-cta1" href="app.html">Im Browser öffnen</a>
-    <a class="btn-primary" id="l-cta-ios" href="https://apps.apple.com/at/app/drone-pad-mobile/id6763631355" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px">
+    <a class="btn-store" id="l-cta1" href="app.html" style="display:inline-flex;align-items:center;gap:8px">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 8 16 12 12 16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+      <span id="l-cta1-label">Im Browser öffnen</span>
+    </a>
+    <a class="btn-store" id="l-cta-mac" href="https://apps.apple.com/at/app/drone-pad/id6763270617?mt=12" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      <span id="l-cta-mac-label">Mac App Store</span>
+    </a>
+    <a class="btn-store btn-store--active" id="l-cta-ios" href="https://apps.apple.com/at/app/drone-pad-mobile/id6763631355" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
       <span id="l-cta-ios-label">iOS App im App Store</span>
     </a>
-    <button class="btn-ghost" id="l-cta2" onclick="document.getElementById('sec-contact').scrollIntoView({behavior:'smooth'})">Kontakt</button>
+    <button class="btn-store" id="l-cta2" onclick="document.getElementById('sec-contact').scrollIntoView({behavior:'smooth'})">Kontakt</button>
   </div>
 </div>
 
@@ -406,43 +422,43 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
   <rect x="0" y="49" width="198" height="30" rx="6" fill="#0d2a4a" stroke="#5a9af0" stroke-width="1"/>
   <circle cx="13" cy="64" r="7" fill="#5a9af0"/>
   <text x="13" y="68" font-family="sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="700">1</text>
-  <text x="25" y="60" font-family="sans-serif" font-size="9" fill="#7ab0e8" font-weight="700">Farbthema / Color theme</text>
-  <text x="25" y="73" font-family="sans-serif" font-size="8.5" fill="#3a6090">10 Themes - Black bis Pastel</text>
+  <text id="svg-1a" x="25" y="60" font-family="sans-serif" font-size="9" fill="#7ab0e8" font-weight="700">Farbthema / Color theme</text>
+  <text id="svg-1b" x="25" y="73" font-family="sans-serif" font-size="8.5" fill="#3a6090">10 Themes - Black bis Pastel</text>
 
   <circle cx="256" cy="96" r="4" fill="#5a9af0"/>
   <line x1="252" y1="96" x2="100" y2="96" stroke="#5a9af0" stroke-width="0.8" stroke-dasharray="4 2" marker-end="url(#arr)"/>
   <rect x="0" y="82" width="198" height="30" rx="6" fill="#0d2a4a" stroke="#5a9af0" stroke-width="1"/>
   <circle cx="13" cy="97" r="7" fill="#5a9af0"/>
   <text x="13" y="101" font-family="sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="700">2</text>
-  <text x="25" y="93" font-family="sans-serif" font-size="9" fill="#7ab0e8" font-weight="700">Grundton / Root note</text>
-  <text x="25" y="106" font-family="sans-serif" font-size="8.5" fill="#3a6090">Oktave wahlen - Pick octave</text>
+  <text id="svg-2a" x="25" y="93" font-family="sans-serif" font-size="9" fill="#7ab0e8" font-weight="700">Grundton / Root note</text>
+  <text id="svg-2b" x="25" y="106" font-family="sans-serif" font-size="8.5" fill="#3a6090">Oktave wahlen - Pick octave</text>
 
   <circle cx="419" cy="247" r="4" fill="#22bb77"/>
   <line x1="415" y1="247" x2="100" y2="247" stroke="#22bb77" stroke-width="0.8" stroke-dasharray="4 2" marker-end="url(#arr)"/>
   <rect x="0" y="226" width="198" height="44" rx="6" fill="#062a18" stroke="#22bb77" stroke-width="1"/>
   <circle cx="13" cy="242" r="7" fill="#22bb77"/>
   <text x="13" y="246" font-family="sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="700">8</text>
-  <text x="25" y="237" font-family="sans-serif" font-size="9" fill="#5ae0aa" font-weight="700">Ton an/aus - Voice on/off</text>
-  <text x="25" y="250" font-family="sans-serif" font-size="8.5" fill="#3a8060">Grun = aktiv - Green = active</text>
-  <text x="25" y="263" font-family="sans-serif" font-size="8.5" fill="#3a8060">Grau = stumm - Gray = muted</text>
+  <text id="svg-8a" x="25" y="237" font-family="sans-serif" font-size="9" fill="#5ae0aa" font-weight="700">Ton an/aus - Voice on/off</text>
+  <text id="svg-8b" x="25" y="250" font-family="sans-serif" font-size="8.5" fill="#3a8060">Grun = aktiv - Green = active</text>
+  <text id="svg-8c" x="25" y="263" font-family="sans-serif" font-size="8.5" fill="#3a8060">Grau = stumm - Gray = muted</text>
 
   <circle cx="552" cy="247" r="4" fill="#5a9af0"/>
   <path d="M548,247 L220,247 L220,291 L100,291" stroke="#5a9af0" stroke-width="0.8" stroke-dasharray="4 2" fill="none" marker-end="url(#arr)"/>
   <rect x="0" y="277" width="198" height="30" rx="6" fill="#0d2a4a" stroke="#5a9af0" stroke-width="1"/>
   <circle cx="13" cy="292" r="7" fill="#5a9af0"/>
   <text x="13" y="296" font-family="sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="700">9</text>
-  <text x="25" y="288" font-family="sans-serif" font-size="9" fill="#7ab0e8" font-weight="700">Lautstarke je Ton / Volume</text>
-  <text x="25" y="301" font-family="sans-serif" font-size="8.5" fill="#3a6090">Grun-Gelb-Rot - per voice</text>
+  <text id="svg-9a" x="25" y="288" font-family="sans-serif" font-size="9" fill="#7ab0e8" font-weight="700">Lautstarke je Ton / Volume</text>
+  <text id="svg-9b" x="25" y="301" font-family="sans-serif" font-size="8.5" fill="#3a6090">Grun-Gelb-Rot - per voice</text>
 
   <circle cx="388" cy="622" r="4" fill="#5a9af0"/>
   <line x1="384" y1="622" x2="100" y2="622" stroke="#5a9af0" stroke-width="0.8" stroke-dasharray="4 2" marker-end="url(#arr)"/>
   <rect x="0" y="596" width="198" height="56" rx="6" fill="#0d2a4a" stroke="#5a9af0" stroke-width="1"/>
   <circle cx="13" cy="614" r="7" fill="#5a9af0"/>
   <text x="13" y="618" font-family="sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="700">11</text>
-  <text x="25" y="609" font-family="sans-serif" font-size="9" fill="#7ab0e8" font-weight="700">Pad-Klangform / Sound</text>
-  <text x="25" y="622" font-family="sans-serif" font-size="8.5" fill="#3a6090">Unison: Anz. Oszillatoren</text>
-  <text x="25" y="635" font-family="sans-serif" font-size="8.5" fill="#3a6090">Detune / Filter / Attack</text>
-  <text x="25" y="647" font-family="sans-serif" font-size="8.5" fill="#3a6090">Oscillators - Filter - Env.</text>
+  <text id="svg-11a" x="25" y="609" font-family="sans-serif" font-size="9" fill="#7ab0e8" font-weight="700">Pad-Klangform / Sound</text>
+  <text id="svg-11b" x="25" y="622" font-family="sans-serif" font-size="8.5" fill="#3a6090">Unison: Anz. Oszillatoren</text>
+  <text id="svg-11c" x="25" y="635" font-family="sans-serif" font-size="8.5" fill="#3a6090">Detune / Filter / Attack</text>
+  <text id="svg-11d" x="25" y="647" font-family="sans-serif" font-size="8.5" fill="#3a6090">Oscillators - Filter - Env.</text>
 
   <!-- === ANNOTATIONS RIGHT === -->
   <circle cx="785" cy="27" r="4" fill="#888888"/>
@@ -450,81 +466,81 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
   <rect x="871" y="49" width="215" height="30" rx="6" fill="#222222" stroke="#888888" stroke-width="1"/>
   <circle cx="884" cy="64" r="7" fill="#888888"/>
   <text x="884" y="68" font-family="sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="700">0</text>
-  <text x="896" y="60" font-family="sans-serif" font-size="9" fill="#cccccc" font-weight="700">Sprache / Language</text>
-  <text x="896" y="73" font-family="sans-serif" font-size="8.5" fill="#777777">DE / EN umschalten - Switch</text>
+  <text id="svg-0a" x="896" y="60" font-family="sans-serif" font-size="9" fill="#cccccc" font-weight="700">Sprache / Language</text>
+  <text id="svg-0b" x="896" y="73" font-family="sans-serif" font-size="8.5" fill="#777777">DE / EN umschalten - Switch</text>
 
   <circle cx="330" cy="96" r="4" fill="#22bb77"/>
   <line x1="334" y1="96" x2="871" y2="96" stroke="#22bb77" stroke-width="0.8" stroke-dasharray="4 2" marker-end="url(#arr)"/>
   <rect x="871" y="82" width="215" height="30" rx="6" fill="#062a18" stroke="#22bb77" stroke-width="1"/>
   <circle cx="884" cy="97" r="7" fill="#22bb77"/>
   <text x="884" y="101" font-family="sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="700">3</text>
-  <text x="896" y="93" font-family="sans-serif" font-size="9" fill="#5ae0aa" font-weight="700">Stimmung / Tuning</text>
-  <text x="896" y="106" font-family="sans-serif" font-size="8.5" fill="#3a8060">Gleichstufig oder Reine St.</text>
+  <text id="svg-3a" x="896" y="93" font-family="sans-serif" font-size="9" fill="#5ae0aa" font-weight="700">Stimmung / Tuning</text>
+  <text id="svg-3b" x="896" y="106" font-family="sans-serif" font-size="8.5" fill="#3a8060">Gleichstufig oder Reine St.</text>
 
   <circle cx="640" cy="95" r="4" fill="#f0a030"/>
   <line x1="644" y1="95" x2="871" y2="120" stroke="#f0a030" stroke-width="0.8" stroke-dasharray="4 2" marker-end="url(#arr)"/>
   <rect x="871" y="116" width="215" height="30" rx="6" fill="#2a1a00" stroke="#f0a030" stroke-width="1"/>
   <circle cx="884" cy="131" r="7" fill="#f0a030"/>
   <text x="884" y="135" font-family="sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="700">4</text>
-  <text x="896" y="127" font-family="sans-serif" font-size="9" fill="#f0c060" font-weight="700">Gesamtlautst. / Master vol.</text>
-  <text x="896" y="140" font-family="sans-serif" font-size="8.5" fill="#a07030">Globaler Ausgangspegel 0-100%</text>
+  <text id="svg-4a" x="896" y="127" font-family="sans-serif" font-size="9" fill="#f0c060" font-weight="700">Gesamtlautst. / Master vol.</text>
+  <text id="svg-4b" x="896" y="140" font-family="sans-serif" font-size="8.5" fill="#a07030">Globaler Ausgangspegel 0-100%</text>
 
   <circle cx="708" cy="96" r="4" fill="#e05252"/>
   <line x1="712" y1="96" x2="871" y2="155" stroke="#e05252" stroke-width="0.8" stroke-dasharray="4 2" marker-end="url(#arr)"/>
   <rect x="871" y="151" width="215" height="30" rx="6" fill="#2a0a0a" stroke="#e05252" stroke-width="1"/>
   <circle cx="884" cy="166" r="7" fill="#e05252"/>
   <text x="884" y="170" font-family="sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="700">5</text>
-  <text x="896" y="162" font-family="sans-serif" font-size="9" fill="#f08080" font-weight="700">Start / Stop</text>
-  <text x="896" y="175" font-family="sans-serif" font-size="8.5" fill="#803030">Synthesizer an/aus - On/off</text>
+  <text id="svg-5a" x="896" y="162" font-family="sans-serif" font-size="9" fill="#f08080" font-weight="700">Start / Stop</text>
+  <text id="svg-5b" x="896" y="175" font-family="sans-serif" font-size="8.5" fill="#803030">Synthesizer an/aus - On/off</text>
 
   <circle cx="650" cy="247" r="4" fill="#f0a030"/>
   <line x1="654" y1="247" x2="871" y2="240" stroke="#f0a030" stroke-width="0.8" stroke-dasharray="4 2" marker-end="url(#arr)"/>
   <rect x="871" y="226" width="215" height="30" rx="6" fill="#2a1a00" stroke="#f0a030" stroke-width="1"/>
   <circle cx="884" cy="241" r="7" fill="#f0a030"/>
   <text x="884" y="245" font-family="sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="700">10</text>
-  <text x="896" y="237" font-family="sans-serif" font-size="9" fill="#f0c060" font-weight="700">Wellenform je Ton / Waveform</text>
-  <text x="896" y="250" font-family="sans-serif" font-size="8.5" fill="#a07030">Pro Stimme wahlbar - Per voice</text>
+  <text id="svg-10a" x="896" y="237" font-family="sans-serif" font-size="9" fill="#f0c060" font-weight="700">Wellenform je Ton / Waveform</text>
+  <text id="svg-10b" x="896" y="250" font-family="sans-serif" font-size="8.5" fill="#a07030">Pro Stimme wahlbar - Per voice</text>
 
   <circle cx="648" cy="590" r="4" fill="#c060e0"/>
   <line x1="652" y1="590" x2="871" y2="590" stroke="#c060e0" stroke-width="0.8" stroke-dasharray="4 2" marker-end="url(#arr)"/>
   <rect x="871" y="563" width="215" height="56" rx="6" fill="#1a0a2a" stroke="#c060e0" stroke-width="1"/>
   <circle cx="884" cy="578" r="7" fill="#c060e0"/>
   <text x="884" y="582" font-family="sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="700">12</text>
-  <text x="896" y="575" font-family="sans-serif" font-size="9" fill="#d090f0" font-weight="700">Reverb / Hall</text>
-  <text x="896" y="588" font-family="sans-serif" font-size="8.5" fill="#8050a0">Mix: Hallanteil - Wet amount</text>
-  <text x="896" y="601" font-family="sans-serif" font-size="8.5" fill="#8050a0">Size: Raumgrosse - Room size</text>
-  <text x="896" y="614" font-family="sans-serif" font-size="8.5" fill="#8050a0">Toggle: Ein/aus - On/off</text>
+  <text id="svg-12a" x="896" y="575" font-family="sans-serif" font-size="9" fill="#d090f0" font-weight="700">Reverb / Hall</text>
+  <text id="svg-12b" x="896" y="588" font-family="sans-serif" font-size="8.5" fill="#8050a0">Mix: Hallanteil - Wet amount</text>
+  <text id="svg-12c" x="896" y="601" font-family="sans-serif" font-size="8.5" fill="#8050a0">Size: Raumgrosse - Room size</text>
+  <text id="svg-12d" x="896" y="614" font-family="sans-serif" font-size="8.5" fill="#8050a0">Toggle: Ein/aus - On/off</text>
 
   <circle cx="334" cy="690" r="4" fill="#c060e0"/>
   <line x1="338" y1="690" x2="871" y2="650" stroke="#c060e0" stroke-width="0.8" stroke-dasharray="4 2" marker-end="url(#arr)"/>
   <rect x="871" y="628" width="215" height="56" rx="6" fill="#1a0a2a" stroke="#c060e0" stroke-width="1"/>
   <circle cx="884" cy="643" r="7" fill="#c060e0"/>
   <text x="884" y="647" font-family="sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="700">13</text>
-  <text x="896" y="640" font-family="sans-serif" font-size="9" fill="#d090f0" font-weight="700">LFO - Amplitudenmod.</text>
-  <text x="896" y="653" font-family="sans-serif" font-size="8.5" fill="#8050a0">Rate: Pulsgeschw. - Speed</text>
-  <text x="896" y="666" font-family="sans-serif" font-size="8.5" fill="#8050a0">Depth: Intensitat - Intensity</text>
-  <text x="896" y="679" font-family="sans-serif" font-size="8.5" fill="#8050a0">Toggle: Ein/aus - On/off</text>
+  <text id="svg-13a" x="896" y="640" font-family="sans-serif" font-size="9" fill="#d090f0" font-weight="700">LFO - Amplitudenmod.</text>
+  <text id="svg-13b" x="896" y="653" font-family="sans-serif" font-size="8.5" fill="#8050a0">Rate: Pulsgeschw. - Speed</text>
+  <text id="svg-13c" x="896" y="666" font-family="sans-serif" font-size="8.5" fill="#8050a0">Depth: Intensitat - Intensity</text>
+  <text id="svg-13d" x="896" y="679" font-family="sans-serif" font-size="8.5" fill="#8050a0">Toggle: Ein/aus - On/off</text>
 
   <circle cx="500" cy="750" r="4" fill="#60b8e8"/>
   <line x1="504" y1="750" x2="871" y2="720" stroke="#60b8e8" stroke-width="0.8" stroke-dasharray="4 2" marker-end="url(#arr)"/>
   <rect x="871" y="696" width="215" height="56" rx="6" fill="#091828" stroke="#60b8e8" stroke-width="1"/>
   <circle cx="884" cy="711" r="7" fill="#60b8e8"/>
   <text x="884" y="715" font-family="sans-serif" font-size="9" fill="#fff" text-anchor="middle" font-weight="700">14</text>
-  <text x="896" y="708" font-family="sans-serif" font-size="9" fill="#90d8f8" font-weight="700">LFO-Wellenanimation</text>
-  <text x="896" y="721" font-family="sans-serif" font-size="8.5" fill="#4080a0">Jede Farbe = eine Stimme</text>
-  <text x="896" y="734" font-family="sans-serif" font-size="8.5" fill="#4080a0">Each color = one active voice</text>
-  <text x="896" y="747" font-family="sans-serif" font-size="8.5" fill="#4080a0">Punkte = Phasenlage - Phase</text>
+  <text id="svg-14a" x="896" y="708" font-family="sans-serif" font-size="9" fill="#90d8f8" font-weight="700">LFO-Wellenanimation</text>
+  <text id="svg-14b" x="896" y="721" font-family="sans-serif" font-size="8.5" fill="#4080a0">Jede Farbe = eine Stimme</text>
+  <text id="svg-14c" x="896" y="734" font-family="sans-serif" font-size="8.5" fill="#4080a0">Each color = one active voice</text>
+  <text id="svg-14d" x="896" y="747" font-family="sans-serif" font-size="8.5" fill="#4080a0">Punkte = Phasenlage - Phase</text>
 
   <!-- LEGEND -->
   <rect x="238" y="900" width="544" height="56" rx="8" fill="#1a1a1a" stroke="#333" stroke-width="0.5"/>
-  <text x="510" y="918" font-family="sans-serif" font-size="10" fill="#555" text-anchor="middle" font-weight="700" letter-spacing="1">LEGENDE / LEGEND</text>
-  <circle cx="258" cy="934" r="5" fill="#5a9af0"/><text x="268" y="938" font-family="sans-serif" font-size="9" fill="#7ab0e8">Steuerung</text>
-  <circle cx="340" cy="934" r="5" fill="#22bb77"/><text x="350" y="938" font-family="sans-serif" font-size="9" fill="#5ae0aa">Toggle</text>
-  <circle cx="410" cy="934" r="5" fill="#f0a030"/><text x="420" y="938" font-family="sans-serif" font-size="9" fill="#f0c060">Klangform</text>
-  <circle cx="490" cy="934" r="5" fill="#c060e0"/><text x="500" y="938" font-family="sans-serif" font-size="9" fill="#d090f0">Effekte/FX</text>
-  <circle cx="565" cy="934" r="5" fill="#60b8e8"/><text x="575" y="938" font-family="sans-serif" font-size="9" fill="#90d8f8">Animation</text>
-  <circle cx="645" cy="934" r="5" fill="#888888"/><text x="655" y="938" font-family="sans-serif" font-size="9" fill="#cccccc">Sprache</text>
-  <circle cx="715" cy="934" r="5" fill="#e05252"/><text x="725" y="938" font-family="sans-serif" font-size="9" fill="#f08080">Start/Stop</text>
+  <text id="svg-leg" x="510" y="918" font-family="sans-serif" font-size="10" fill="#555" text-anchor="middle" font-weight="700" letter-spacing="1">LEGENDE / LEGEND</text>
+  <circle cx="258" cy="934" r="5" fill="#5a9af0"/><text id="svg-lc1" x="268" y="938" font-family="sans-serif" font-size="9" fill="#7ab0e8">Steuerung</text>
+  <circle cx="340" cy="934" r="5" fill="#22bb77"/><text id="svg-lc2" x="350" y="938" font-family="sans-serif" font-size="9" fill="#5ae0aa">Toggle</text>
+  <circle cx="410" cy="934" r="5" fill="#f0a030"/><text id="svg-lc3" x="420" y="938" font-family="sans-serif" font-size="9" fill="#f0c060">Klangform</text>
+  <circle cx="490" cy="934" r="5" fill="#c060e0"/><text id="svg-lc4" x="500" y="938" font-family="sans-serif" font-size="9" fill="#d090f0">Effekte/FX</text>
+  <circle cx="565" cy="934" r="5" fill="#60b8e8"/><text id="svg-lc5" x="575" y="938" font-family="sans-serif" font-size="9" fill="#90d8f8">Animation</text>
+  <circle cx="645" cy="934" r="5" fill="#888888"/><text id="svg-lc6" x="655" y="938" font-family="sans-serif" font-size="9" fill="#cccccc">Sprache</text>
+  <circle cx="715" cy="934" r="5" fill="#e05252"/><text id="svg-lc7" x="725" y="938" font-family="sans-serif" font-size="9" fill="#f08080">Start/Stop</text>
 </svg>
 </div>
 </div>
@@ -626,35 +642,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
   <div class="section-label" id="l-tech-label">Technische Details</div>
   <div class="divider"></div>
   <h2 id="l-tech-h2">Entweder im Browser<br>oder als App.</h2>
-  <p class="lead" id="l-tech-lead">Drone Pad läuft direkt im Browser — ohne Installation. Zusätzlich gibt es eine native Mac-App für Apple Silicon und Intel. Weitere Plattformen folgen.</p>
-
-  <!-- Mac Coming Soon -->
-  <div class="tech-card" style="margin-top:28px;max-width:560px">
-    <h3 id="l-mac-head">🍎 Mac-App — demnächst im Mac App Store</h3>
-    <p id="l-mac-lead">Apple Silicon &amp; Intel · macOS 12 oder neuer · Kostenlos</p>
-    <div class="security-note" style="background:rgba(42,111,214,.1);border-color:rgba(42,111,214,.3);color:#a0c8f0;margin-top:16px" id="l-mac-soon">
-      <strong style="color:#7ab0e8">ℹ️ App Store-Version in Vorbereitung</strong>
-      Die native Mac-App befindet sich derzeit im Review-Prozess für den Mac App Store. Bis zur Veröffentlichung steht Drone Pad vollständig als Browser-App zur Verfügung — ohne Installation, direkt im Browser nutzbar.
-    </div>
-    <a class="btn-primary" href="app.html" id="l-mac-app-btn" style="margin-top:16px;display:inline-flex;align-items:center;gap:8px">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 8 16 12 12 16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-      <span id="l-mac-app-btn-label">Browser-App starten</span>
+  <p class="lead" id="l-tech-lead">Drone Pad läuft direkt im Browser — ohne Installation.</p>
+  <div style="margin-top:16px">
+    <a class="btn-store btn-store--sm" href="app.html" id="l-browser-btn" style="display:inline-flex;align-items:center;gap:8px">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 8 16 12 12 16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+      <span id="l-browser-btn-label">Im Browser öffnen</span>
     </a>
   </div>
 
   <!-- Other platforms -->
   <div style="margin-top:32px">
-    <p style="font-size:14px;color:#7ab0e8;font-weight:600;margin-bottom:12px;letter-spacing:.05em;text-transform:uppercase" id="l-platforms-label">Weitere Plattformen</p>
+    <p style="font-size:14px;color:#7ab0e8;font-weight:600;margin-bottom:6px;letter-spacing:.05em;text-transform:uppercase" id="l-platforms-label">Weitere Plattformen</p>
+    <p style="font-size:12px;color:#3a5a7a;margin-bottom:14px" id="l-platforms-hint">Zum Öffnen anklicken</p>
     <div class="platform-row">
-      <span class="platform-tag">🌐 Browser <span id="l-browser-avail" style="color:#5adcb0;font-size:11px;margin-left:4px">✓ Verfügbar</span></span>
-      <span class="platform-tag">📱 iPhone &amp; iPad <span id="l-ios-avail" style="color:#5adcb0;font-size:11px;margin-left:4px">✓ Verfügbar</span></span>
-      <span class="platform-tag coming-soon" style="margin-bottom:24px">🤖 Android</span>
-    </div>
-    <div style="margin-top:20px">
-      <a id="l-ios-btn" href="https://apps.apple.com/app/drone-pad/id6746036982" target="_blank" rel="noopener" class="btn-primary" style="display:inline-flex;align-items:center;gap:10px;margin-top:0;text-decoration:none">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        <span id="l-ios-btn-label">Im App Store laden</span>
-      </a>
+      <a href="app.html" class="platform-tag platform-tag--link">🌐 Browser <span id="l-browser-avail" style="color:#5adcb0;font-size:12px;margin-left:6px">✓ Verfügbar</span></a>
+      <a href="https://apps.apple.com/at/app/drone-pad/id6763270617?mt=12" target="_blank" rel="noopener" class="platform-tag platform-tag--link">🍎 Mac <span id="l-mac-avail" style="color:#5adcb0;font-size:12px;margin-left:6px">✓ Verfügbar</span></a>
+      <a href="https://apps.apple.com/at/app/drone-pad-mobile/id6763631355" target="_blank" rel="noopener" class="platform-tag platform-tag--link">📱 iPhone &amp; iPad <span id="l-ios-avail" style="color:#5adcb0;font-size:12px;margin-left:6px">✓ Verfügbar</span></a>
+      <span class="platform-tag platform-tag--soon">🤖 Android <span id="l-android-soon" style="font-size:12px;margin-left:6px;color:#4a6a88">In Entwicklung</span></span>
     </div>
   </div>
 
@@ -678,7 +682,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
     <input type="text" id="con-subject" placeholder="Betreff">
     <textarea id="con-msg" placeholder="Deine Nachricht…"></textarea>
     <p class="contact-note">thomas.haake@gmail.com</p>
-    <button class="btn-primary" style="margin-top:16px" onclick="submitContact()" id="l-con-btn">Nachricht senden</button>
+    <button class="btn-store" style="margin-top:16px" onclick="submitContact()" id="l-con-btn">Nachricht senden</button>
     <div class="success-msg" id="con-success">✓ &nbsp;Danke — deine Nachricht wurde gesendet. Wir melden uns bald!</div>
   </div>
 </div>
@@ -686,7 +690,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 <div class="footer-cta">
   <h2 id="l-fh">Bereit zu klingen?</h2>
   <p id="l-fp">Öffne Drone Pad direkt im Browser — kein Account, kein Download.</p>
-  <a class="btn-primary" href="app.html" id="l-fbtn">Jetzt ausprobieren</a>
+  <a class="btn-store btn-store--active" href="app.html" id="l-fbtn" style="display:inline-flex;align-items:center;gap:8px;justify-content:center">Jetzt ausprobieren</a>
 </div>
 
 <div class="footer">
@@ -712,7 +716,7 @@ const T = {
   de:{
     'l-h1':'Dein persönlicher<br>Intonations-Assistent',
     'l-sub':'Ein stimmreiner Drohnen-Synthesizer für Musiker, die auf genaue Intonation angewiesen sind — und für alle, die Klang als Meditation erleben.',
-    'l-cta1':'Im Browser öffnen','l-cta2':'Kontakt','l-cta-ios-label':'iOS App im App Store',
+    'l-cta1-label':'Im Browser öffnen','l-cta2':'Kontakt','l-cta-mac-label':'Mac App Store','l-cta-ios-label':'iOS App im App Store',
     'l-feat-label':'Funktionen','l-feat-h2':'Stimmreine Töne. Jederzeit. Überall.',
     'l-feat-lead':'Drone Pad erzeugt einen oder mehrere gehaltene Referenztöne — in Gleichstufiger oder Reiner Stimmung — mit vollständig anpassbarem Klangbild.',
     'l-f1h':'16 Intervalle','l-f1p':'Von der Prime bis zur Duodezime — einzeln aktivierbar, mit eigenem Lautstärkeregler und Wellenform.',
@@ -747,15 +751,18 @@ const T = {
     'l-a4h':'Klanginstallationen','l-a4p':'Mehrere Stimmen, individuell gepegelt, in reiner oder gleichstufiger Stimmung — für räumliche Klangarbeiten.',
     'l-quote':'„Ein Instrument zum Hören. Ein Werkzeug zum Üben. Ein Raum zum Sein."',
     'l-tech-label':'Technische Details','l-tech-h2':'Entweder im Browser<br>oder als App.',
-    'l-tech-lead':'Drone Pad läuft direkt im Browser — ohne Installation. Zusätzlich gibt es eine native Mac-App für Apple Silicon und Intel sowie eine iPhone &amp; iPad App im App Store. Weitere Plattformen folgen.',
-    'l-mac-head':'🍎 Mac-App — demnächst im Mac App Store',
+    'l-tech-lead':'Drone Pad läuft direkt im Browser — ohne Installation.',
+    'l-browser-btn-label':'Im Browser öffnen',
+    'l-mac-head':'🍎 Mac-App',
     'l-mac-lead':'Apple Silicon &amp; Intel · macOS 12 oder neuer · Kostenlos',
-    'l-mac-soon':'<strong style="color:#7ab0e8">ℹ️ App Store-Version in Vorbereitung</strong> Die native Mac-App befindet sich derzeit im Review-Prozess für den Mac App Store. Bis zur Veröffentlichung steht Drone Pad vollständig als Browser-App zur Verfügung — ohne Installation, direkt im Browser nutzbar.',
-    'l-mac-app-btn-label':'Browser-App starten',
+    'l-mac-app-btn-label':'Im Mac App Store laden',
     'l-ios-btn-label':'Im App Store laden',
     'l-browser-avail':'✓ Verfügbar',
+    'l-mac-avail':'✓ Verfügbar',
     'l-ios-avail':'✓ Verfügbar',
+    'l-android-soon':'In Entwicklung',
     'l-platforms-label':'Weitere Plattformen',
+    'l-platforms-hint':'Zum Öffnen anklicken',
     'l-s1':'Stimmen / Intervalle','l-s2':'Unison-Oszillatoren','l-s3':'Wellenformen','l-s4':'Farbthemes','l-s5':'Stimmungssysteme','l-s6':'Kostenlos',
     'l-con-label':'Kontakt','l-con-h2':'Schreib uns','l-con-lead':'Fragen, Feedback oder Kooperationsanfragen — wir freuen uns über deine Nachricht.',
     'l-con-btn':'Nachricht senden',
@@ -766,7 +773,7 @@ const T = {
   en:{
     'l-h1':'Your Personal<br>Intonation Assistant',
     'l-sub':'A pitch-pure drone synthesizer for musicians who depend on precise intonation — and for everyone who experiences sound as meditation.',
-    'l-cta1':'Open App in Browser','l-cta2':'Contact','l-cta-ios-label':'iOS App on the App Store',
+    'l-cta1-label':'Open App in Browser','l-cta2':'Contact','l-cta-mac-label':'Mac App Store','l-cta-ios-label':'iOS App on the App Store',
     'l-feat-label':'Features','l-feat-h2':'Pure Tones. Anytime. Anywhere.',
     'l-feat-lead':'Drone Pad generates one or more sustained reference tones — in equal or just intonation — with a fully customizable sound profile.',
     'l-f1h':'16 Intervals','l-f1p':'From root to perfect twelfth — each individually switchable, with its own volume and waveform.',
@@ -801,21 +808,98 @@ const T = {
     'l-a4h':'Sound installations','l-a4p':'Multiple voices, individually leveled, in just or equal tuning — for spatial sound works.',
     'l-quote':'"An instrument for listening. A tool for practicing. A space for being."',
     'l-tech-label':'Technical Details','l-tech-h2':'In the browser<br>or as an app.',
-    'l-tech-lead':'Drone Pad runs directly in the browser — no installation needed. A native Mac app is also available for Apple Silicon and Intel, and an iPhone &amp; iPad app is available on the App Store. More platforms coming soon.',
-    'l-mac-head':'🍎 Mac App — coming soon to the Mac App Store',
+    'l-tech-lead':'Drone Pad runs directly in the browser — no installation needed.',
+    'l-browser-btn-label':'Open in Browser',
+    'l-mac-head':'🍎 Mac App',
     'l-mac-lead':'Apple Silicon & Intel · macOS 12 or later · Free',
-    'l-mac-soon':'<strong style="color:#7ab0e8">ℹ️ App Store version in preparation</strong> The native Mac app is currently going through the Mac App Store review process. In the meantime, Drone Pad is fully available as a browser app — no installation required, ready to use directly in your browser.',
-    'l-mac-app-btn-label':'Open Browser App',
+    'l-mac-app-btn-label':'Download on the Mac App Store',
     'l-ios-btn-label':'Download on the App Store',
     'l-browser-avail':'✓ Available',
+    'l-mac-avail':'✓ Available',
     'l-ios-avail':'✓ Available',
+    'l-android-soon':'Coming soon',
     'l-platforms-label':'More Platforms',
+    'l-platforms-hint':'Click to open',
     'l-s1':'Voices / Intervals','l-s2':'Unison oscillators','l-s3':'Waveforms','l-s4':'Color themes','l-s5':'Tuning systems','l-s6':'Free',
     'l-con-label':'Contact','l-con-h2':'Get in touch','l-con-lead':'Questions, feedback, or collaboration — we look forward to hearing from you.',
     'l-con-btn':'Send message',
     'l-fh':'Ready to sound?','l-fp':'Open Drone Pad directly in the browser — no account, no download.','l-fbtn':'Try it now',
     ps:'Subject',pm:'Your message…',
     suc:'✓ &nbsp;Thank you — your message has been sent. We\'ll be in touch soon!'
+  },
+  es:{
+    'l-h1':'Tu asistente personal<br>de afinación',
+    'l-sub':'Un sintetizador de drones puro en afinación para músicos que dependen de una entonación precisa — y para todos los que experimentan el sonido como meditación.',
+    'l-cta1-label':'Abrir en el navegador','l-cta2':'Contacto','l-cta-mac-label':'Mac App Store','l-cta-ios-label':'App iOS en el App Store',
+    'l-feat-label':'Funciones','l-feat-h2':'Tonos puros. En cualquier momento. En cualquier lugar.',
+    'l-feat-lead':'Drone Pad genera uno o más tonos de referencia sostenidos — en afinación igual o justa — con un perfil de sonido totalmente personalizable.',
+    'l-f1h':'16 intervalos','l-f1p':'Desde la fundamental hasta la duodécima justa — cada uno activable individualmente, con su propio volumen y forma de onda.',
+    'l-f2h':'Unísono y Detune','l-f2p':'Hasta 7 osciladores por voz con detune continuo crean una base de pad rica y vibrante.',
+    'l-f3h':'LFO y Reverb','l-f3p':'Modulación de amplitud con LFO visualizado y reverberación atmosférica — para drones vivos y respirantes.',
+    'l-f4h':'Filtro y Ataque','l-f4p':'Filtro paso bajo con resonancia y envolvente de ataque suave dan forma al sonido, de cálido a cortante.',
+    'l-f5h':'Afinación justa','l-f5p':'Cambia entre temperamento igual y afinación justa — y escucha la diferencia de inmediato.',
+    'l-f6h':'10 temas','l-f6p':'Esquemas de color oscuros y claros — del negro al pastel. Agradable a la vista en sesiones largas.',
+    'l-wave-label':'Formas de onda','l-wave-h2':'Cuatro caracteres sonoros',
+    'l-wave-lead':'Cada voz tiene su propia forma de onda — o cámbialas todas a la vez. Del seno cálido al cuadrado áspero.',
+    'l-w1h':'Sierra','l-w1p':'Rico en armónicos — cálido, brillante, el sonido pad clásico.',
+    'l-w2h':'Seno','l-w2p':'Puro y sin armónicos — ideal para el trabajo de entonación y la meditación.',
+    'l-w3h':'Triángulo','l-w3p':'Suave y similar a una flauta — menos agudo que la sierra, más cuerpo que el seno.',
+    'l-w4h':'Cuadrada','l-w4p':'Hueco y penetrante — destacado en el conjunto, poderoso como base de drone.',
+    'l-uniq-label':'Lo que hace único a Drone Pad','l-uniq-h2':'Sin tono estático.<br>Un espacio sonoro vivo.',
+    'l-uniq-lead':'La mayoría de las apps de drone ofrecen un tono sostenido simple. Drone Pad hace algo fundamentalmente diferente — a través de cuatro propiedades técnicas que juntas crean un sonido que respira, vibra y se despliega.',
+    'l-u1h':'Desfase de fase individual por voz','l-u1p':'Al inicio, cada voz recibe un desfase de fase LFO aleatorio. La fundamental, la quinta y la octava nunca oscilan sincronizadas — el resultado es un ensemble que respira orgánicamente, sin bombeo mecánico.',
+    'l-u2h':'Dinámica cambiante por modulación independiente','l-u2p':'El LFO modula todas las voces activas simultáneamente pero desfasadas. La relación de volumen entre tonos cambia constantemente — como los instrumentistas de cuerda en un ensemble que nunca respiran exactamente igual. El sonido se vuelve tridimensional.',
+    'l-u3h':'Batidos naturales por detune de unísono','l-u3p':'Hasta 7 osciladores por voz con detune distribuido generan frecuencias de batido acústico — no mediante efectos, sino mediante física. El sonido llena la sala sin ser intrusivo.',
+    'l-u4h':'Sonido espacial real — calculado sintéticamente','l-u4p':'La reverberación no se extrae de espacios sampleados, sino que se calcula en vivo como convolucionador a partir de ruido sintético con curva de decay. El espacio se crea en el momento — y su tamaño y mezcla son moldeables en tiempo real.',
+    'l-int-label':'Para cuerdas, viento y voz','l-int-h2':'Entrenar la entonación perfecta',
+    'l-int-lead':'Quien no tiene trastes, pistones ni altura de tono fija, debe escuchar y sentir la entonación. Drone Pad proporciona el tono de referencia exacto — de forma continua, puro en afinación, sin interferencias.',
+    'l-i1h':'Control de entonación','l-i1p':'Toca contra un drone sostenido y escucha de inmediato si las quintas, terceras y séptimas están afinadas.',
+    'l-i2h':'Experimentar la afinación justa','l-i2p':'Compara intervalos de temperamento igual y puros directamente — ideal para música de cámara y tocar en conjunto.',
+    'l-i3h':'Calentamiento y afinación','l-i3p':'Afina tu oído antes del ensayo con una fundamental tranquila — sin piano ni afinador.',
+    'l-i4h':'Entonación de conjunto','l-i4p':'Tocar juntos contra el mismo drone agudiza la entonación colectiva en dúos y conjuntos.',
+    'l-amb-label':'Ambiente y Meditación','l-amb-h2':'El sonido como espacio.<br>El espacio como pausa.',
+    'l-amb-lead':'Con LFO activo, unísono vivo y reverberación sintética, surge un espacio sonoro que cambia constantemente de forma sutil — sin repetirse nunca, sin congelarse.',
+    'l-a1h':'Producción ambient','l-a1p':'Como capa base para texturas electrónicas — drone puro en afinación con espectro moldeado individualmente.',
+    'l-a2h':'Meditación','l-a2p':'Una fundamental profunda que respira suavemente ayuda a la mente a encontrar la quietud — probado en la curación sónica.',
+    'l-a3h':'Yoga y trabajo corporal','l-a3p':'Drone Pad funciona establemente durante horas, sin interrupciones, sin repetición — agradable en el fondo.',
+    'l-a4h':'Instalaciones sonoras','l-a4p':'Múltiples voces, con niveles individuales, en afinación justa o igual — para trabajos sonoros espaciales.',
+    'l-quote':'"Un instrumento para escuchar. Una herramienta para practicar. Un espacio para ser."',
+    'l-tech-label':'Detalles técnicos','l-tech-h2':'En el navegador<br>o como aplicación.',
+    'l-tech-lead':'Drone Pad funciona directamente en el navegador — sin instalación.',
+    'l-browser-btn-label':'Abrir en el navegador',
+    'l-mac-head':'🍎 App para Mac',
+    'l-mac-lead':'Apple Silicon e Intel · macOS 12 o posterior · Gratis',
+    'l-mac-app-btn-label':'Descargar en el Mac App Store',
+    'l-ios-btn-label':'Descargar en el App Store',
+    'l-browser-avail':'✓ Disponible',
+    'l-mac-avail':'✓ Disponible',
+    'l-ios-avail':'✓ Disponible',
+    'l-android-soon':'Próximamente',
+    'l-platforms-label':'Más plataformas',
+    'l-platforms-hint':'Haz clic para abrir',
+    'l-s1':'Voces / Intervalos','l-s2':'Osciladores en unísono','l-s3':'Formas de onda','l-s4':'Temas de color','l-s5':'Sistemas de afinación','l-s6':'Gratis',
+    'l-con-label':'Contacto','l-con-h2':'Escríbenos','l-con-lead':'Preguntas, comentarios o propuestas de colaboración — nos alegramos de recibir tu mensaje.',
+    'l-con-btn':'Enviar mensaje',
+    'l-fh':'¿Listo para sonar?','l-fp':'Abre Drone Pad directamente en el navegador — sin cuenta, sin descarga.','l-fbtn':'Pruébalo ahora',
+    ps:'Asunto',pm:'Tu mensaje…',
+    suc:'✓ &nbsp;Gracias — tu mensaje ha sido enviado. ¡Nos pondremos en contacto pronto!',
+    svg:{
+      '0a':'Idioma / Language','0b':'DE / EN / ES cambiar',
+      '1a':'Tema de color','1b':'10 temas - Negro hasta Pastel',
+      '2a':'Tono fundamental','2b':'Elegir octava',
+      '3a':'Afinación','3b':'Igual o justa',
+      '4a':'Vol. maestro','4b':'Nivel de salida global 0-100%',
+      '5a':'Inicio / Pausa','5b':'Sintetizador enc./apag.',
+      '8a':'Voz enc./apag.','8b':'Verde = activo','8c':'Gris = silenciado',
+      '9a':'Volumen por voz','9b':'Verde-Amarillo-Rojo',
+      '10a':'Forma de onda por voz','10b':'Seleccionable por voz',
+      '11a':'Sonido del pad','11b':'Unísono: nº osciladores','11c':'Detune / Filtro / Ataque','11d':'Osciladores - Filtro - Env.',
+      '12a':'Reverb','12b':'Mix: cantidad wet','12c':'Size: tamaño del espacio','12d':'Toggle: enc./apag.',
+      '13a':'LFO - Mod. amplitud','13b':'Rate: velocidad','13c':'Depth: intensidad','13d':'Toggle: enc./apag.',
+      '14a':'Animación LFO','14b':'Cada color = una voz activa','14c':'Cada color = una voz activa','14d':'Puntos = fase',
+      'leg':'LEYENDA',
+      'lc1':'Control','lc2':'Toggle','lc3':'Timbre','lc4':'Efectos/FX','lc5':'Animación','lc6':'Idioma','lc7':'Inicio/Pausa'
+    }
   }
 };
 
@@ -823,17 +907,79 @@ function setLang(lang){
   const t=T[lang];
   document.getElementById('btn-de').classList.toggle('active',lang==='de');
   document.getElementById('btn-en').classList.toggle('active',lang==='en');
+  document.getElementById('btn-es').classList.toggle('active',lang==='es');
   for(const[id,val]of Object.entries(t)){
-    if(id==='ps'||id==='pm'||id==='suc')continue;
+    if(id==='ps'||id==='pm'||id==='suc'||id==='svg')continue;
     const el=document.getElementById(id);
     if(el)el.innerHTML=val;
   }
   document.getElementById('con-subject').placeholder=t.ps;
   document.getElementById('con-msg').placeholder=t.pm;
   document.getElementById('con-success').innerHTML=t.suc;
+
+  // SVG annotation texts — use current lang if has svg block, else fall back to EN
+  const svgT = t.svg || {
+    '0a': lang==='de' ? 'Sprache / Language' : 'Language',
+    '0b': lang==='de' ? 'DE / EN umschalten' : 'Switch DE / EN',
+    '1a': lang==='de' ? 'Farbthema / Color theme' : 'Color theme',
+    '1b': lang==='de' ? '10 Themes - Black bis Pastel' : '10 themes - Black to Pastel',
+    '2a': lang==='de' ? 'Grundton / Root note' : 'Root note',
+    '2b': lang==='de' ? 'Oktave wahlen - Pick octave' : 'Pick octave',
+    '3a': lang==='de' ? 'Stimmung / Tuning' : 'Tuning',
+    '3b': lang==='de' ? 'Gleichstufig oder Reine St.' : 'Equal or just intonation',
+    '4a': lang==='de' ? 'Gesamtlautst. / Master vol.' : 'Master volume',
+    '4b': lang==='de' ? 'Globaler Ausgangspegel 0-100%' : 'Global output level 0-100%',
+    '5a': 'Start / Stop',
+    '5b': lang==='de' ? 'Synthesizer an/aus - On/off' : 'Synthesizer on/off',
+    '8a': lang==='de' ? 'Ton an/aus - Voice on/off' : 'Voice on/off',
+    '8b': lang==='de' ? 'Grun = aktiv - Green = active' : 'Green = active',
+    '8c': lang==='de' ? 'Grau = stumm - Gray = muted' : 'Gray = muted',
+    '9a': lang==='de' ? 'Lautstarke je Ton / Volume' : 'Volume per voice',
+    '9b': lang==='de' ? 'Grun-Gelb-Rot - per voice' : 'Green-Yellow-Red',
+    '10a': lang==='de' ? 'Wellenform je Ton / Waveform' : 'Waveform per voice',
+    '10b': lang==='de' ? 'Pro Stimme wahlbar - Per voice' : 'Selectable per voice',
+    '11a': lang==='de' ? 'Pad-Klangform / Sound' : 'Pad sound shape',
+    '11b': lang==='de' ? 'Unison: Anz. Oszillatoren' : 'Unison: no. of oscillators',
+    '11c': 'Detune / Filter / Attack',
+    '11d': 'Oscillators - Filter - Env.',
+    '12a': 'Reverb / Hall',
+    '12b': lang==='de' ? 'Mix: Hallanteil - Wet amount' : 'Mix: wet amount',
+    '12c': lang==='de' ? 'Size: Raumgrosse - Room size' : 'Size: room size',
+    '12d': lang==='de' ? 'Toggle: Ein/aus - On/off' : 'Toggle: on/off',
+    '13a': lang==='de' ? 'LFO - Amplitudenmod.' : 'LFO - Amp. modulation',
+    '13b': lang==='de' ? 'Rate: Pulsgeschw. - Speed' : 'Rate: speed',
+    '13c': lang==='de' ? 'Depth: Intensitat - Intensity' : 'Depth: intensity',
+    '13d': lang==='de' ? 'Toggle: Ein/aus - On/off' : 'Toggle: on/off',
+    '14a': lang==='de' ? 'LFO-Wellenanimation' : 'LFO wave animation',
+    '14b': lang==='de' ? 'Jede Farbe = eine Stimme' : 'Each color = one active voice',
+    '14c': lang==='de' ? 'Each color = one active voice' : 'Each color = one active voice',
+    '14d': lang==='de' ? 'Punkte = Phasenlage - Phase' : 'Dots = phase position',
+    'leg': lang==='de' ? 'LEGENDE / LEGEND' : 'LEGEND',
+    'lc1': lang==='de' ? 'Steuerung' : 'Control',
+    'lc2': 'Toggle',
+    'lc3': lang==='de' ? 'Klangform' : 'Timbre',
+    'lc4': 'Effekte/FX',
+    'lc5': 'Animation',
+    'lc6': lang==='de' ? 'Sprache' : 'Language',
+    'lc7': 'Start/Stop'
+  };
+  for(const[key,val]of Object.entries(svgT)){
+    const el=document.getElementById('svg-'+key);
+    if(el)el.textContent=val;
+  }
 }
 
-document.addEventListener('DOMContentLoaded', () => setLang('en'));
+document.addEventListener('DOMContentLoaded', () => {
+  setLang('en');
+
+  // Dim iOS hero button when hovering other hero buttons
+  const iosBtn = document.getElementById('l-cta-ios');
+  const heroBtns = document.querySelectorAll('.cta-row .btn-store:not(#l-cta-ios), .cta-row button:not(#l-cta-ios)');
+  heroBtns.forEach(btn => {
+    btn.addEventListener('mouseenter', () => iosBtn.classList.add('btn-store--dim'));
+    btn.addEventListener('mouseleave', () => iosBtn.classList.remove('btn-store--dim'));
+  });
+});
 
 function submitContact(){
   const s=document.getElementById('con-subject').value.trim();
