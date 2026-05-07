@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NoteChart — haakemusic.com</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;700&display=swap">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;color:#fff;background:linear-gradient(to bottom,#1a3a6b 0%,#0a1a3a 60%,#060e22 100%);min-height:100vh;padding:0 0 100px}
+.lang-bar{display:flex;justify-content:flex-end;padding:14px 28px 0;gap:8px}
+.lang-btn{background:rgba(255,255,255,.08);border:1.5px solid rgba(120,170,230,.35);color:#a0c0e0;border-radius:50px;padding:7px 20px;font-size:13px;font-weight:700;cursor:pointer;transition:all .18s;letter-spacing:.06em}
+.lang-btn.active{background:rgba(42,111,214,.4);border-color:#5a9af0;color:#fff}
+.lang-btn:hover{background:rgba(42,111,214,.25);color:#fff}
+.site-nav{display:flex;align-items:center;justify-content:space-between;padding:12px 28px;background:rgba(6,14,34,0.7);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(120,170,230,.1);position:sticky;top:0;z-index:100}
+.site-nav .nav-logo{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:#fff;text-decoration:none;letter-spacing:.02em}
+.site-nav .nav-logo span{font-weight:300;color:#a0c0e0}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-link{color:#7ab0e8;font-size:13px;font-weight:600;text-decoration:none;padding:7px 16px;border-radius:50px;border:1.5px solid transparent;transition:all .18s;letter-spacing:.03em}
+.nav-link:hover{color:#fff;background:rgba(42,111,214,.2);border-color:rgba(90,154,240,.3)}
+.nav-link.active{color:#fff;background:rgba(42,111,214,.35);border-color:rgba(90,154,240,.5)}
+.nav-badge{display:inline-block;background:#2a6fd6;color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:50px;margin-left:4px;letter-spacing:.04em;vertical-align:middle;line-height:1.4}
+.hero{text-align:center;padding:64px 24px 56px}
+.hero-eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#7ab0e8;margin-bottom:18px;font-weight:700}
+.hero h1{font-size:clamp(40px,6vw,68px);font-weight:700;line-height:1.07;letter-spacing:-.02em;color:#fff;margin-bottom:18px}
+.hero h1 span{color:#7ab0e8}
+.hero-sub{font-size:clamp(17px,2.2vw,20px);color:#c0d8f0;max-width:620px;margin:0 auto 14px;line-height:1.65;font-weight:300}
+.hero-note{font-size:14px;color:#5a7a9a;margin-bottom:36px;font-style:italic}
+.cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:#2a6fd6;color:#fff;border:2px solid #4a8af0;padding:14px 34px;border-radius:50px;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:.01em;transition:all .2s;text-decoration:none;display:inline-block}
+.btn-primary:hover{background:#3a80e6;box-shadow:0 0 28px rgba(60,140,255,.4)}
+.section{max-width:960px;margin:0 auto;padding:72px 24px 0}
+.section-label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#7ab0e8;margin-bottom:10px;font-weight:700}
+.divider{width:44px;height:3px;background:linear-gradient(to right,#2a6fd6,#7ab0e8);border-radius:3px;margin:0 0 24px}
+.section h2{font-size:clamp(26px,3.5vw,38px);font-weight:700;color:#fff;margin-bottom:14px;line-height:1.13}
+.section p.lead{font-size:17px;color:#b0ccec;line-height:1.72;max-width:700px}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:36px}
+.feat-card{background:rgba(255,255,255,.05);border:1px solid rgba(120,170,230,.14);border-radius:16px;padding:28px 24px;transition:background .2s}
+.feat-card:hover{background:rgba(255,255,255,.08)}
+.feat-icon{font-size:26px;margin-bottom:14px;display:block}
+.feat-card h3{font-size:17px;font-weight:600;color:#fff;margin-bottom:8px}
+.feat-card p{font-size:14px;color:#88aed0;line-height:1.65}
+.unique-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:36px}
+.unique-card{background:rgba(42,111,214,.1);border:1px solid rgba(42,111,214,.28);border-radius:16px;padding:28px 24px;position:relative;overflow:hidden}
+.unique-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(to bottom,#4a8af0,#2a4ab0)}
+.unique-card h3{font-size:16px;font-weight:700;color:#a8d0f8;margin-bottom:10px}
+.unique-card p{font-size:14px;color:#80a8cc;line-height:1.65}
+.specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:28px}
+.spec{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:18px 16px}
+.spec-val{font-size:20px;font-weight:700;color:#7ab0e8;margin-bottom:4px}
+.spec-lbl{font-size:12px;color:#507090;line-height:1.4}
+.tag-row{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+.tag{background:rgba(120,170,230,.1);border:1px solid rgba(120,170,230,.22);color:#a0c8ee;border-radius:50px;padding:8px 18px;font-size:13px;font-weight:500}
+.cta-section{text-align:center;padding:80px 24px 0;max-width:600px;margin:0 auto}
+.cta-section h2{font-size:clamp(24px,3.5vw,36px);font-weight:700;color:#fff;margin-bottom:12px}
+.cta-section p{font-size:17px;color:#88aed0;margin-bottom:30px;line-height:1.6}
+.footer{text-align:center;padding:48px 24px 0;color:#2a4a6a;font-size:13px}
+.footer a{color:#3a6a9a;text-decoration:none}
+.mockup-placeholder{background:rgba(42,111,214,.06);border:1px dashed rgba(42,111,214,.25);border-radius:20px;padding:60px 40px;text-align:center;margin-top:48px}
+.mockup-placeholder p{color:#3a5a7a;font-size:14px}
+.mockup-placeholder .mp-title{font-size:16px;font-weight:600;color:#5a7aaa;margin-bottom:8px}
+</style>
+</head>
+<body>
+
+<div class="lang-bar">
+  <button class="lang-btn active" id="btn-de" onclick="setLang('de')">DE</button>
+  <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" id="btn-es" onclick="setLang('es')">ES</button>
+</div>
+
+<nav class="site-nav">
+  <a class="nav-logo" href="index.html">haake<span>music</span>.com</a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html" id="nav-home">Home</a>
+    <a class="nav-link" href="dronepad.html">Drone Pad</a>
+    <a class="nav-link active" href="notechart.html">NoteChart<span class="nav-badge">Beta</span></a>
+    <a class="nav-link" href="patchdirector.html">PatchDirector</a>
+    <a class="nav-link" href="privacy.html" id="nav-privacy">Privacy</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <p class="hero-eyebrow" id="l-eyebrow">macOS · Beta Juni 2026</p>
+  <h1>Note<span>Chart</span></h1>
+  <p class="hero-sub" id="l-sub">Lead-Sheet-Software, die neu denkt — von null an, ohne Rücksicht auf das, was immer so war.</p>
+  <p class="hero-note" id="l-note">Screenshots kommen in Kürze. Beta startet im Juni 2026 — Warteliste ist offen.</p>
+  <div class="cta-row">
+    <a class="btn-primary" href="https://tally.so/r/D40QR5" target="_blank" rel="noopener" id="l-cta">Beta-Warteliste</a>
+  </div>
+</div>
+
+<div class="section">
+  <p class="section-label" id="l-s1-label">Konzept</p>
+  <div class="divider"></div>
+  <h2 id="l-s1-h2">Alte Zöpfe neu flechten</h2>
+  <p class="lead" id="l-s1-p1">Lead Sheets haben sich seit Jahrzehnten kaum verändert — und die Software auch nicht. NoteChart bringt ein vollständig neues Konzept mit, das von Grund auf für Musiker gedacht ist: schnell für Einsteiger, mächtig für Profis, ohne dass man sich durch Menüs kämpfen muss.</p>
+  <p class="lead" style="margin-top:16px" id="l-s1-p2">Nur Akkorde? Geht. Mit Rhythmus? Geht. Mit vollständiger Melodie? Auch das. So viele Seiten wie man braucht. NoteChart passt sich an — nicht umgekehrt.</p>
+  <p class="lead" style="margin-top:16px;font-style:italic;color:#7a9ab8" id="l-s1-p3">Wer bisher mit iReal Pro unterwegs war: herzlich willkommen in 2026. Euer Abo läuft ja noch bis Ende des Monats.</p>
+
+  <div class="features-grid">
+    <div class="feat-card">
+      <span class="feat-icon">🎵</span>
+      <h3 id="l-f1-h">Nur Akkorde</h3>
+      <p id="l-f1-p">Schnell ein Chart hinwerfen, ohne Noten, ohne Aufwand. Für die Probe, für die Session, für unterwegs.</p>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">🥁</span>
+      <h3 id="l-f2-h">Mit Rhythmus</h3>
+      <p id="l-f2-p">Wer mehr will, bekommt mehr — rhythmische Information direkt im Chart, klar und lesbar.</p>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">🎼</span>
+      <h3 id="l-f3-h">Mit Melodie</h3>
+      <p id="l-f3-p">Vollständige Notation wenn nötig — pro Takt zuschaltbar, nicht aufgezwungen. Das Notensystem erscheint genau dort, wo es gebraucht wird.</p>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">🎧</span>
+      <h3 id="l-f4-h">Audio-Import</h3>
+      <p id="l-f4-p">Song reinziehen, BPM wird erkannt, Akkordvorschläge kommen automatisch — bestätigen oder korrigieren, fertig.</p>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">📄</span>
+      <h3 id="l-f5-h">PDF-Export</h3>
+      <p id="l-f5-p">Druckfertige Charts, so viele Seiten wie nötig, mit wählbarem Layout und Kopfbereich.</p>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">🔄</span>
+      <h3 id="l-f6-h">Kompatibel</h3>
+      <p id="l-f6-p">MusicXML Import und Export. iReal Pro Nutzer exportieren ihre Charts als MusicXML — der Import in NoteChart funktioniert direkt.</p>
+    </div>
+  </div>
+
+  <div class="mockup-placeholder">
+    <p class="mp-title" id="l-mock-title">Screenshots kommen in Kürze</p>
+    <p id="l-mock-p">Die App ist in aktiver Entwicklung.</p>
+  </div>
+</div>
+
+<div class="section">
+  <p class="section-label" id="l-s2-label">Im Detail</p>
+  <div class="divider"></div>
+  <h2 id="l-s2-h2">Was NoteChart kann</h2>
+  <div class="unique-grid">
+    <div class="unique-card">
+      <h3 id="l-u1-h">Akkord-Syntax vollständig</h3>
+      <p id="l-u1-p">Von Cm über Cmaj7, Cdim7 und C7b9 bis zu Slash-Chords wie Bb/G — alle gängigen Schreibweisen werden erkannt und korrekt dargestellt.</p>
+    </div>
+    <div class="unique-card">
+      <h3 id="l-u2-h">Strukturelemente</h3>
+      <p id="l-u2-p">Wiederholungszeichen, Endungsklammern, Segno, Coda, Fine, Da Capo, N.C. — alles was ein echtes Chart braucht, ist vorhanden.</p>
+    </div>
+    <div class="unique-card">
+      <h3 id="l-u3-h">Lyrics</h3>
+      <p id="l-u3-p">Text direkt unter den Takten, takt- oder zeilenweise bearbeitbar. Floating-Fenster für den Gesamttext mit Live-Synchronisation.</p>
+    </div>
+    <div class="unique-card">
+      <h3 id="l-u4-h">Wiedergabe</h3>
+      <p id="l-u4-p">Akkord- und Melodiewiedergabe mit Piano-Sound, Metronom und Pre-Count. Loop-Funktion für markierte Bereiche.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <p class="section-label" id="l-s3-label">Spezifikation</p>
+  <div class="divider"></div>
+  <h2 id="l-s3-h2">Auf einen Blick</h2>
+  <div class="specs">
+    <div class="spec">
+      <div class="spec-val">macOS</div>
+      <div class="spec-lbl" id="l-spec1">Erste Plattform — iOS, Android, Windows geplant</div>
+    </div>
+    <div class="spec">
+      <div class="spec-val">DE / EN</div>
+      <div class="spec-lbl" id="l-spec2">Sprachen beim Start — ES folgt</div>
+    </div>
+    <div class="spec">
+      <div class="spec-val">.nct</div>
+      <div class="spec-lbl" id="l-spec3">Eigenes Format + MusicXML Import/Export</div>
+    </div>
+    <div class="spec">
+      <div class="spec-val">PDF</div>
+      <div class="spec-lbl" id="l-spec4">Export mit Vorschau, wählbares Format und Layout</div>
+    </div>
+    <div class="spec">
+      <div class="spec-val">20×</div>
+      <div class="spec-lbl" id="l-spec5">Undo-Schritte</div>
+    </div>
+    <div class="spec">
+      <div class="spec-val">Auto</div>
+      <div class="spec-lbl" id="l-spec6">Autosave nach jeder Änderung</div>
+    </div>
+  </div>
+  <div class="tag-row">
+    <span class="tag">Flutter + Rust</span>
+    <span class="tag">SMuFL / Bravura</span>
+    <span class="tag">MP3 · AAC · WAV · AIFF</span>
+    <span class="tag">MusicXML</span>
+    <span class="tag">BPM-Erkennung</span>
+    <span class="tag">Akkorderkennung</span>
+  </div>
+</div>
+
+<div class="cta-section">
+  <h2 id="l-cta-h">Beta-Warteliste</h2>
+  <p id="l-cta-p">NoteChart ist noch in der Entwicklung. Wer dabei sein möchte, kann sich jetzt eintragen.</p>
+  <a class="btn-primary" href="https://tally.so/r/D40QR5" target="_blank" rel="noopener" id="l-cta2">Jetzt eintragen</a>
+</div>
+
+<div class="footer">
+  <p>© 2025 Thomas Haake · <a href="index.html">haakemusic.com</a> · <a href="privacy.html">Privacy</a></p>
+</div>
+
+<script>
+const T = {
+  de:{
+    'nav-home':'Home','nav-privacy':'Privacy',
+    'l-eyebrow':'macOS · Beta Juni 2026',
+    'l-sub':'Lead-Sheet-Software, die neu denkt — von null an, ohne Rücksicht auf das, was immer so war.',
+    'l-note':'Screenshots kommen in Kürze. Beta startet im Juni 2026 — Warteliste ist offen.',
+    'l-cta':'Beta-Warteliste',
+    'l-s1-label':'Konzept','l-s1-h2':'Alte Zöpfe neu flechten',
+    'l-s1-p1':'Lead Sheets haben sich seit Jahrzehnten kaum verändert — und die Software auch nicht. NoteChart bringt ein vollständig neues Konzept mit, das von Grund auf für Musiker gedacht ist: schnell für Einsteiger, mächtig für Profis, ohne dass man sich durch Menüs kämpfen muss.',
+    'l-s1-p2':'Nur Akkorde? Geht. Mit Rhythmus? Geht. Mit vollständiger Melodie? Auch das. So viele Seiten wie man braucht. NoteChart passt sich an — nicht umgekehrt.',
+    'l-s1-p3':'Wer bisher mit iReal Pro unterwegs war: herzlich willkommen in 2026. Euer Abo läuft ja noch bis Ende des Monats.',
+    'l-f1-h':'Nur Akkorde','l-f1-p':'Schnell ein Chart hinwerfen, ohne Noten, ohne Aufwand. Für die Probe, für die Session, für unterwegs.',
+    'l-f2-h':'Mit Rhythmus','l-f2-p':'Wer mehr will, bekommt mehr — rhythmische Information direkt im Chart, klar und lesbar.',
+    'l-f3-h':'Mit Melodie','l-f3-p':'Vollständige Notation wenn nötig — pro Takt zuschaltbar, nicht aufgezwungen. Das Notensystem erscheint genau dort, wo es gebraucht wird.',
+    'l-f4-h':'Audio-Import','l-f4-p':'Song reinziehen, BPM wird erkannt, Akkordvorschläge kommen automatisch — bestätigen oder korrigieren, fertig.',
+    'l-f5-h':'PDF-Export','l-f5-p':'Druckfertige Charts, so viele Seiten wie nötig, mit wählbarem Layout und Kopfbereich.',
+    'l-f6-h':'Kompatibel','l-f6-p':'MusicXML Import und Export. iReal Pro Nutzer exportieren ihre Charts als MusicXML — der Import in NoteChart funktioniert direkt.',
+    'l-mock-title':'Screenshots kommen in Kürze','l-mock-p':'Die App ist in aktiver Entwicklung.',
+    'l-s2-label':'Im Detail','l-s2-h2':'Was NoteChart kann',
+    'l-u1-h':'Akkord-Syntax vollständig','l-u1-p':'Von Cm über Cmaj7, Cdim7 und C7b9 bis zu Slash-Chords wie Bb/G — alle gängigen Schreibweisen werden erkannt und korrekt dargestellt.',
+    'l-u2-h':'Strukturelemente','l-u2-p':'Wiederholungszeichen, Endungsklammern, Segno, Coda, Fine, Da Capo, N.C. — alles was ein echtes Chart braucht, ist vorhanden.',
+    'l-u3-h':'Lyrics','l-u3-p':'Text direkt unter den Takten, takt- oder zeilenweise bearbeitbar. Floating-Fenster für den Gesamttext mit Live-Synchronisation.',
+    'l-u4-h':'Wiedergabe','l-u4-p':'Akkord- und Melodiewiedergabe mit Piano-Sound, Metronom und Pre-Count. Loop-Funktion für markierte Bereiche.',
+    'l-s3-label':'Spezifikation','l-s3-h2':'Auf einen Blick',
+    'l-spec1':'Erste Plattform — iOS, Android, Windows geplant','l-spec2':'Sprachen beim Start — ES folgt',
+    'l-spec3':'Eigenes Format + MusicXML Import/Export','l-spec4':'Export mit Vorschau, wählbares Format und Layout',
+    'l-spec5':'Undo-Schritte','l-spec6':'Autosave nach jeder Änderung',
+    'l-cta-h':'Beta-Warteliste','l-cta-p':'NoteChart ist noch in der Entwicklung. Wer dabei sein möchte, kann sich jetzt eintragen.','l-cta2':'Jetzt eintragen',
+  },
+  en:{
+    'nav-home':'Home','nav-privacy':'Privacy',
+    'l-eyebrow':'macOS · Beta June 2026',
+    'l-sub':'Lead sheet software that thinks from scratch — no legacy, no compromises.',
+    'l-note':'Screenshots coming soon. Beta starts June 2026 — waitlist is open.',
+    'l-cta':'Join the Beta Waitlist',
+    'l-s1-label':'Concept','l-s1-h2':'Time to rewrite the rulebook',
+    'l-s1-p1':'Lead sheets haven\'t changed much in decades — and neither has the software. NoteChart brings a completely new concept built from the ground up for musicians: fast for beginners, powerful for professionals, without fighting through menus.',
+    'l-s1-p2':'Chords only? Done. With rhythm? Done. Full melody notation? That too. As many pages as your song needs. NoteChart adapts to you — not the other way around.',
+    'l-s1-p3':'Been using iReal Pro? Welcome to 2026. Your subscription is still valid until the end of the month, though.',
+    'l-f1-h':'Chords only','l-f1-p':'Throw together a chart fast, no notation needed. For rehearsal, for the session, on the go.',
+    'l-f2-h':'With rhythm','l-f2-p':'Want more? Get more — rhythmic information right in the chart, clear and readable.',
+    'l-f3-h':'With melody','l-f3-p':'Full notation when you need it — switchable per bar, never forced. The staff appears exactly where it\'s needed.',
+    'l-f4-h':'Audio import','l-f4-p':'Drop a song in, BPM gets detected, chord suggestions appear automatically — confirm or correct, done.',
+    'l-f5-h':'PDF export','l-f5-p':'Print-ready charts, as many pages as needed, with selectable layout and header fields.',
+    'l-f6-h':'Compatible','l-f6-p':'MusicXML import and export. iReal Pro users can export their charts as MusicXML — import into NoteChart works directly.',
+    'l-mock-title':'Screenshots coming soon','l-mock-p':'The app is in active development.',
+    'l-s2-label':'Details','l-s2-h2':'What NoteChart can do',
+    'l-u1-h':'Full chord syntax','l-u1-p':'From Cm to Cmaj7, Cdim7 and C7b9, all the way to slash chords like Bb/G — all common notations are recognized and displayed correctly.',
+    'l-u2-h':'Structure elements','l-u2-p':'Repeat signs, endings, segno, coda, fine, da capo, N.C. — everything a real chart needs is there.',
+    'l-u3-h':'Lyrics','l-u3-p':'Text directly below the bars, editable per bar or per line. Floating window for the full lyrics with live synchronization.',
+    'l-u4-h':'Playback','l-u4-p':'Chord and melody playback with piano sound, metronome and pre-count. Loop function for marked sections.',
+    'l-s3-label':'Specs','l-s3-h2':'At a glance',
+    'l-spec1':'First platform — iOS, Android, Windows planned','l-spec2':'Languages at launch — ES to follow',
+    'l-spec3':'Native format + MusicXML import/export','l-spec4':'Export with preview, selectable format and layout',
+    'l-spec5':'Undo steps','l-spec6':'Autosave after every change',
+    'l-cta-h':'Beta Waitlist','l-cta-p':'NoteChart is still in development. Sign up now to be among the first to try it.','l-cta2':'Sign up now',
+  },
+  es:{
+    'nav-home':'Inicio','nav-privacy':'Privacidad',
+    'l-eyebrow':'macOS · Beta junio 2026',
+    'l-sub':'Software de lead sheets que piensa desde cero — sin legado, sin compromisos.',
+    'l-note':'Capturas de pantalla próximamente. Beta en junio 2026 — la lista de espera está abierta.',
+    'l-cta':'Lista de espera Beta',
+    'l-s1-label':'Concepto','l-s1-h2':'Hora de reescribir las reglas',
+    'l-s1-p1':'Los lead sheets no han cambiado mucho en décadas — y el software tampoco. NoteChart trae un concepto completamente nuevo, construido desde cero para músicos: rápido para principiantes, potente para profesionales, sin pelear con menús.',
+    'l-s1-p2':'¿Solo acordes? Hecho. ¿Con ritmo? También. ¿Melodía completa? Por supuesto. Tantas páginas como necesite tu canción. NoteChart se adapta a ti — no al revés.',
+    'l-s1-p3':'¿Venías usando iReal Pro? Bienvenido a 2026. Tu suscripción todavía es válida hasta fin de mes.',
+    'l-f1-h':'Solo acordes','l-f1-p':'Un chart rápido, sin notas, sin complicaciones. Para el ensayo, la sesión o cuando estás de camino.',
+    'l-f2-h':'Con ritmo','l-f2-p':'¿Quieres más? Más tienes — información rítmica directamente en el chart, clara y legible.',
+    'l-f3-h':'Con melodía','l-f3-p':'Notación completa cuando la necesitas — activable por compás, nunca impuesta. El pentagrama aparece exactamente donde se necesita.',
+    'l-f4-h':'Importar audio','l-f4-p':'Arrastra una canción, el BPM se detecta, los acordes se sugieren automáticamente — confirma o corrige, listo.',
+    'l-f5-h':'Exportar PDF','l-f5-p':'Charts listos para imprimir, tantas páginas como necesites, con diseño y encabezado configurables.',
+    'l-f6-h':'Compatible','l-f6-p':'Importación y exportación MusicXML. Los usuarios de iReal Pro pueden exportar sus charts como MusicXML — la importación en NoteChart funciona directamente.',
+    'l-mock-title':'Capturas próximamente','l-mock-p':'La app está en desarrollo activo.',
+    'l-s2-label':'En detalle','l-s2-h2':'Qué puede hacer NoteChart',
+    'l-u1-h':'Sintaxis de acordes completa','l-u1-p':'Desde Cm hasta Cmaj7, Cdim7 y C7b9, pasando por slash chords como Bb/G — todas las notaciones habituales se reconocen y se muestran correctamente.',
+    'l-u2-h':'Elementos estructurales','l-u2-p':'Signos de repetición, casillas, segno, coda, fine, da capo, N.C. — todo lo que un chart real necesita está ahí.',
+    'l-u3-h':'Letra','l-u3-p':'Texto directamente bajo los compases, editable por compás o por línea. Ventana flotante para la letra completa con sincronización en tiempo real.',
+    'l-u4-h':'Reproducción','l-u4-p':'Reproducción de acordes y melodía con sonido de piano, metrónomo y pre-cuenta. Función de loop para secciones marcadas.',
+    'l-s3-label':'Especificaciones','l-s3-h2':'De un vistazo',
+    'l-spec1':'Primera plataforma — iOS, Android, Windows previsto','l-spec2':'Idiomas al lanzamiento — ES próximamente',
+    'l-spec3':'Formato propio + importación/exportación MusicXML','l-spec4':'Exportación con vista previa, formato y diseño configurables',
+    'l-spec5':'Pasos de deshacer','l-spec6':'Guardado automático en cada cambio',
+    'l-cta-h':'Lista de espera Beta','l-cta-p':'NoteChart está aún en desarrollo. Apúntate ahora para ser de los primeros en probarlo.','l-cta2':'Apuntarse ahora',
+  }
+};
+function setLang(lang){
+  ['de','en','es'].forEach(l=>document.getElementById('btn-'+l).classList.toggle('active',l===lang));
+  document.documentElement.lang=lang;
+  const t=T[lang];
+  for(const[id,val]of Object.entries(t)){const el=document.getElementById(id);if(el)el.innerHTML=val;}
+}
+document.addEventListener('DOMContentLoaded',()=>setLang('de'));
+</script>
+</body>
+</html>

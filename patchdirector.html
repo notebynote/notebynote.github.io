@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PatchDirector — haakemusic.com</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;700&display=swap">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;color:#fff;background:linear-gradient(to bottom,#1a3a6b 0%,#0a1a3a 60%,#060e22 100%);min-height:100vh;padding:0 0 100px}
+.lang-bar{display:flex;justify-content:flex-end;padding:14px 28px 0;gap:8px}
+.lang-btn{background:rgba(255,255,255,.08);border:1.5px solid rgba(120,170,230,.35);color:#a0c0e0;border-radius:50px;padding:7px 20px;font-size:13px;font-weight:700;cursor:pointer;transition:all .18s;letter-spacing:.06em}
+.lang-btn.active{background:rgba(42,111,214,.4);border-color:#5a9af0;color:#fff}
+.lang-btn:hover{background:rgba(42,111,214,.25);color:#fff}
+.site-nav{display:flex;align-items:center;justify-content:space-between;padding:12px 28px;background:rgba(6,14,34,0.7);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(120,170,230,.1);position:sticky;top:0;z-index:100}
+.site-nav .nav-logo{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:#fff;text-decoration:none;letter-spacing:.02em}
+.site-nav .nav-logo span{font-weight:300;color:#a0c0e0}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-link{color:#7ab0e8;font-size:13px;font-weight:600;text-decoration:none;padding:7px 16px;border-radius:50px;border:1.5px solid transparent;transition:all .18s;letter-spacing:.03em}
+.nav-link:hover{color:#fff;background:rgba(42,111,214,.2);border-color:rgba(90,154,240,.3)}
+.nav-link.active{color:#fff;background:rgba(42,111,214,.35);border-color:rgba(90,154,240,.5)}
+.nav-badge{display:inline-block;background:#2a6fd6;color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:50px;margin-left:4px;letter-spacing:.04em;vertical-align:middle;line-height:1.4}
+.hero{text-align:center;padding:64px 24px 56px}
+.hero-eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#7ab0e8;margin-bottom:18px;font-weight:700}
+.hero h1{font-size:clamp(40px,6vw,68px);font-weight:700;line-height:1.07;letter-spacing:-.02em;color:#fff;margin-bottom:18px}
+.hero h1 span{color:#7ab0e8}
+.hero-sub{font-size:clamp(17px,2.2vw,20px);color:#c0d8f0;max-width:640px;margin:0 auto 14px;line-height:1.65;font-weight:300}
+.hero-note{font-size:14px;color:#5a7a9a;margin-bottom:36px;font-style:italic;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.6}
+.cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-store{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(160deg,rgba(255,255,255,.07) 0%,rgba(255,255,255,.02) 100%);color:#7aa8cc;border:1.5px solid rgba(80,130,190,.25);padding:13px 26px;border-radius:50px;font-size:15px;font-weight:600;cursor:pointer;letter-spacing:.01em;transition:all .25s;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.08)}
+.btn-store:hover{background:linear-gradient(160deg,#2e7de0 0%,#1e5ab8 100%);color:#fff;border-color:#4a8af0;box-shadow:0 0 28px rgba(60,140,255,.45),0 6px 22px rgba(0,0,0,.4)}
+.section{max-width:960px;margin:0 auto;padding:72px 24px 0}
+.section-label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#7ab0e8;margin-bottom:10px;font-weight:700}
+.divider{width:44px;height:3px;background:linear-gradient(to right,#2a6fd6,#7ab0e8);border-radius:3px;margin:0 0 24px}
+.section h2{font-size:clamp(26px,3.5vw,38px);font-weight:700;color:#fff;margin-bottom:14px;line-height:1.13}
+.section p.lead{font-size:17px;color:#b0ccec;line-height:1.72;max-width:700px}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:36px}
+.feat-card{background:rgba(255,255,255,.05);border:1px solid rgba(120,170,230,.14);border-radius:16px;padding:28px 24px;transition:background .2s}
+.feat-card:hover{background:rgba(255,255,255,.08)}
+.feat-icon{font-size:26px;margin-bottom:14px;display:block}
+.feat-card h3{font-size:17px;font-weight:600;color:#fff;margin-bottom:8px}
+.feat-card p{font-size:14px;color:#88aed0;line-height:1.65}
+.status-box{background:rgba(255,200,50,.06);border:1px solid rgba(255,200,50,.18);border-radius:14px;padding:22px 28px;margin-top:36px}
+.status-box p{font-size:15px;color:#c0a040;line-height:1.7}
+.status-box strong{color:#e0c060;display:block;margin-bottom:6px;font-size:15px}
+.specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:28px}
+.spec{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:18px 16px}
+.spec-val{font-size:20px;font-weight:700;color:#7ab0e8;margin-bottom:4px}
+.spec-lbl{font-size:12px;color:#507090;line-height:1.4}
+.tag-row{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+.tag{background:rgba(120,170,230,.1);border:1px solid rgba(120,170,230,.22);color:#a0c8ee;border-radius:50px;padding:8px 18px;font-size:13px;font-weight:500}
+.footer{text-align:center;padding:48px 24px 0;color:#2a4a6a;font-size:13px}
+.footer a{color:#3a6a9a;text-decoration:none}
+</style>
+</head>
+<body>
+
+<div class="lang-bar">
+  <button class="lang-btn active" id="btn-de" onclick="setLang('de')">DE</button>
+  <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" id="btn-es" onclick="setLang('es')">ES</button>
+</div>
+
+<nav class="site-nav">
+  <a class="nav-logo" href="index.html">haake<span>music</span>.com</a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html" id="nav-home">Home</a>
+    <a class="nav-link" href="dronepad.html">Drone Pad</a>
+    <a class="nav-link" href="notechart.html">NoteChart<span class="nav-badge">Beta</span></a>
+    <a class="nav-link active" href="patchdirector.html">PatchDirector</a>
+    <a class="nav-link" href="privacy.html" id="nav-privacy">Privacy</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <p class="hero-eyebrow" id="l-eyebrow">Sound-Archiv &amp; Preset-Manager</p>
+  <h1>Patch<span>Director</span></h1>
+  <p class="hero-sub" id="l-sub">Eigene Sounds aufnehmen, verwalten und teilen — für virtuelle Instrumente und Hardware-Synthesizer.</p>
+  <p class="hero-note" id="l-note">PatchDirector existiert seit einigen Jahren — das letzte Update liegt zurück, und eine Neuentwicklung wird derzeit geprüft. Die bestehende Version läuft auf Windows und macOS und wird weiterhin gepflegt.</p>
+  <div class="cta-row">
+    <a class="btn-store" href="https://github.com/notebynote/patchdirector" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+      GitHub
+    </a>
+  </div>
+</div>
+
+<div class="section">
+  <p class="section-label" id="l-s1-label">Was ist PatchDirector</p>
+  <div class="divider"></div>
+  <h2 id="l-s1-h2">Sounds archivieren, finden, teilen</h2>
+  <p class="lead" id="l-s1-p">PatchDirector ist ein Klang-Archiv, eine Suchmaschine und ein Audio-Manager für eigene Presets. Sounds aufnehmen, taggen, in Gruppen organisieren und als kompakte Container-Dateien teilen — auch mit Audio-Wasserzeichen zum Schutz vor Missbrauch.</p>
+  <div class="features-grid">
+    <div class="feat-card"><span class="feat-icon">🎹</span><h3 id="l-f1-h">Alle Quellen</h3><p id="l-f1-p">Sounds aus virtuellen Instrumenten und Hardware-Synthesizern — alles landet in einem Archiv.</p></div>
+    <div class="feat-card"><span class="feat-icon">🔍</span><h3 id="l-f2-h">Schnell finden</h3><p id="l-f2-p">Tags, Gruppen, Sortierung und Suche. Der richtige Sound ist in Sekunden gefunden — auch in großen Sammlungen.</p></div>
+    <div class="feat-card"><span class="feat-icon">📦</span><h3 id="l-f3-h">Teilen leicht gemacht</h3><p id="l-f3-p">Sounds und Presets werden als Container-Datei verpackt und verschickt. Import auf der anderen Seite mit einem Klick.</p></div>
+    <div class="feat-card"><span class="feat-icon">🔐</span><h3 id="l-f4-h">Audio-Wasserzeichen</h3><p id="l-f4-p">Geteilte Samples können mit einem unhörbaren Wasserzeichen geschützt werden — Herkunft bleibt nachvollziehbar.</p></div>
+    <div class="feat-card"><span class="feat-icon">🎵</span><h3 id="l-f5-h">Vorschau &amp; Export</h3><p id="l-f5-p">Jeder Sound direkt abhörbar. Export als MP3 oder im Container-Format für andere Nutzer.</p></div>
+    <div class="feat-card"><span class="feat-icon">🤝</span><h3 id="l-f6-h">Kollaboration</h3><p id="l-f6-p">Sounds zwischen Musikern und Produzenten tauschen — schneller, strukturierter, ohne E-Mail-Chaos.</p></div>
+  </div>
+  <div class="status-box">
+    <strong id="l-status-h">Hinweis zum Stand der Entwicklung</strong>
+    <p id="l-status-p">PatchDirector hat seit einiger Zeit kein Update bekommen — das Projekt wurde nicht aufgegeben, aber die Weiterentwicklung ruht. Eine komplette Neuentwicklung wird geprüft. Die bestehende Version bleibt verfügbar und funktioniert stabil.</p>
+  </div>
+</div>
+
+<div class="section">
+  <p class="section-label" id="l-s2-label">Technisch</p>
+  <div class="divider"></div>
+  <h2 id="l-s2-h2">Plattformen &amp; Systemvoraussetzungen</h2>
+  <div class="specs">
+    <div class="spec"><div class="spec-val">Win</div><div class="spec-lbl" id="l-spec1">Windows 7 und höher</div></div>
+    <div class="spec"><div class="spec-val">Mac</div><div class="spec-lbl" id="l-spec2">OS X 10.8 und höher · getestet auf macOS 15</div></div>
+    <div class="spec"><div class="spec-val">DE / EN</div><div class="spec-lbl" id="l-spec3">Deutsche und englische Oberfläche</div></div>
+  </div>
+  <div class="tag-row">
+    <span class="tag" id="l-t1">Virtuelle Instrumente</span>
+    <span class="tag" id="l-t2">Hardware-Synthesizer</span>
+    <span class="tag" id="l-t3">Audio-Wasserzeichen</span>
+    <span class="tag">Container-Format</span>
+    <span class="tag">MP3-Export</span>
+    <span class="tag">Windows &amp; macOS</span>
+  </div>
+</div>
+
+<div class="footer">
+  <p>© 2025 Thomas Haake · <a href="index.html">haakemusic.com</a> · <a href="https://github.com/notebynote/patchdirector" target="_blank" rel="noopener">GitHub</a> · <a href="privacy.html">Privacy</a></p>
+</div>
+
+<script>
+const T = {
+  de:{
+    'nav-home':'Home','nav-privacy':'Privacy',
+    'l-eyebrow':'Sound-Archiv & Preset-Manager',
+    'l-sub':'Eigene Sounds aufnehmen, verwalten und teilen — für virtuelle Instrumente und Hardware-Synthesizer.',
+    'l-note':'PatchDirector existiert seit einigen Jahren — das letzte Update liegt zurück, und eine Neuentwicklung wird derzeit geprüft. Die bestehende Version läuft auf Windows und macOS und wird weiterhin gepflegt.',
+    'l-s1-label':'Was ist PatchDirector','l-s1-h2':'Sounds archivieren, finden, teilen',
+    'l-s1-p':'PatchDirector ist ein Klang-Archiv, eine Suchmaschine und ein Audio-Manager für eigene Presets. Sounds aufnehmen, taggen, in Gruppen organisieren und als kompakte Container-Dateien teilen — auch mit Audio-Wasserzeichen zum Schutz vor Missbrauch.',
+    'l-f1-h':'Alle Quellen','l-f1-p':'Sounds aus virtuellen Instrumenten und Hardware-Synthesizern — alles landet in einem Archiv.',
+    'l-f2-h':'Schnell finden','l-f2-p':'Tags, Gruppen, Sortierung und Suche. Der richtige Sound ist in Sekunden gefunden — auch in großen Sammlungen.',
+    'l-f3-h':'Teilen leicht gemacht','l-f3-p':'Sounds und Presets werden als Container-Datei verpackt und verschickt. Import auf der anderen Seite mit einem Klick.',
+    'l-f4-h':'Audio-Wasserzeichen','l-f4-p':'Geteilte Samples können mit einem unhörbaren Wasserzeichen geschützt werden — Herkunft bleibt nachvollziehbar.',
+    'l-f5-h':'Vorschau & Export','l-f5-p':'Jeder Sound direkt abhörbar. Export als MP3 oder im Container-Format für andere Nutzer.',
+    'l-f6-h':'Kollaboration','l-f6-p':'Sounds zwischen Musikern und Produzenten tauschen — schneller, strukturierter, ohne E-Mail-Chaos.',
+    'l-status-h':'Hinweis zum Stand der Entwicklung',
+    'l-status-p':'PatchDirector hat seit einiger Zeit kein Update bekommen — das Projekt wurde nicht aufgegeben, aber die Weiterentwicklung ruht. Eine komplette Neuentwicklung wird geprüft. Die bestehende Version bleibt verfügbar und funktioniert stabil.',
+    'l-s2-label':'Technisch','l-s2-h2':'Plattformen & Systemvoraussetzungen',
+    'l-spec1':'Windows 7 und höher','l-spec2':'OS X 10.8 und höher · getestet auf macOS 15','l-spec3':'Deutsche und englische Oberfläche',
+    'l-t1':'Virtuelle Instrumente','l-t2':'Hardware-Synthesizer','l-t3':'Audio-Wasserzeichen',
+  },
+  en:{
+    'nav-home':'Home','nav-privacy':'Privacy',
+    'l-eyebrow':'Sound Archive & Preset Manager',
+    'l-sub':'Record, manage and share your own sounds — for virtual instruments and hardware synthesizers.',
+    'l-note':'PatchDirector has been around for a few years — the last update was a while back, and a complete rebuild is currently being considered. The existing version runs on Windows and macOS and remains maintained.',
+    'l-s1-label':'What is PatchDirector','l-s1-h2':'Archive, find, share sounds',
+    'l-s1-p':'PatchDirector is a sound archive, a search engine and an audio manager for your own presets. Record, tag, organize sounds into groups and share them as compact container files — optionally with an audio watermark to protect against misuse.',
+    'l-f1-h':'All sources','l-f1-p':'Sounds from virtual instruments and hardware synthesizers — everything in one archive.',
+    'l-f2-h':'Find fast','l-f2-p':'Tags, groups, sorting and search. The right sound found in seconds — even in large collections.',
+    'l-f3-h':'Easy sharing','l-f3-p':'Sounds and presets packed into a container file and sent. Import on the other end with one click.',
+    'l-f4-h':'Audio watermark','l-f4-p':'Shared samples can be protected with an inaudible watermark — origin remains traceable.',
+    'l-f5-h':'Preview & export','l-f5-p':'Every sound playable directly. Export as MP3 or in container format for other users.',
+    'l-f6-h':'Collaboration','l-f6-p':'Exchange sounds between musicians and producers — faster, more organized, without email chaos.',
+    'l-status-h':'Development status',
+    'l-status-p':'PatchDirector hasn\'t received an update in a while — the project hasn\'t been abandoned, but development is on hold. A complete rebuild is under consideration. The existing version remains available and runs stable.',
+    'l-s2-label':'Technical','l-s2-h2':'Platforms & system requirements',
+    'l-spec1':'Windows 7 and higher','l-spec2':'OS X 10.8 and higher · tested on macOS 15','l-spec3':'German and English interface',
+    'l-t1':'Virtual instruments','l-t2':'Hardware synthesizers','l-t3':'Audio watermark',
+  },
+  es:{
+    'nav-home':'Inicio','nav-privacy':'Privacidad',
+    'l-eyebrow':'Archivo de Sonidos y Gestor de Presets',
+    'l-sub':'Graba, gestiona y comparte tus propios sonidos — para instrumentos virtuales y sintetizadores de hardware.',
+    'l-note':'PatchDirector lleva varios años en funcionamiento — la última actualización fue hace tiempo, y actualmente se está estudiando un rediseño completo. La versión existente funciona en Windows y macOS y sigue siendo mantenida.',
+    'l-s1-label':'¿Qué es PatchDirector?','l-s1-h2':'Archivar, encontrar, compartir sonidos',
+    'l-s1-p':'PatchDirector es un archivo de sonidos, un motor de búsqueda y un gestor de audio para tus propios presets. Graba, etiqueta, organiza sonidos en grupos y compártelos como archivos contenedor compactos — opcionalmente con una marca de agua de audio para proteger contra el uso indebido.',
+    'l-f1-h':'Todas las fuentes','l-f1-p':'Sonidos de instrumentos virtuales y sintetizadores de hardware — todo en un único archivo.',
+    'l-f2-h':'Encuentra rápido','l-f2-p':'Etiquetas, grupos, ordenación y búsqueda. El sonido correcto encontrado en segundos — incluso en grandes colecciones.',
+    'l-f3-h':'Compartir fácil','l-f3-p':'Sonidos y presets empaquetados en un archivo contenedor y enviados. Importación en el otro extremo con un clic.',
+    'l-f4-h':'Marca de agua de audio','l-f4-p':'Las muestras compartidas pueden protegerse con una marca de agua inaudible — el origen permanece trazable.',
+    'l-f5-h':'Vista previa y exportación','l-f5-p':'Cada sonido reproducible directamente. Exportación como MP3 o en formato contenedor para otros usuarios.',
+    'l-f6-h':'Colaboración','l-f6-p':'Intercambia sonidos entre músicos y productores — más rápido, más organizado, sin caos de correos.',
+    'l-status-h':'Estado del desarrollo',
+    'l-status-p':'PatchDirector no ha recibido una actualización desde hace tiempo — el proyecto no está abandonado, pero el desarrollo está en pausa. Se está considerando una reescritura completa. La versión existente permanece disponible y funciona establemente.',
+    'l-s2-label':'Técnico','l-s2-h2':'Plataformas y requisitos del sistema',
+    'l-spec1':'Windows 7 y superior','l-spec2':'OS X 10.8 y superior · probado en macOS 15','l-spec3':'Interfaz en alemán e inglés',
+    'l-t1':'Instrumentos virtuales','l-t2':'Sintetizadores de hardware','l-t3':'Marca de agua de audio',
+  }
+};
+function setLang(lang){
+  ['de','en','es'].forEach(l=>document.getElementById('btn-'+l).classList.toggle('active',l===lang));
+  document.documentElement.lang=lang;
+  const t=T[lang];
+  for(const[id,val]of Object.entries(t)){const el=document.getElementById(id);if(el)el.innerHTML=val;}
+}
+document.addEventListener('DOMContentLoaded',()=>setLang('de'));
+</script>
+</body>
+</html>
