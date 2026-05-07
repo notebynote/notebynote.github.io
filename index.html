@@ -132,7 +132,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 
 <div class="footer">
   <p>© 2025 Thomas Haake · haakemusic.com · <a href="privacy.html">Privacy</a></p>
+  <p style="margin-top:24px;font-size:12px;color:#2a4a6a;line-height:1.8" id="impressum">
+    <strong style="color:#3a6a9a;display:block;margin-bottom:6px">Impressum</strong>
+    Angaben gemäß § 5 ECG<br>
+    <span id="imp"></span>
+  </p>
 </div>
+<script>
+  document.getElementById('imp').innerHTML = atob(
+    'VGhvbWFzIEhhYWtlPGJyPk3DvGhsZXN0ci4gMmM8YnI+NjkyMyBMYXV0ZXJhY2g8YnI+w5Zz' +
+    'dGVycmVpY2g8YnI+PGJyPkUtTWFpbDogdGhvbWFzLmhhYWtlQGdtYWlsLmNvbTxicj48YnI+' +
+    'VW50ZXJuZWhtZW5zZ2VnZW5zdGFuZDogU29mdHdhcmVlbnR3aWNrbHVuZyAvIE11c2lrc29m' +
+    'dHdhcmU8YnI+RGllc2UgV2Vic2l0ZSB3aXJkIHZvbiBlaW5lciBQcml2YXRwZXJzb24gYmV0' +
+    'cmllYmVuLg=='
+  );
+</script>
 
 <script>
 const T = {
