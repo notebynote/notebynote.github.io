@@ -139,13 +139,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
   </p>
 </div>
 <script>
-  document.getElementById('imp').innerHTML = atob(
-    'VGhvbWFzIEhhYWtlPGJyPk3DvGhsZXN0ci4gMmM8YnI+NjkyMyBMYXV0ZXJhY2g8YnI+w5Zz' +
-    'dGVycmVpY2g8YnI+PGJyPkUtTWFpbDogdGhvbWFzLmhhYWtlQGdtYWlsLmNvbTxicj48YnI+' +
-    'VW50ZXJuZWhtZW5zZ2VnZW5zdGFuZDogU29mdHdhcmVlbnR3aWNrbHVuZyAvIE11c2lrc29m' +
-    'dHdhcmU8YnI+RGllc2UgV2Vic2l0ZSB3aXJkIHZvbiBlaW5lciBQcml2YXRwZXJzb24gYmV0' +
-    'cmllYmVuLg=='
-  );
+  (function(){
+    const b64 =
+      'VGhvbWFzIEhhYWtlPGJyPk3DvGhsZXN0ci4gMmM8YnI+NjkyMyBMYXV0ZXJhY2g8YnI+w5Zz' +
+      'dGVycmVpY2g8YnI+PGJyPkUtTWFpbDogdGhvbWFzLmhhYWtlQGdtYWlsLmNvbTxicj48YnI+' +
+      'VW50ZXJuZWhtZW5zZ2VnZW5zdGFuZDogU29mdHdhcmVlbnR3aWNrbHVuZyAvIE11c2lrc29m' +
+      'dHdhcmU8YnI+RGllc2UgV2Vic2l0ZSB3aXJkIHZvbiBlaW5lciBQcml2YXRwZXJzb24gYmV0' +
+      'cmllYmVuLg==';
+    const bytes = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    document.getElementById('imp').innerHTML = new TextDecoder('utf-8').decode(bytes);
+  })();
 </script>
 
 <script>
