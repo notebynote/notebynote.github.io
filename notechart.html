@@ -58,9 +58,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 .cta-section p{font-size:17px;color:#88aed0;margin-bottom:30px;line-height:1.6}
 .footer{text-align:center;padding:48px 24px 0;color:#2a4a6a;font-size:13px}
 .footer a{color:#3a6a9a;text-decoration:none}
-.mockup-placeholder{background:rgba(42,111,214,.06);border:1px dashed rgba(42,111,214,.25);border-radius:20px;padding:60px 40px;text-align:center;margin-top:48px}
-.mockup-placeholder p{color:#3a5a7a;font-size:14px}
-.mockup-placeholder .mp-title{font-size:16px;font-weight:600;color:#5a7aaa;margin-bottom:8px}
+.screenshot-wrap{margin-top:48px;text-align:center}
+.screenshot-img{width:100%;max-width:860px;border-radius:16px;border:1px solid rgba(120,170,230,.18);box-shadow:0 8px 48px rgba(0,0,0,.5);display:block;margin:0 auto}
+.screenshot-caption{margin-top:14px;font-size:13px;color:#3a5a7a;font-style:italic}
 </style>
 </head>
 <body>
@@ -133,9 +133,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
     </div>
   </div>
 
-  <div class="mockup-placeholder">
-    <p class="mp-title" id="l-mock-title">Screenshots kommen in Kürze</p>
-    <p id="l-mock-p">Die App ist in aktiver Entwicklung.</p>
+  <div class="screenshot-wrap">
+    <img src="images/first_screenshot_notechart.png" alt="NoteChart Screenshot – erster Blick auf die Oberfläche" class="screenshot-img">
+    <p class="screenshot-caption" id="l-mock-title">Erster Screenshot — NoteChart macOS, Beta</p>
   </div>
 </div>
 
@@ -219,7 +219,7 @@ const T = {
     'nav-home':'Home','nav-privacy':'Privacy',
     'l-eyebrow':'macOS · Beta Juni 2026',
     'l-sub':'Lead-Sheet-Software, die neu denkt — von null an, ohne Rücksicht auf das, was immer so war.',
-    'l-note':'Screenshots kommen in Kürze. Beta startet im Juni 2026 — Warteliste ist offen.',
+    'l-note':'Beta startet im Juni 2026 — Warteliste ist offen.',
     'l-cta':'Beta-Warteliste',
     'l-s1-label':'Konzept','l-s1-h2':'Alte Zöpfe neu flechten',
     'l-s1-p1':'Lead Sheets haben sich seit Jahrzehnten kaum verändert — und die Software auch nicht. NoteChart bringt ein vollständig neues Konzept mit, das von Grund auf für Musiker gedacht ist: schnell für Einsteiger, mächtig für Profis, ohne dass man sich durch Menüs kämpfen muss.',
@@ -231,7 +231,7 @@ const T = {
     'l-f4-h':'Audio-Import','l-f4-p':'Song reinziehen, BPM wird erkannt, Akkordvorschläge kommen automatisch — bestätigen oder korrigieren, fertig.',
     'l-f5-h':'PDF-Export','l-f5-p':'Druckfertige Charts, so viele Seiten wie nötig, mit wählbarem Layout und Kopfbereich.',
     'l-f6-h':'Kompatibel','l-f6-p':'MusicXML Import und Export. iReal Pro Nutzer exportieren ihre Charts als MusicXML — der Import in NoteChart funktioniert direkt.',
-    'l-mock-title':'Screenshots kommen in Kürze','l-mock-p':'Die App ist in aktiver Entwicklung.',
+    'l-mock-title':'Erster Screenshot — NoteChart macOS, Beta',
     'l-s2-label':'Im Detail','l-s2-h2':'Was NoteChart kann',
     'l-u1-h':'Akkord-Syntax vollständig','l-u1-p':'Von Cm über Cmaj7, Cdim7 und C7b9 bis zu Slash-Chords wie Bb/G — alle gängigen Schreibweisen werden erkannt und korrekt dargestellt.',
     'l-u2-h':'Strukturelemente','l-u2-p':'Wiederholungszeichen, Endungsklammern, Segno, Coda, Fine, Da Capo, N.C. — alles was ein echtes Chart braucht, ist vorhanden.',
@@ -247,7 +247,7 @@ const T = {
     'nav-home':'Home','nav-privacy':'Privacy',
     'l-eyebrow':'macOS · Beta June 2026',
     'l-sub':'Lead sheet software that thinks from scratch — no legacy, no compromises.',
-    'l-note':'Screenshots coming soon. Beta starts June 2026 — waitlist is open.',
+    'l-note':'Beta starts June 2026 — waitlist is open.',
     'l-cta':'Join the Beta Waitlist',
     'l-s1-label':'Concept','l-s1-h2':'Time to rewrite the rulebook',
     'l-s1-p1':'Lead sheets haven\'t changed much in decades — and neither has the software. NoteChart brings a completely new concept built from the ground up for musicians: fast for beginners, powerful for professionals, without fighting through menus.',
@@ -259,7 +259,7 @@ const T = {
     'l-f4-h':'Audio import','l-f4-p':'Drop a song in, BPM gets detected, chord suggestions appear automatically — confirm or correct, done.',
     'l-f5-h':'PDF export','l-f5-p':'Print-ready charts, as many pages as needed, with selectable layout and header fields.',
     'l-f6-h':'Compatible','l-f6-p':'MusicXML import and export. iReal Pro users can export their charts as MusicXML — import into NoteChart works directly.',
-    'l-mock-title':'Screenshots coming soon','l-mock-p':'The app is in active development.',
+    'l-mock-title':'First screenshot — NoteChart macOS, Beta',
     'l-s2-label':'Details','l-s2-h2':'What NoteChart can do',
     'l-u1-h':'Full chord syntax','l-u1-p':'From Cm to Cmaj7, Cdim7 and C7b9, all the way to slash chords like Bb/G — all common notations are recognized and displayed correctly.',
     'l-u2-h':'Structure elements','l-u2-p':'Repeat signs, endings, segno, coda, fine, da capo, N.C. — everything a real chart needs is there.',
@@ -275,7 +275,7 @@ const T = {
     'nav-home':'Inicio','nav-privacy':'Privacidad',
     'l-eyebrow':'macOS · Beta junio 2026',
     'l-sub':'Software de lead sheets que piensa desde cero — sin legado, sin compromisos.',
-    'l-note':'Capturas de pantalla próximamente. Beta en junio 2026 — la lista de espera está abierta.',
+    'l-note':'Beta en junio 2026 — la lista de espera está abierta.',
     'l-cta':'Lista de espera Beta',
     'l-s1-label':'Concepto','l-s1-h2':'Hora de reescribir las reglas',
     'l-s1-p1':'Los lead sheets no han cambiado mucho en décadas — y el software tampoco. NoteChart trae un concepto completamente nuevo, construido desde cero para músicos: rápido para principiantes, potente para profesionales, sin pelear con menús.',
@@ -287,7 +287,7 @@ const T = {
     'l-f4-h':'Importar audio','l-f4-p':'Arrastra una canción, el BPM se detecta, los acordes se sugieren automáticamente — confirma o corrige, listo.',
     'l-f5-h':'Exportar PDF','l-f5-p':'Charts listos para imprimir, tantas páginas como necesites, con diseño y encabezado configurables.',
     'l-f6-h':'Compatible','l-f6-p':'Importación y exportación MusicXML. Los usuarios de iReal Pro pueden exportar sus charts como MusicXML — la importación en NoteChart funciona directamente.',
-    'l-mock-title':'Capturas próximamente','l-mock-p':'La app está en desarrollo activo.',
+    'l-mock-title':'Primera captura — NoteChart macOS, Beta',
     'l-s2-label':'En detalle','l-s2-h2':'Qué puede hacer NoteChart',
     'l-u1-h':'Sintaxis de acordes completa','l-u1-p':'Desde Cm hasta Cmaj7, Cdim7 y C7b9, pasando por slash chords como Bb/G — todas las notaciones habituales se reconocen y se muestran correctamente.',
     'l-u2-h':'Elementos estructurales','l-u2-p':'Signos de repetición, casillas, segno, coda, fine, da capo, N.C. — todo lo que un chart real necesita está ahí.',
