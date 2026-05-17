@@ -22,6 +22,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 .nav-link:hover{color:#fff;background:rgba(42,111,214,.2);border-color:rgba(90,154,240,.3)}
 .nav-link.active{color:#fff;background:rgba(42,111,214,.35);border-color:rgba(90,154,240,.5)}
 .nav-badge{display:inline-block;background:#2a6fd6;color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:50px;margin-left:4px;letter-spacing:.04em;vertical-align:middle;line-height:1.4}
+.nav-item{position:relative}
+.nav-item.dropdown>.nav-link{cursor:pointer}
+.nav-item.dropdown>.nav-link::after{content:' ▾';font-size:9px;opacity:.7;margin-left:2px}
+.nav-submenu{display:none;position:absolute;top:calc(100% + 6px);left:0;background:rgba(6,14,34,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(120,170,230,.15);border-radius:14px;padding:6px;min-width:170px;flex-direction:column;gap:2px;z-index:101;box-shadow:0 6px 24px rgba(0,0,0,.4)}
+.nav-submenu.open{display:flex}
+.nav-submenu .nav-link{padding:8px 14px;border-radius:10px;font-size:13px;white-space:nowrap}
+
 .page{max-width:680px;margin:0 auto;padding:64px 24px 0}
 .page-label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#7ab0e8;margin-bottom:10px;font-weight:700}
 .divider{width:44px;height:3px;background:linear-gradient(to right,#2a6fd6,#7ab0e8);border-radius:3px;margin:0 0 32px}
@@ -51,11 +58,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
   <a class="nav-logo" href="index.html">haake<span>music</span>.com</a>
   <div class="nav-links">
     <a class="nav-link" href="index.html" id="nav-home">Home</a>
-    <a class="nav-link" href="dronepad.html">Drone Pad</a>
+    <div class="nav-item dropdown">
+      <a class="nav-link" href="dronepad.html" id="nav-dp">Drone Pad</a>
+      <div class="nav-submenu">
+        <a class="nav-link" href="dronepad.html" id="nav-dp-info">Info</a>
+        <a class="nav-link" href="dronepad-app.html" id="nav-dp-app">App starten</a>
+      </div>
+    </div>
     <a class="nav-link" href="notechart.html">NoteChart<span class="nav-badge">Beta</span></a>
     <a class="nav-link" href="patchdirector.html">PatchDirector</a>
+    <a class="nav-link" href="ueber-mich.html" id="nav-about">Über</a>
     <a class="nav-link active" href="privacy.html" id="nav-privacy">Privacy</a>
-    <a class="nav-link" href="ueber-mich.html" id="nav-about">Über…</a>
   </div>
 </nav>
 
@@ -85,6 +98,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
   </div>
 
   <div class="priv-section">
+    <h2 id="l-h-website">Website (haakemusic.com)</h2>
+    <p id="l-website">Die Website haakemusic.com erfasst keine personenbezogenen Daten und setzt keine Tracking-Cookies. Die einzige lokal gespeicherte Information ist die zuletzt gewählte Sprache der Website (DE/EN/ES). Sie wird im <em>localStorage</em> deines Browsers unter dem Schlüssel <code>haakemusic.lang</code> gespeichert, damit deine Sprachwahl beim Seitenwechsel erhalten bleibt. Diese Speicherung ist technisch erforderlich für die gewünschte Funktion (Sprachauswahl) und enthält keine personenbezogenen Daten. Du kannst sie jederzeit im Browser löschen.</p>
+  </div>
+
+  <div class="priv-section">
     <h2 id="l-h-children">Kinder</h2>
     <p id="l-children">Da keinerlei Daten erfasst werden, bestehen keine besonderen Risiken für Kinder unter 13 Jahren. Die App richtet sich an Musiker, Lehrer und alle klanginteressierten Nutzer.</p>
   </div>
@@ -105,34 +123,37 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 <script>
 const T = {
   de:{
-    'nav-home':'Home','nav-privacy':'Privacy','nav-about':'Über…',
+    'nav-home':'Home','nav-about':'Über','nav-privacy':'Privacy','nav-dp-info':'Info','nav-dp-app':'App starten',
     'l-label':'Datenschutz','l-title':'Datenschutzerklärung','l-subtitle':'Drone Pad – macOS & Web App',
     'l-summary':'Drone Pad erfasst, speichert oder überträgt keinerlei personenbezogene Daten. Die App funktioniert vollständig lokal auf deinem Gerät.',
     'l-h-data':'Datenerfassung','l-data':'Drone Pad erfasst keine personenbezogenen Daten. Es werden keine Nutzungsdaten, Analysedaten, Absturzberichte oder sonstige Informationen erhoben, gespeichert oder an Dritte übertragen.',
     'l-h-local':'Lokale Verarbeitung','l-local':'Alle Funktionen der App – Klangsynthese, Einstellungen, Benutzeroberfläche – laufen ausschließlich lokal auf dem Gerät des Nutzers. Es besteht keine Verbindung zu externen Servern.',
     'l-h-third':'Drittanbieter','l-third':'Drone Pad verwendet keine Drittanbieter-SDKs, Analyse-Frameworks, Werbedienste oder sonstige externe Dienste, die Daten erfassen könnten.',
+    'l-h-website':'Website (haakemusic.com)','l-website':'Die Website haakemusic.com erfasst keine personenbezogenen Daten und setzt keine Tracking-Cookies. Die einzige lokal gespeicherte Information ist die zuletzt gewählte Sprache der Website (DE/EN/ES). Sie wird im <em>localStorage</em> deines Browsers unter dem Schlüssel <code>haakemusic.lang</code> gespeichert, damit deine Sprachwahl beim Seitenwechsel erhalten bleibt. Diese Speicherung ist technisch erforderlich für die gewünschte Funktion (Sprachauswahl) und enthält keine personenbezogenen Daten. Du kannst sie jederzeit im Browser löschen.',
     'l-h-children':'Kinder','l-children':'Da keinerlei Daten erfasst werden, bestehen keine besonderen Risiken für Kinder unter 13 Jahren. Die App richtet sich an Musiker, Lehrer und alle klanginteressierten Nutzer.',
     'l-h-contact':'Kontakt','l-contact':'<a href="mailto:thomas.haake@gmail.com" style="color:#7ab0e8">thomas.haake@gmail.com</a><br><a href="https://haakemusic.com" style="color:#7ab0e8">haakemusic.com</a>',
     'l-updated':'Zuletzt aktualisiert: April 2025',
   },
   en:{
-    'nav-home':'Home','nav-privacy':'Privacy','nav-about':'About…',
+    'nav-home':'Home','nav-about':'About','nav-privacy':'Privacy','nav-dp-info':'Info','nav-dp-app':'Launch app',
     'l-label':'Privacy','l-title':'Privacy Policy','l-subtitle':'Drone Pad – macOS & Web App',
     'l-summary':'Drone Pad does not collect, store or transmit any personal data. The app runs entirely locally on your device.',
     'l-h-data':'Data collection','l-data':'Drone Pad collects no personal data. No usage data, analytics, crash reports or any other information is gathered, stored or shared with third parties.',
     'l-h-local':'Local processing','l-local':'All app functions — sound synthesis, settings, user interface — run exclusively on the user\'s device. There is no connection to external servers.',
     'l-h-third':'Third parties','l-third':'Drone Pad uses no third-party SDKs, analytics frameworks, advertising services or any other external services that could collect data.',
+    'l-h-website':'Website (haakemusic.com)','l-website':'The haakemusic.com website does not collect any personal data and sets no tracking cookies. The only locally stored information is your most recently selected website language (DE/EN/ES). It is saved in your browser\'s <em>localStorage</em> under the key <code>haakemusic.lang</code>, so your language choice persists across pages. This storage is strictly necessary for the requested function (language selection) and contains no personal data. You can clear it at any time in your browser.',
     'l-h-children':'Children','l-children':'Since no data is collected, there are no particular risks for children under 13. The app is aimed at musicians, teachers and anyone interested in sound.',
     'l-h-contact':'Contact','l-contact':'<a href="mailto:thomas.haake@gmail.com" style="color:#7ab0e8">thomas.haake@gmail.com</a><br><a href="https://haakemusic.com" style="color:#7ab0e8">haakemusic.com</a>',
     'l-updated':'Last updated: April 2025',
   },
   es:{
-    'nav-home':'Inicio','nav-privacy':'Privacidad','nav-about':'Acerca de…',
+    'nav-home':'Inicio','nav-about':'Acerca','nav-privacy':'Privacidad','nav-dp-info':'Info','nav-dp-app':'Abrir app',
     'l-label':'Privacidad','l-title':'Política de Privacidad','l-subtitle':'Drone Pad – macOS y App Web',
     'l-summary':'Drone Pad no recopila, almacena ni transmite ningún dato personal. La app funciona completamente de forma local en tu dispositivo.',
     'l-h-data':'Recopilación de datos','l-data':'Drone Pad no recopila datos personales. No se recoge, almacena ni comparte con terceros ningún dato de uso, análisis, informes de fallos ni ninguna otra información.',
     'l-h-local':'Procesamiento local','l-local':'Todas las funciones de la app — síntesis de sonido, ajustes, interfaz de usuario — se ejecutan exclusivamente en el dispositivo del usuario. No hay conexión a servidores externos.',
     'l-h-third':'Terceros','l-third':'Drone Pad no utiliza SDKs de terceros, marcos de análisis, servicios publicitarios ni ningún otro servicio externo que pueda recopilar datos.',
+    'l-h-website':'Sitio web (haakemusic.com)','l-website':'El sitio web haakemusic.com no recopila datos personales y no establece cookies de seguimiento. La única información almacenada localmente es el idioma del sitio web seleccionado más recientemente (DE/EN/ES). Se guarda en el <em>localStorage</em> de tu navegador bajo la clave <code>haakemusic.lang</code>, para que tu elección de idioma se mantenga al cambiar de página. Este almacenamiento es estrictamente necesario para la función solicitada (selección de idioma) y no contiene datos personales. Puedes borrarlo en cualquier momento en tu navegador.',
     'l-h-children':'Menores','l-children':'Dado que no se recopilan datos, no existen riesgos particulares para menores de 13 años. La app está dirigida a músicos, profesores y cualquier persona interesada en el sonido.',
     'l-h-contact':'Contacto','l-contact':'<a href="mailto:thomas.haake@gmail.com" style="color:#7ab0e8">thomas.haake@gmail.com</a><br><a href="https://haakemusic.com" style="color:#7ab0e8">haakemusic.com</a>',
     'l-updated':'Última actualización: abril 2025',
@@ -141,10 +162,31 @@ const T = {
 function setLang(lang){
   ['de','en','es'].forEach(l=>document.getElementById('btn-'+l).classList.toggle('active',l===lang));
   document.documentElement.lang=lang;
+  try{localStorage.setItem('haakemusic.lang',lang);}catch(e){}
   const t=T[lang];
   for(const[id,val]of Object.entries(t)){const el=document.getElementById(id);if(el)el.innerHTML=val;}
 }
-document.addEventListener('DOMContentLoaded',()=>setLang('de'));
+document.addEventListener('DOMContentLoaded',()=>{
+  let stored='de';
+  try{const s=localStorage.getItem('haakemusic.lang');if(s==='de'||s==='en'||s==='es')stored=s;}catch(e){}
+  setLang(stored);
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const dd=document.querySelector('.nav-item.dropdown');
+  if(!dd)return;
+  const trigger=dd.querySelector('.nav-link');
+  const menu=dd.querySelector('.nav-submenu');
+  trigger.addEventListener('click',e=>{
+    e.preventDefault();
+    menu.classList.toggle('open');
+  });
+  document.addEventListener('click',e=>{
+    if(!dd.contains(e.target))menu.classList.remove('open');
+  });
+});
 </script>
 </body>
 </html>

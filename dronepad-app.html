@@ -59,12 +59,21 @@ body.theme-pastel {
   --border:rgba(130,80,180,0.1); --border2:rgba(130,80,180,0.2);
   --text:#2a1a3a; --text2:#9060b8; --text3:#c4a8dc;
 }
-/* ── Site Nav (minimal, dark, non-intrusive) ── */
-.site-nav-app{display:flex;align-items:center;justify-content:space-between;padding:8px 16px;background:#0d0d0d;border-bottom:1px solid rgba(255,255,255,.07);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif}
-.site-nav-app a{color:#555;font-size:11px;font-weight:600;text-decoration:none;padding:4px 10px;border-radius:6px;transition:color .15s;letter-spacing:.04em}
-.site-nav-app a:hover{color:#aaa}
-.site-nav-app a.active{color:#888}
-.site-nav-app .nav-logo-app{color:#444;font-size:11px;letter-spacing:.08em}
+/* ── Site Nav (volle Site-Nav wie auf den anderen Seiten) ── */
+.site-nav{display:flex;align-items:center;justify-content:space-between;padding:12px 28px;background:rgba(6,14,34,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(120,170,230,.1);position:sticky;top:0;z-index:100;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;color:#fff}
+.site-nav .nav-logo{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;font-weight:700;font-size:15px;color:#fff;text-decoration:none;letter-spacing:.02em}
+.site-nav .nav-logo span{font-weight:300;color:#a0c0e0}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-link{color:#7ab0e8;font-size:13px;font-weight:600;text-decoration:none;padding:7px 16px;border-radius:50px;border:1.5px solid transparent;transition:all .18s;letter-spacing:.03em}
+.nav-link:hover{color:#fff;background:rgba(42,111,214,.2);border-color:rgba(90,154,240,.3)}
+.nav-link.active{color:#fff;background:rgba(42,111,214,.35);border-color:rgba(90,154,240,.5)}
+.nav-badge{display:inline-block;background:#2a6fd6;color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:50px;margin-left:4px;letter-spacing:.04em;vertical-align:middle;line-height:1.4}
+.nav-item{position:relative}
+.nav-item.dropdown>.nav-link{cursor:pointer}
+.nav-item.dropdown>.nav-link::after{content:' ▾';font-size:9px;opacity:.7;margin-left:2px}
+.nav-submenu{display:none;position:absolute;top:calc(100% + 6px);left:0;background:rgba(6,14,34,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(120,170,230,.15);border-radius:14px;padding:6px;min-width:170px;flex-direction:column;gap:2px;z-index:101;box-shadow:0 6px 24px rgba(0,0,0,.4)}
+.nav-submenu.open{display:flex}
+.nav-submenu .nav-link{padding:8px 14px;border-radius:10px;font-size:13px;white-space:nowrap}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;font-size:14px;overflow-x:hidden;overflow-y:auto;transition:background .25s,color .2s}
 body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.12;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23paper)' opacity='1'/%3E%3C/svg%3E");background-size:300px 300px}
@@ -171,17 +180,47 @@ canvas.viz{width:100%;height:72px;margin-top:6px;display:block}
 </style>
 </head>
 <body>
-<nav class="site-nav-app">
-  <span class="nav-logo-app">haakemusic.com</span>
-  <div>
-    <a href="index.html">Home</a>
-    <a href="dronepad.html">Drone Pad</a>
-    <a class="active" href="dronepad-app.html">Web App</a>
-    <a href="notechart.html">NoteChart</a>
-    <a href="patchdirector.html">PatchDirector</a>
-    <a href="privacy.html">Privacy</a>
+<nav class="site-nav">
+  <a class="nav-logo" href="index.html">haake<span>music</span>.com</a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html" id="nav-home">Home</a>
+    <div class="nav-item dropdown">
+      <a class="nav-link active" href="dronepad.html" id="nav-dp">Drone Pad</a>
+      <div class="nav-submenu">
+        <a class="nav-link" href="dronepad.html" id="nav-dp-info">Info</a>
+        <a class="nav-link active" href="dronepad-app.html" id="nav-dp-app">App starten</a>
+      </div>
+    </div>
+    <a class="nav-link" href="notechart.html">NoteChart<span class="nav-badge">Beta</span></a>
+    <a class="nav-link" href="patchdirector.html">PatchDirector</a>
+    <a class="nav-link" href="ueber-mich.html" id="nav-about">Über</a>
+    <a class="nav-link" href="privacy.html" id="nav-privacy">Privacy</a>
   </div>
 </nav>
+<script>
+(function(){
+  function applyLang(lang){
+    document.documentElement.lang=lang;
+    const M={
+      de:{'nav-home':'Home','nav-about':'Über','nav-privacy':'Privacy','nav-dp':'Drone Pad','nav-dp-info':'Info','nav-dp-app':'App starten'},
+      en:{'nav-home':'Home','nav-about':'About','nav-privacy':'Privacy','nav-dp':'Drone Pad','nav-dp-info':'Info','nav-dp-app':'Launch app'},
+      es:{'nav-home':'Inicio','nav-about':'Acerca','nav-privacy':'Privacidad','nav-dp':'Drone Pad','nav-dp-info':'Info','nav-dp-app':'Abrir app'}
+    };
+    const t=M[lang]||M.de;
+    for(const[id,val]of Object.entries(t)){const el=document.getElementById(id);if(el)el.textContent=val;}
+  }
+  let stored='de';
+  try{const s=localStorage.getItem('haakemusic.lang');if(s==='de'||s==='en'||s==='es')stored=s;}catch(e){}
+  applyLang(stored);
+  const dd=document.querySelector('.nav-item.dropdown');
+  if(dd){
+    const trigger=dd.querySelector('.nav-link');
+    const menu=dd.querySelector('.nav-submenu');
+    trigger.addEventListener('click',e=>{e.preventDefault();menu.classList.toggle('open');});
+    document.addEventListener('click',e=>{if(!dd.contains(e.target))menu.classList.remove('open');});
+  }
+})();
+</script>
 <div class="app">
 
 <!-- Row 1: Theme links, Lang rechts -->

@@ -22,6 +22,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 .nav-link:hover{color:#fff;background:rgba(42,111,214,.2);border-color:rgba(90,154,240,.3)}
 .nav-link.active{color:#fff;background:rgba(42,111,214,.35);border-color:rgba(90,154,240,.5)}
 .nav-badge{display:inline-block;background:#2a6fd6;color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:50px;margin-left:4px;letter-spacing:.04em;vertical-align:middle;line-height:1.4}
+.nav-item{position:relative}
+.nav-item.dropdown>.nav-link{cursor:pointer}
+.nav-item.dropdown>.nav-link::after{content:' ▾';font-size:9px;opacity:.7;margin-left:2px}
+.nav-submenu{display:none;position:absolute;top:calc(100% + 6px);left:0;background:rgba(6,14,34,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(120,170,230,.15);border-radius:14px;padding:6px;min-width:170px;flex-direction:column;gap:2px;z-index:101;box-shadow:0 6px 24px rgba(0,0,0,.4)}
+.nav-submenu.open{display:flex}
+.nav-submenu .nav-link{padding:8px 14px;border-radius:10px;font-size:13px;white-space:nowrap}
+
 .hero{text-align:center;padding:64px 24px 56px}
 .hero-eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#7ab0e8;margin-bottom:18px;font-weight:700}
 .hero h1{font-size:clamp(40px,6vw,68px);font-weight:700;line-height:1.07;letter-spacing:-.02em;color:#fff;margin-bottom:18px}
@@ -67,11 +74,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
   <a class="nav-logo" href="index.html">haake<span>music</span>.com</a>
   <div class="nav-links">
     <a class="nav-link" href="index.html" id="nav-home">Home</a>
-    <a class="nav-link" href="dronepad.html">Drone Pad</a>
+    <div class="nav-item dropdown">
+      <a class="nav-link" href="dronepad.html" id="nav-dp">Drone Pad</a>
+      <div class="nav-submenu">
+        <a class="nav-link" href="dronepad.html" id="nav-dp-info">Info</a>
+        <a class="nav-link" href="dronepad-app.html" id="nav-dp-app">App starten</a>
+      </div>
+    </div>
     <a class="nav-link" href="notechart.html">NoteChart<span class="nav-badge">Beta</span></a>
     <a class="nav-link active" href="patchdirector.html">PatchDirector</a>
+    <a class="nav-link" href="ueber-mich.html" id="nav-about">Über</a>
     <a class="nav-link" href="privacy.html" id="nav-privacy">Privacy</a>
-    <a class="nav-link" href="ueber-mich.html" id="nav-about">Über…</a>
   </div>
 </nav>
 
@@ -133,7 +146,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 <script>
 const T = {
   de:{
-    'nav-home':'Home','nav-privacy':'Privacy','nav-about':'Über…',
+    'nav-home':'Home','nav-about':'Über','nav-privacy':'Privacy','nav-dp-info':'Info','nav-dp-app':'App starten',
     'l-eyebrow':'Sound-Archiv & Preset-Manager',
     'l-sub':'Eigene Sounds aufnehmen, verwalten und teilen — für virtuelle Instrumente und Hardware-Synthesizer.',
     'l-note':'PatchDirector existiert seit einigen Jahren — das letzte Update liegt zurück, und eine Neuentwicklung wird derzeit geprüft. Die bestehende Version läuft auf Windows und macOS und wird weiterhin gepflegt.',
@@ -152,7 +165,7 @@ const T = {
     'l-t1':'Virtuelle Instrumente','l-t2':'Hardware-Synthesizer','l-t3':'Audio-Wasserzeichen',
   },
   en:{
-    'nav-home':'Home','nav-privacy':'Privacy','nav-about':'About…',
+    'nav-home':'Home','nav-about':'About','nav-privacy':'Privacy','nav-dp-info':'Info','nav-dp-app':'Launch app',
     'l-eyebrow':'Sound Archive & Preset Manager',
     'l-sub':'Record, manage and share your own sounds — for virtual instruments and hardware synthesizers.',
     'l-note':'PatchDirector has been around for a few years — the last update was a while back, and a complete rebuild is currently being considered. The existing version runs on Windows and macOS and remains maintained.',
@@ -171,7 +184,7 @@ const T = {
     'l-t1':'Virtual instruments','l-t2':'Hardware synthesizers','l-t3':'Audio watermark',
   },
   es:{
-    'nav-home':'Inicio','nav-privacy':'Privacidad','nav-about':'Acerca de…',
+    'nav-home':'Inicio','nav-about':'Acerca','nav-privacy':'Privacidad','nav-dp-info':'Info','nav-dp-app':'Abrir app',
     'l-eyebrow':'Archivo de Sonidos y Gestor de Presets',
     'l-sub':'Graba, gestiona y comparte tus propios sonidos — para instrumentos virtuales y sintetizadores de hardware.',
     'l-note':'PatchDirector lleva varios años en funcionamiento — la última actualización fue hace tiempo, y actualmente se está estudiando un rediseño completo. La versión existente funciona en Windows y macOS y sigue siendo mantenida.',
@@ -193,10 +206,31 @@ const T = {
 function setLang(lang){
   ['de','en','es'].forEach(l=>document.getElementById('btn-'+l).classList.toggle('active',l===lang));
   document.documentElement.lang=lang;
+  try{localStorage.setItem('haakemusic.lang',lang);}catch(e){}
   const t=T[lang];
   for(const[id,val]of Object.entries(t)){const el=document.getElementById(id);if(el)el.innerHTML=val;}
 }
-document.addEventListener('DOMContentLoaded',()=>setLang('de'));
+document.addEventListener('DOMContentLoaded',()=>{
+  let stored='de';
+  try{const s=localStorage.getItem('haakemusic.lang');if(s==='de'||s==='en'||s==='es')stored=s;}catch(e){}
+  setLang(stored);
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const dd=document.querySelector('.nav-item.dropdown');
+  if(!dd)return;
+  const trigger=dd.querySelector('.nav-link');
+  const menu=dd.querySelector('.nav-submenu');
+  trigger.addEventListener('click',e=>{
+    e.preventDefault();
+    menu.classList.toggle('open');
+  });
+  document.addEventListener('click',e=>{
+    if(!dd.contains(e.target))menu.classList.remove('open');
+  });
+});
 </script>
 </body>
 </html>
