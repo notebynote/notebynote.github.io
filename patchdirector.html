@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <link rel="icon" type="image/png" href="favicon.png">
@@ -65,8 +65,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 <body>
 
 <div class="lang-bar">
-  <button class="lang-btn active" id="btn-de" onclick="setLang('de')">DE</button>
-  <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" id="btn-de" onclick="setLang('de')">DE</button>
+  <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
   <button class="lang-btn" id="btn-es" onclick="setLang('es')">ES</button>
 </div>
 
@@ -211,7 +211,7 @@ function setLang(lang){
   for(const[id,val]of Object.entries(t)){const el=document.getElementById(id);if(el)el.innerHTML=val;}
 }
 document.addEventListener('DOMContentLoaded',()=>{
-  let stored='de';
+  let stored='en';
   try{const s=localStorage.getItem('haakemusic.lang');if(s==='de'||s==='en'||s==='es')stored=s;}catch(e){}
   setLang(stored);
 });
