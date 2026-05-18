@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Über — haakemusic.com</title>
+<title id="l-title">Vom Musiker für Musiker — haakemusic.com</title>
 <meta name="description" content="Thomas Haake über NoteChart: ein Lead-Sheet-Tool, gebaut von einem Musiker für Musiker.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;700&display=swap">
 <style>
@@ -32,6 +32,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 .essay-wrap{max-width:780px;margin:48px auto 0;padding:0 24px}
 .essay{background:#fafaf7;color:#1a1a1a;border-radius:18px;padding:4rem 3rem;font-family:Georgia,"Times New Roman",serif;font-size:18px;line-height:1.7;box-shadow:0 10px 40px rgba(0,0,0,.3)}
 .essay .credo{font-style:italic;font-size:1.15rem;line-height:1.6;color:#2a4a6b;border-left:3px solid #2a4a6b;padding:.5rem 0 .5rem 1.5rem;margin:0 0 3rem 0}
+.essay h1{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:2.1rem;line-height:1.2;color:#2a4a6b;margin:0 0 2rem 0;letter-spacing:-.01em}
 .essay hr{border:none;border-top:1px solid #d8d4ca;margin:2.5rem 0}
 .essay p{margin:0 0 1.5rem 0;hyphens:auto}
 .essay p:last-child{margin-bottom:0}
@@ -75,9 +76,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 
     <hr>
 
-    <p id="l-p1">Mein Name ist Thomas Haake. Ich bin 65, Kölner, lebe seit Jahren in Vorarlberg, und ich mache seit über 40 Jahren Musik.</p>
+    <h1 id="l-h1">Vom Musiker für Musiker.</h1>
 
-    <p id="l-p2">Als ich Anfang der 80er angefangen habe, gab's für eigene Lead Sheets die Methode Papier und Kuli. Akkordbezeichnungen oben, Text unten, dazwischen ein bisschen Rhythmik wenn nötig. Jeder Musiker hat sich sein eigenes Lead Sheet geschrieben — war damals so und ist es heute eigentlich immer noch. Diese Schmierzettel sind mir über die Jahre ans Herz gewachsen. Sie sind zerfleddert, kaffeebefleckt, ehrlich.</p>
+    <p id="l-p1">Mein Name ist Thomas Haake. Ich mache seit über 4 Jahrzehnten Musik, Live und Studio.</p>
+
+    <p id="l-p2">Als ich Anfang der 80er angefangen habe, wurden Lead Sheets mit Papier und Kuli geschrieben, Computer gab es noch nicht. Akkordbezeichnungen oben, Text unten, dazwischen ein bisschen Rhythmik wenn nötig. Jeder Musiker hat sich sein eigenes Lead Sheet geschrieben — war damals so und ist es heute eigentlich immer noch. Diese Schmierzettel sind mir über die Jahre ans Herz gewachsen. Sie sind zerfleddert, kaffeebefleckt, ehrlich.</p>
 
     <p id="l-p3">Am Computer nutze ich seit Jahren unter anderem auch iReal Pro. Weit verbreitet in meinen Kreisen. Nur, meine Erwartungen an ein Lead-Sheet-Programm hat es nie erfüllt. Die Vermischung aus Lead-Sheet und Übe-App hat für mich nie wirklich funktioniert und für eine detailliertere Notation der Songs sind die Möglichkeiten viel zu eng, buchstäblich sogar. Guitar Pro oder <span style="hyphens:manual;-webkit-hyphens:manual">MuseScore</span> sind großartige — und leider komplizierte — Tools. Für ein schnelles Lead Sheet jedesmal das falsche Werkzeug. Und wirklich Spaß macht das nicht, wenn es viel Zeit frisst.<br>Ewig habe ich darauf gewartet, dass jemand etwas baut, das genau dazwischen liegt: intuitiv wie die schnelle Skizze, aber mit genug Möglichkeiten, einen Song wirklich zu notieren. Akkorde im Vordergrund wie auf meinen alten Notizblättern, aber Melodie dort, wo man sie wirklich braucht.<br>Wir Musiker leben mit schlechten Tools, und gewöhnen uns daran.</p>
 
@@ -102,9 +105,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 const T = {
   de:{
     'nav-home':'Home','nav-about':'Über','nav-privacy':'Privacy','nav-dp':'Drone Pad','nav-dp-info':'Info','nav-dp-app':'App starten',
+    'l-title':'Vom Musiker für Musiker — haakemusic.com',
+    'l-h1':'Vom Musiker für Musiker.',
     'l-credo':'Jede kreative Arbeit zeigt einen Teil unserer Persönlichkeit, unseres Wesens. Unsere Ideen werden Realität. NoteChart ist ein Teil meiner Welt — willkommen.',
-    'l-p1':'Mein Name ist Thomas Haake. Ich bin 65, Kölner, lebe seit Jahren in Vorarlberg, und ich mache seit über 40 Jahren Musik.',
-    'l-p2':'Als ich Anfang der 80er angefangen habe, gab\'s für eigene Lead Sheets die Methode Papier und Kuli. Akkordbezeichnungen oben, Text unten, dazwischen ein bisschen Rhythmik wenn nötig. Jeder Musiker hat sich sein eigenes Lead Sheet geschrieben — war damals so und ist es heute eigentlich immer noch. Diese Schmierzettel sind mir über die Jahre ans Herz gewachsen. Sie sind zerfleddert, kaffeebefleckt, ehrlich.',
+    'l-p1':'Mein Name ist Thomas Haake. Ich mache seit über 4 Jahrzehnten Musik, Live und Studio.',
+    'l-p2':'Als ich Anfang der 80er angefangen habe, wurden Lead Sheets mit Papier und Kuli geschrieben, Computer gab es noch nicht. Akkordbezeichnungen oben, Text unten, dazwischen ein bisschen Rhythmik wenn nötig. Jeder Musiker hat sich sein eigenes Lead Sheet geschrieben — war damals so und ist es heute eigentlich immer noch. Diese Schmierzettel sind mir über die Jahre ans Herz gewachsen. Sie sind zerfleddert, kaffeebefleckt, ehrlich.',
     'l-p3':'Am Computer nutze ich seit Jahren unter anderem auch iReal Pro. Weit verbreitet in meinen Kreisen. Nur, meine Erwartungen an ein Lead-Sheet-Programm hat es nie erfüllt. Die Vermischung aus Lead-Sheet und Übe-App hat für mich nie wirklich funktioniert und für eine detailliertere Notation der Songs sind die Möglichkeiten viel zu eng, buchstäblich sogar. Guitar Pro oder <span style="hyphens:manual;-webkit-hyphens:manual">MuseScore</span> sind großartige — und leider komplizierte — Tools. Für ein schnelles Lead Sheet jedesmal das falsche Werkzeug. Und wirklich Spaß macht das nicht, wenn es viel Zeit frisst.<br>Ewig habe ich darauf gewartet, dass jemand etwas baut, das genau dazwischen liegt: intuitiv wie die schnelle Skizze, aber mit genug Möglichkeiten, einen Song wirklich zu notieren. Akkorde im Vordergrund wie auf meinen alten Notizblättern, aber Melodie dort, wo man sie wirklich braucht.<br>Wir Musiker leben mit schlechten Tools, und gewöhnen uns daran.',
     'l-p4':'Dass ich das jetzt selber baue, hat mit KI zu tun. Ich bin kein Programmierer und werde auch keiner mehr. Aber als ich vor einigen Monaten zum ersten Mal mit einer KI gearbeitet habe und mein erstes kleines Programm tatsächlich lief, war klar: da geht mehr.',
     'l-p5':'Vor NoteChart habe ich zwei kleine Programme entwickelt: PatchDirector in 2016 und dann Drone Pad. Beide laufen, beide sind veröffentlicht. Ich selber habe nur mässige Programmierskills, aber ich kann, was ich als Musiker über Jahrzehnte gelernt habe: genau hinhören.',
@@ -116,9 +121,11 @@ const T = {
   },
   en:{
     'nav-home':'Home','nav-about':'About','nav-privacy':'Privacy','nav-dp':'Drone Pad','nav-dp-info':'Info','nav-dp-app':'Launch app',
+    'l-title':'From a musician, for musicians — haakemusic.com',
+    'l-h1':'From a musician, for musicians.',
     'l-credo':'Every piece of creative work shows a part of our personality, of our nature. Our ideas become real. NoteChart is a part of my world — welcome.',
-    'l-p1':'My name is Thomas Haake. I\'m 65, originally from Cologne, have lived in Vorarlberg for years, and I\'ve been making music for over 40 years.',
-    'l-p2':'When I started in the early 80s, the method for your own lead sheets was paper and pen. Chord symbols on top, lyrics underneath, a bit of rhythm in between when needed. Every musician wrote their own lead sheets — that\'s how it was back then, and really, it still is today. Those scrappy sheets have grown dear to me over the years. They\'re dog-eared, coffee-stained, honest.',
+    'l-p1':'My name is Thomas Haake. I\'ve been making music for over four decades, live and in the studio.',
+    'l-p2':'When I started in the early 80s, lead sheets were written with paper and pen — there were no computers yet. Chord symbols on top, lyrics underneath, a bit of rhythm in between when needed. Every musician wrote their own lead sheets — that\'s how it was back then, and really, it still is today. Those scrappy sheets have grown dear to me over the years. They\'re dog-eared, coffee-stained, honest.',
     'l-p3':'On the computer, I\'ve been using iReal Pro for years, among other things. Widely used in my circles. But it never lived up to what I expect from a lead sheet program. The mix of lead sheet and practice app never really worked for me, and for more detailed notation the options are far too tight — literally. Guitar Pro and <span style="hyphens:manual;-webkit-hyphens:manual">MuseScore</span> are great — and unfortunately complicated — tools. For a quick lead sheet, always the wrong tool. And it stops being fun when it eats up your time.<br>For ages I waited for someone to build something that sits right in between: intuitive like a quick sketch, but with enough range to actually notate a song. Chords up front like on my old notebook pages, but melody right where you really need it.<br>We musicians live with bad tools, and we get used to it.',
     'l-p4':'That I\'m now building this myself has to do with AI. I\'m not a programmer and I never will be. But when I worked with an AI for the first time a few months ago and my first little program actually ran, it was clear: there\'s more in this.',
     'l-p5':'Before NoteChart, I developed two small programs: PatchDirector in 2016 and then Drone Pad. Both run, both are released. My programming skills are modest at best, but I can do what I\'ve learned as a musician over decades: listen closely.',
@@ -130,9 +137,11 @@ const T = {
   },
   es:{
     'nav-home':'Inicio','nav-about':'Acerca','nav-privacy':'Privacidad','nav-dp':'Drone Pad','nav-dp-info':'Info','nav-dp-app':'Abrir app',
+    'l-title':'De músico para músicos — haakemusic.com',
+    'l-h1':'De músico para músicos.',
     'l-credo':'Cada trabajo creativo muestra una parte de nuestra personalidad, de nuestra esencia. Nuestras ideas se hacen realidad. NoteChart es una parte de mi mundo — bienvenida, bienvenido.',
-    'l-p1':'Me llamo Thomas Haake. Tengo 65 años, soy de Colonia, vivo desde hace años en Vorarlberg, y llevo más de 40 años haciendo música.',
-    'l-p2':'Cuando empecé a principios de los 80, el método para hacerse uno mismo un lead sheet era papel y bolígrafo. Cifrado de acordes arriba, letra abajo, algo de rítmica entre medias cuando hacía falta. Cada músico escribía su propio lead sheet — así era entonces, y en realidad lo sigue siendo hoy. Esos cuadernillos garabateados me han ido cogiendo cariño con los años. Están manoseados, manchados de café, honestos.',
+    'l-p1':'Me llamo Thomas Haake. Llevo más de cuatro décadas haciendo música, en directo y en estudio.',
+    'l-p2':'Cuando empecé a principios de los 80, los lead sheets se escribían con papel y bolígrafo — todavía no había ordenadores. Cifrado de acordes arriba, letra abajo, algo de rítmica entre medias cuando hacía falta. Cada músico escribía su propio lead sheet — así era entonces, y en realidad lo sigue siendo hoy. Esos cuadernillos garabateados me han ido cogiendo cariño con los años. Están manoseados, manchados de café, honestos.',
     'l-p3':'En el ordenador uso desde hace años, entre otras cosas, iReal Pro. Muy extendido en mi entorno. Pero nunca cumplió mis expectativas para un programa de lead sheets. La mezcla de lead sheet y app de estudio nunca me funcionó del todo, y para una notación más detallada de las canciones las posibilidades son demasiado estrechas, literalmente. Guitar Pro o <span style="hyphens:manual;-webkit-hyphens:manual">MuseScore</span> son herramientas estupendas — y, por desgracia, complicadas. Para un lead sheet rápido, cada vez la herramienta equivocada. Y deja de ser divertido cuando te come el tiempo.<br>Llevaba siglos esperando a que alguien construyera algo que estuviera justo en medio: intuitivo como un boceto rápido, pero con margen suficiente para anotar de verdad una canción. Los acordes en primer plano como en mis viejas hojas, pero la melodía allí donde realmente la necesitas.<br>Los músicos convivimos con malas herramientas y nos acostumbramos.',
     'l-p4':'Que ahora lo construya yo mismo tiene que ver con la IA. No soy programador y ya no lo voy a ser. Pero cuando hace unos meses trabajé por primera vez con una IA y mi primer pequeño programa funcionó de verdad, quedó claro: aquí hay más.',
     'l-p5':'Antes de NoteChart desarrollé dos pequeños programas: PatchDirector en 2016 y luego Drone Pad. Ambos funcionan, ambos están publicados. Mis habilidades como programador son modestas, pero sí sé hacer lo que he aprendido como músico durante décadas: escuchar con atención.',
