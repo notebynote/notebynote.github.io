@@ -1,177 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-<meta charset="UTF-8">
-<link rel="icon" type="image/png" href="favicon.png">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title id="l-title">Vom Musiker für Musiker — haakemusic.com</title>
-<meta name="description" content="Thomas Haake über NoteChart: ein Lead-Sheet-Tool, gebaut von einem Musiker für Musiker.">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;700&display=swap">
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;color:#fff;background:linear-gradient(to bottom,#1a3a6b 0%,#0a1a3a 60%,#060e22 100%) fixed;min-height:100vh;padding:0 0 100px}
-.lang-bar{display:flex;justify-content:flex-end;padding:14px 28px 0;gap:8px}
-.lang-btn{background:rgba(255,255,255,.08);border:1.5px solid rgba(120,170,230,.35);color:#a0c0e0;border-radius:50px;padding:7px 20px;font-size:13px;font-weight:700;cursor:pointer;transition:all .18s;letter-spacing:.06em}
-.lang-btn.active{background:rgba(42,111,214,.4);border-color:#5a9af0;color:#fff}
-.lang-btn:hover{background:rgba(42,111,214,.25);color:#fff}
-.site-nav{display:flex;align-items:center;justify-content:space-between;padding:12px 28px;background:rgba(6,14,34,0.7);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(120,170,230,.1);position:sticky;top:0;z-index:100}
-.site-nav .nav-logo{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:#fff;text-decoration:none;letter-spacing:.02em}
-.site-nav .nav-logo span{font-weight:300;color:#a0c0e0}
-.nav-links{display:flex;align-items:center;gap:6px}
-.nav-link{color:#7ab0e8;font-size:13px;font-weight:600;text-decoration:none;padding:7px 16px;border-radius:50px;border:1.5px solid transparent;transition:all .18s;letter-spacing:.03em}
-.nav-link:hover{color:#fff;background:rgba(42,111,214,.2);border-color:rgba(90,154,240,.3)}
-.nav-link.active{color:#fff;background:rgba(42,111,214,.35);border-color:rgba(90,154,240,.5)}
-.nav-badge{display:inline-block;background:#2a6fd6;color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:50px;margin-left:4px;letter-spacing:.04em;vertical-align:middle;line-height:1.4}
-.nav-item{position:relative}
-.nav-item.dropdown>.nav-link{cursor:pointer}
-.nav-item.dropdown>.nav-link::after{content:' ▾';font-size:9px;opacity:.7;margin-left:2px}
-.nav-submenu{display:none;position:absolute;top:calc(100% + 6px);left:0;background:rgba(6,14,34,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(120,170,230,.15);border-radius:14px;padding:6px;min-width:170px;flex-direction:column;gap:2px;z-index:101;box-shadow:0 6px 24px rgba(0,0,0,.4)}
-.nav-submenu.open{display:flex}
-.nav-submenu .nav-link{padding:8px 14px;border-radius:10px;font-size:13px;white-space:nowrap}
-.essay-wrap{max-width:780px;margin:48px auto 0;padding:0 24px}
-.essay{background:#fafaf7;color:#1a1a1a;border-radius:18px;padding:4rem 3rem;font-family:Georgia,"Times New Roman",serif;font-size:18px;line-height:1.7;box-shadow:0 10px 40px rgba(0,0,0,.3)}
-.essay .credo{font-style:italic;font-size:1.15rem;line-height:1.6;color:#2a4a6b;border-left:3px solid #2a4a6b;padding:.5rem 0 .5rem 1.5rem;margin:0 0 3rem 0}
-.essay h1{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:2.1rem;line-height:1.2;color:#2a4a6b;margin:0 0 2rem 0;letter-spacing:-.01em}
-.essay hr{border:none;border-top:1px solid #d8d4ca;margin:2.5rem 0}
-.essay p{margin:0 0 1.5rem 0;hyphens:auto}
-.essay p:last-child{margin-bottom:0}
-.essay a{color:#2a4a6b;text-decoration:underline}
-@media (max-width:600px){
-  .essay{padding:2.5rem 1.5rem;font-size:17px;border-radius:14px}
-  .essay-wrap{padding:0 16px;margin-top:24px}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Über mich – NoteChart</title>
+  <meta name="description" content="Thomas Haake über NoteChart: ein Lead-Sheet-Tool, gebaut von einem Musiker für Musiker.">
+  <style>
+    :root {
+      --text: #1a1a1a;
+      --muted: #555;
+      --accent: #2a4a6b;
+      --bg: #fafaf7;
+      --rule: #d8d4ca;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--text);
+      background: var(--bg);
+    }
+    article {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+    .credo {
+      font-style: italic;
+      font-size: 1.15rem;
+      line-height: 1.6;
+      color: var(--accent);
+      border-left: 3px solid var(--accent);
+      padding: 0.5rem 0 0.5rem 1.5rem;
+      margin: 0 0 3rem 0;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 2.5rem 0;
+    }
+    h1 {
+      font-family: Georgia, serif;
+      font-size: 1.7rem;
+      font-weight: normal;
+      letter-spacing: 0.01em;
+      margin: 0 0 2rem 0;
+      color: var(--text);
+    }
+    p {
+      margin: 0 0 1.5rem 0;
+      hyphens: auto;
+    }
+    p:last-child {
+      margin-bottom: 0;
+    }
+    @media (max-width: 600px) {
+      body { font-size: 17px; }
+      article { padding: 2.5rem 1.25rem; }
+      h1 { font-size: 1.4rem; }
+    }
+  </style>
 </head>
 <body>
+  <article>
 
-<div class="lang-bar">
-  <button class="lang-btn" id="btn-de" onclick="setLang('de')">DE</button>
-  <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
-  <button class="lang-btn" id="btn-es" onclick="setLang('es')">ES</button>
-</div>
-
-<nav class="site-nav">
-  <a class="nav-logo" href="index.html">haake<span>music</span>.com</a>
-  <div class="nav-links">
-    <a class="nav-link" href="index.html" id="nav-home">Home</a>
-    <div class="nav-item dropdown">
-      <a class="nav-link" href="dronepad.html" id="nav-dp">Drone Pad</a>
-      <div class="nav-submenu">
-        <a class="nav-link" href="dronepad.html" id="nav-dp-info">Info</a>
-        <a class="nav-link" href="dronepad-app.html" id="nav-dp-app">App starten</a>
-      </div>
-    </div>
-    <a class="nav-link" href="notechart.html">NoteChart<span class="nav-badge">Beta</span></a>
-    <a class="nav-link" href="patchdirector.html">PatchDirector</a>
-    <a class="nav-link active" href="ueber-mich.html" id="nav-about">Über</a>
-    <a class="nav-link" href="privacy.html" id="nav-privacy">Privacy</a>
-  </div>
-</nav>
-
-<div class="essay-wrap">
-  <article class="essay">
-
-    <blockquote class="credo" id="l-credo">Jede kreative Arbeit zeigt einen Teil unserer Persönlichkeit, unseres Wesens. Unsere Ideen werden Realität. NoteChart ist ein Teil meiner Welt — willkommen.</blockquote>
+    <blockquote class="credo">
+      Jede kreative Arbeit zeigt einen Teil unserer Persönlichkeit,
+      unseres Wesens. Unsere Ideen werden Realität.
+      NoteChart ist ein Teil meiner Welt — willkommen.
+    </blockquote>
 
     <hr>
 
-    <h1 id="l-h1">Vom Musiker für Musiker.</h1>
+    <h1>Wer ich bin und warum mir das wichtig ist</h1>
 
-    <p id="l-p1">Mein Name ist Thomas Haake. Ich mache seit über 4 Jahrzehnten Musik, Live und Studio.</p>
+    <p>Mein Name ist Thomas Haake. Ich bin 65, Kölner, lebe seit Jahren in Vorarlberg, und ich mache seit über 40 Jahren Musik. Das ist der Hintergrund, vor dem alles steht, was hier auf dieser Seite zu sehen ist.</p>
 
-    <p id="l-p2">Als ich Anfang der 80er angefangen habe, wurden Lead Sheets mit Papier und Kuli geschrieben, Computer gab es noch nicht. Akkordbezeichnungen oben, Text unten, dazwischen ein bisschen Rhythmik wenn nötig. Jeder Musiker hat sich sein eigenes Lead Sheet geschrieben — war damals so und ist es heute eigentlich immer noch. Diese Schmierzettel sind mir über die Jahre ans Herz gewachsen. Sie sind zerfleddert, kaffeebefleckt, ehrlich.</p>
+    <p>Als ich Anfang der 80er angefangen habe, gab's für Lead Sheets eine Methode: Papier und Kuli. Akkordbezeichnungen oben, Text unten, dazwischen ein bisschen Rhythmik wenn nötig. Jeder Musiker hat sich sein eigenes Lead Sheet geschrieben — damals so, und heute eigentlich immer noch. Diese Sheets sind mir über die Jahre ans Herz gewachsen. Sie sind zerfleddert, kaffeebefleckt, ehrlich.</p>
 
-    <p id="l-p3">Am Computer nutze ich seit Jahren unter anderem auch iReal Pro. Weit verbreitet in meinen Kreisen. Nur, meine Erwartungen an ein Lead-Sheet-Programm hat es nie erfüllt. Die Vermischung aus Lead-Sheet und Übe-App hat für mich nie wirklich funktioniert und für eine detailliertere Notation der Songs sind die Möglichkeiten viel zu eng, buchstäblich sogar. Guitar Pro oder <span style="hyphens:manual;-webkit-hyphens:manual">MuseScore</span> sind großartige — und leider komplizierte — Tools. Für ein schnelles Lead Sheet jedesmal das falsche Werkzeug. Und wirklich Spaß macht das nicht, wenn es viel Zeit frisst.<br>Ewig habe ich darauf gewartet, dass jemand etwas baut, das genau dazwischen liegt: intuitiv wie die schnelle Skizze, aber mit genug Möglichkeiten, einen Song wirklich zu notieren. Akkorde im Vordergrund wie auf meinen alten Notizblättern, aber Melodie dort, wo man sie wirklich braucht.<br>Wir Musiker leben mit schlechten Tools, und gewöhnen uns daran.</p>
+    <p>iReal Pro nutze ich seit Jahren. Aber meine Erwartungen an ein Lead-Sheet-Programm hat es nie erfüllt. Die Vermischung aus Lead Sheet und Übe-App hat für mich nie wirklich funktioniert, und für eine detailliertere Notation der Songs sind die Möglichkeiten viel zu eng. Guitar Pro und MuseScore sind großartige — und komplizierte — Tools. Und für ein schnelles Lead Sheet, das einfach nur das tut was es soll, jedesmal das falsche Werkzeug. Jahrzehnte habe ich darauf gewartet, dass jemand etwas baut, das genau dazwischen liegt: intuitiv wie eine schnelle Skizze, aber mit genug Möglichkeiten, einen Song wirklich zu notieren. Akkorde im Vordergrund wie auf meinen alten Notizblättern, aber Melodie dort, wo man sie wirklich braucht. Wir Musiker leben mit schlechten Tools, und gewöhnen uns daran.</p>
 
-    <p id="l-p4">Dass ich das jetzt selber baue, hat mit KI zu tun. Ich bin kein Programmierer und werde auch keiner mehr. Aber als ich vor einigen Monaten zum ersten Mal mit einer KI gearbeitet habe und mein erstes kleines Programm tatsächlich lief, war klar: da geht mehr.</p>
+    <p>Vor NoteChart habe ich zwei kleine Apps gebaut: Drone Pad, ein Nischenprogramm zum Intonationsüben, und PatchDirector (2016), eine Patch-Verwaltung für Synthesizer. Beide laufen, beide sind veröffentlicht. Ich kann nicht programmieren, aber ich kann, was ich als Musiker über Jahrzehnte gelernt habe: genau hinhören. Eine analytische Denkweise, eine fast schon störrische Neigung, kleine Details genau zu durchdenken, und die Geduld, Dinge so lange zu beschreiben, bis sie wirklich so sind, wie ich sie mir vorstelle. Ein Akkord, der eine Achtel zu früh kommt, klingt anders — und genauso ist's mit jedem Pixel, jeder Hover-Reaktion, jeder Tastenbelegung. Details eben.</p>
 
-    <p id="l-p5">Vor NoteChart habe ich zwei kleine Programme entwickelt: PatchDirector in 2016 und dann Drone Pad. Beide laufen, beide sind veröffentlicht. Ich selber habe nur mässige Programmierskills, aber ich kann, was ich als Musiker über Jahrzehnte gelernt habe: genau hinhören.</p>
+    <p>Was ich vor allem lernen musste: wie ich mit einer KI arbeite. Anfangs habe ich sie behandelt wie einen Kollegen — mit Smalltalk, mit Andeutungen, mit Sätzen, die ein Mensch sofort verstanden hätte. Das funktioniert nicht. Eine KI ist ein Werkzeug, kein Gegenüber. Sie liest, was dasteht, und nichts dazwischen. Also habe ich mir das Schreiben in knappen Abkürzungen angewöhnt — präziser als ganze Sätze, ungeschönt, funktional. Ich beschreibe, die KI baut. Das ist die Arbeitsteilung. Notepad zu, Mensch noch da, KI weg.</p>
 
-    <p id="l-p6">Die KI Claude, die ich nutze, entspricht meinem Spieltrieb. Meine analytische Denkweise, die fast schon störrische Liebe zu kleinen Details, und die Geduld, Dinge so lange zu beschreiben, bis sie wirklich so sind, wie ich sie mir vorstelle, passen für mich perfekt zu KI. Ganz ehrlich, die Arbeit fasziniert.</p>
+    <p>Was die Leute oft nicht sehen, ist wie hart das tatsächlich ist. Seit Wochen sitze ich täglich daran, morgens bis tief in die Nacht. Ein schlampig formulierter Satz, ein zu lockerer Kommentar, und schon dauert das, was eigentlich kurz sein sollte, Stunden. Das ist keine entspannte Bastelei. Das ist ernste Arbeit — und gleichzeitig die spannendste Sache, die ich seit langem gemacht habe.</p>
 
-    <p id="l-p7">Anfangs habe ich die KI behandelt wie einen Kollegen — mit Smalltalk, mit Andeutungen, mit Sätzen, die ein Mensch sofort verstanden hätte. Das funktioniert nicht. KI ist Hammer, Säge und Zange in Einem, aber kein Gegenüber. Sie liest, was dasteht, und nichts dazwischen. Also habe ich mir das Schreiben in knappen Abkürzungen angewöhnt — präziser als ganze Sätze, ungeschönt, funktional.<br>Ich beschreibe, die KI baut. Das ist die Arbeitsteilung.<br>Notepad zu — Mensch noch da — KI weg.</p>
+    <p>NoteChart ist das Ergebnis. Es ist das Lead-Sheet-Tool, das ich mir 1995 gewünscht hätte, 2005, 2015, 2025. Beim Arbeiten finde ich alles dort, wo ich es brauche, zu dem Zeitpunkt, der genau richtig ist — ohne Ablenkung, fokussiert, schnell. Die Idee dahinter ist einfach: alles, was ich oft tue, soll mich einen Klick oder Tastendruck kosten, nicht drei. Akkord setzen, am Balken ziehen für die Länge, Rhythmusnoten dazu oder weg, das ganze Notensystem mal sichtbar, mal nicht — je nachdem, was der Song gerade braucht. Notensetzen geht direkt, ohne Umweg durch ein Menü. Akkorde vorziehen, Volta-Klammern mit Wiederholung, Tonart, Taktart, Tempo — was immer es ist, es ist genau eine Bewegung entfernt. Auch ein Audiofile kann ich importieren, das Tempo wird erkannt, Akkorde werden vorgeschlagen, ich bestätige oder ändere. Intuitiv, ohne Umweg. Und wenn das Sheet fertig ist, geht's in Sekunden an die Bandkolleginnen und Bandkollegen — jede und jeder bekommt die Version, die passt. Die Sängerin ihr Lead Sheet mit Lyrics, die Bassistin die Akkorde mit Rhythmusnoten, der Pianist das volle Notensystem. Aus einem Sheet werden so viele Versionen, wie die Band Köpfe hat.</p>
 
-    <p id="l-p8">Dass ich die Arbeit stark unterschätzt habe, ist untertrieben. Ich habe keine Mindmap oder irgendeinen Fahrplan vorher aufgeschrieben, sondern einfach angefangen. Meine Vorstellung der intuitivsten Arbeit fließt direkt in das Programm. Logik ergibt sich aus dem, was ich in dieser oder jener Situation auf dem Blatt machen würde. Professionelle Programmierer machen das anders, aber ich improvisiere wie in der Musik. Und am Ende des Tages habe ich immer einen Song — oder ein Kapitel für das Programm beendet. Das Ergebnis überzeugt und verblüfft mich selber, wie es mich auch verblüfft, wenn ich einen meiner Songs nach Monaten oder Jahren mal wieder höre.</p>
-
-    <p id="l-p9">NoteChart wird das Lead-Sheet-Tool, das ich mir schon 1995 gewünscht hätte. Beim Arbeiten finde ich alles dort, wo ich es brauche, zu dem Zeitpunkt, der genau richtig ist — ohne Ablenkung, fokussiert, schnell.<br>Die Idee dahinter ist simpel: Klicken-Ziehen-Fertig. Alles, was ich oft brauche, soll mich einen Klick kosten, nicht drei.<br>Akkord setzen: am Balken ziehen für die Länge, Noten und Akkorde werden automatisch gesetzt; Rhythmusnoten dazu: ein Klick; das ganze Notensystem mal sichtbar, mal nicht — je nachdem, was der Song gerade braucht. Eigene Noten setzen geht direkt, ohne Umweg durch ein Menü, einfach „N" auf der Tastatur drücken und los. 1, 2, 3 Noten, schnell, unkompliziert. Akkorde vorziehen, Volta-Klammern mit Wiederholung: ziehen und fertig. Tonart, Taktart, Tempo — was immer es ist, es ist genau einen Klick entfernt. Easy.<br>Oder ein Audiofile importieren, das Tempo wird erkannt, Akkorde werden vorgeschlagen, ich bestätige oder ändere. Intuitiv, ohne Umweg.<br>Und wenn das Sheet fertig ist, geht's in Sekunden an die Bandkolleginnen und Bandkollegen — jede und jeder bekommt die Version, die passt: die Sänger ihr Lead Sheet mit Lyrics, die Bassistin die Akkorde mit Rhythmusnoten, der Pianist das volle Notensystem. Oder ein Mix aus all dem — aus einem Sheet werden so viele Versionen, wie die Band Köpfe hat. Und alles sieht so aus, wie ich das kenne.<br>Mit einem Klick.</p>
-
-    <p id="l-p10">Endlich gibt's das. Nicht weil jemand anders es gebaut hat — sondern weil ich es selber kann, mit Hilfe einer Technologie, die mir vor zwei Jahren noch wie Science-Fiction vorgekommen wäre. Im Juli 2026 kommt die Beta für Mac, Windows folgt sicher. Ich lade dich ein, die Beta-App zu testen — <a href="notechart.html">trage dich hier ein</a>.</p>
+    <p>Endlich gibt's das. Nicht weil jemand anders es gebaut hat — sondern weil ich es selber konnte, mit Hilfe einer Technologie, die mir vor zwei Jahren noch wie Science-Fiction vorgekommen wäre.</p>
 
   </article>
-</div>
-
-<script>
-const T = {
-  de:{
-    'nav-home':'Home','nav-about':'Über','nav-privacy':'Privacy','nav-dp':'Drone Pad','nav-dp-info':'Info','nav-dp-app':'App starten',
-    'l-title':'Vom Musiker für Musiker — haakemusic.com',
-    'l-h1':'Vom Musiker für Musiker.',
-    'l-credo':'Jede kreative Arbeit zeigt einen Teil unserer Persönlichkeit, unseres Wesens. Unsere Ideen werden Realität. NoteChart ist ein Teil meiner Welt — willkommen.',
-    'l-p1':'Mein Name ist Thomas Haake. Ich mache seit über 4 Jahrzehnten Musik, Live und Studio.',
-    'l-p2':'Als ich Anfang der 80er angefangen habe, wurden Lead Sheets mit Papier und Kuli geschrieben, Computer gab es noch nicht. Akkordbezeichnungen oben, Text unten, dazwischen ein bisschen Rhythmik wenn nötig. Jeder Musiker hat sich sein eigenes Lead Sheet geschrieben — war damals so und ist es heute eigentlich immer noch. Diese Schmierzettel sind mir über die Jahre ans Herz gewachsen. Sie sind zerfleddert, kaffeebefleckt, ehrlich.',
-    'l-p3':'Am Computer nutze ich seit Jahren unter anderem auch iReal Pro. Weit verbreitet in meinen Kreisen. Nur, meine Erwartungen an ein Lead-Sheet-Programm hat es nie erfüllt. Die Vermischung aus Lead-Sheet und Übe-App hat für mich nie wirklich funktioniert und für eine detailliertere Notation der Songs sind die Möglichkeiten viel zu eng, buchstäblich sogar. Guitar Pro oder <span style="hyphens:manual;-webkit-hyphens:manual">MuseScore</span> sind großartige — und leider komplizierte — Tools. Für ein schnelles Lead Sheet jedesmal das falsche Werkzeug. Und wirklich Spaß macht das nicht, wenn es viel Zeit frisst.<br>Ewig habe ich darauf gewartet, dass jemand etwas baut, das genau dazwischen liegt: intuitiv wie die schnelle Skizze, aber mit genug Möglichkeiten, einen Song wirklich zu notieren. Akkorde im Vordergrund wie auf meinen alten Notizblättern, aber Melodie dort, wo man sie wirklich braucht.<br>Wir Musiker leben mit schlechten Tools, und gewöhnen uns daran.',
-    'l-p4':'Dass ich das jetzt selber baue, hat mit KI zu tun. Ich bin kein Programmierer und werde auch keiner mehr. Aber als ich vor einigen Monaten zum ersten Mal mit einer KI gearbeitet habe und mein erstes kleines Programm tatsächlich lief, war klar: da geht mehr.',
-    'l-p5':'Vor NoteChart habe ich zwei kleine Programme entwickelt: PatchDirector in 2016 und dann Drone Pad. Beide laufen, beide sind veröffentlicht. Ich selber habe nur mässige Programmierskills, aber ich kann, was ich als Musiker über Jahrzehnte gelernt habe: genau hinhören.',
-    'l-p6':'Die KI Claude, die ich nutze, entspricht meinem Spieltrieb. Meine analytische Denkweise, die fast schon störrische Liebe zu kleinen Details, und die Geduld, Dinge so lange zu beschreiben, bis sie wirklich so sind, wie ich sie mir vorstelle, passen für mich perfekt zu KI. Ganz ehrlich, die Arbeit fasziniert.',
-    'l-p7':'Anfangs habe ich die KI behandelt wie einen Kollegen — mit Smalltalk, mit Andeutungen, mit Sätzen, die ein Mensch sofort verstanden hätte. Das funktioniert nicht. KI ist Hammer, Säge und Zange in Einem, aber kein Gegenüber. Sie liest, was dasteht, und nichts dazwischen. Also habe ich mir das Schreiben in knappen Abkürzungen angewöhnt — präziser als ganze Sätze, ungeschönt, funktional.<br>Ich beschreibe, die KI baut. Das ist die Arbeitsteilung.<br>Notepad zu — Mensch noch da — KI weg.',
-    'l-p8':'Dass ich die Arbeit stark unterschätzt habe, ist untertrieben. Ich habe keine Mindmap oder irgendeinen Fahrplan vorher aufgeschrieben, sondern einfach angefangen. Meine Vorstellung der intuitivsten Arbeit fließt direkt in das Programm. Logik ergibt sich aus dem, was ich in dieser oder jener Situation auf dem Blatt machen würde. Professionelle Programmierer machen das anders, aber ich improvisiere wie in der Musik. Und am Ende des Tages habe ich immer einen Song — oder ein Kapitel für das Programm beendet. Das Ergebnis überzeugt und verblüfft mich selber, wie es mich auch verblüfft, wenn ich einen meiner Songs nach Monaten oder Jahren mal wieder höre.',
-    'l-p9':'NoteChart wird das Lead-Sheet-Tool, das ich mir schon 1995 gewünscht hätte. Beim Arbeiten finde ich alles dort, wo ich es brauche, zu dem Zeitpunkt, der genau richtig ist — ohne Ablenkung, fokussiert, schnell.<br>Die Idee dahinter ist simpel: Klicken-Ziehen-Fertig. Alles, was ich oft brauche, soll mich einen Klick kosten, nicht drei.<br>Akkord setzen: am Balken ziehen für die Länge, Noten und Akkorde werden automatisch gesetzt; Rhythmusnoten dazu: ein Klick; das ganze Notensystem mal sichtbar, mal nicht — je nachdem, was der Song gerade braucht. Eigene Noten setzen geht direkt, ohne Umweg durch ein Menü, einfach „N" auf der Tastatur drücken und los. 1, 2, 3 Noten, schnell, unkompliziert. Akkorde vorziehen, Volta-Klammern mit Wiederholung: ziehen und fertig. Tonart, Taktart, Tempo — was immer es ist, es ist genau einen Klick entfernt. Easy.<br>Oder ein Audiofile importieren, das Tempo wird erkannt, Akkorde werden vorgeschlagen, ich bestätige oder ändere. Intuitiv, ohne Umweg.<br>Und wenn das Sheet fertig ist, geht\'s in Sekunden an die Bandkolleginnen und Bandkollegen — jede und jeder bekommt die Version, die passt: die Sänger ihr Lead Sheet mit Lyrics, die Bassistin die Akkorde mit Rhythmusnoten, der Pianist das volle Notensystem. Oder ein Mix aus all dem — aus einem Sheet werden so viele Versionen, wie die Band Köpfe hat. Und alles sieht so aus, wie ich das kenne.<br>Mit einem Klick.',
-    'l-p10':'Endlich gibt\'s das. Nicht weil jemand anders es gebaut hat — sondern weil ich es selber kann, mit Hilfe einer Technologie, die mir vor zwei Jahren noch wie Science-Fiction vorgekommen wäre. Im Juli 2026 kommt die Beta für Mac, Windows folgt sicher. Ich lade dich ein, die Beta-App zu testen — <a href="notechart.html">trage dich hier ein</a>.',
-  },
-  en:{
-    'nav-home':'Home','nav-about':'About','nav-privacy':'Privacy','nav-dp':'Drone Pad','nav-dp-info':'Info','nav-dp-app':'Launch app',
-    'l-title':'From a musician, for musicians — haakemusic.com',
-    'l-h1':'From a musician, for musicians.',
-    'l-credo':'Every piece of creative work shows a part of our personality, of our nature. Our ideas become real. NoteChart is a part of my world — welcome.',
-    'l-p1':'My name is Thomas Haake. I\'ve been making music for over four decades, live and in the studio.',
-    'l-p2':'When I started in the early 80s, lead sheets were written with paper and pen — there were no computers yet. Chord symbols on top, lyrics underneath, a bit of rhythm in between when needed. Every musician wrote their own lead sheets — that\'s how it was back then, and really, it still is today. Those scrappy sheets have grown dear to me over the years. They\'re dog-eared, coffee-stained, honest.',
-    'l-p3':'On the computer, I\'ve been using iReal Pro for years, among other things. Widely used in my circles. But it never lived up to what I expect from a lead sheet program. The mix of lead sheet and practice app never really worked for me, and for more detailed notation the options are far too tight — literally. Guitar Pro and <span style="hyphens:manual;-webkit-hyphens:manual">MuseScore</span> are great — and unfortunately complicated — tools. For a quick lead sheet, always the wrong tool. And it stops being fun when it eats up your time.<br>For ages I waited for someone to build something that sits right in between: intuitive like a quick sketch, but with enough range to actually notate a song. Chords up front like on my old notebook pages, but melody right where you really need it.<br>We musicians live with bad tools, and we get used to it.',
-    'l-p4':'That I\'m now building this myself has to do with AI. I\'m not a programmer and I never will be. But when I worked with an AI for the first time a few months ago and my first little program actually ran, it was clear: there\'s more in this.',
-    'l-p5':'Before NoteChart, I developed two small programs: PatchDirector in 2016 and then Drone Pad. Both run, both are released. My programming skills are modest at best, but I can do what I\'ve learned as a musician over decades: listen closely.',
-    'l-p6':'The AI Claude that I use matches my urge to play. My analytical thinking, the almost stubborn love of small details, and the patience to describe things until they really are the way I imagine them — all of that fits perfectly with AI for me. Honestly, the work fascinates me.',
-    'l-p7':'In the beginning I treated the AI like a colleague — with small talk, with hints, with sentences a human would have understood immediately. That doesn\'t work. AI is hammer, saw and pliers in one, but not a counterpart. It reads what\'s there, and nothing between the lines. So I got used to writing in tight abbreviations — more precise than full sentences, unvarnished, functional.<br>I describe, the AI builds. That\'s the division of labor.<br>Notepad closed — human still here — AI gone.',
-    'l-p8':'To say I\'ve drastically underestimated the work is an understatement. I didn\'t write down a mind map or any roadmap beforehand, I just started. My idea of the most intuitive way to work flows straight into the program. The logic emerges from what I would do on paper in this or that situation. Professional programmers do it differently, but I improvise like in music. And at the end of the day I always have a song — or have finished a chapter for the program. The result convinces and astonishes me, just as it astonishes me when I listen to one of my songs again after months or years.',
-    'l-p9':'NoteChart will be the lead sheet tool I would have wished for back in 1995. While working I find everything where I need it, exactly when I need it — without distraction, focused, fast.<br>The idea behind it is simple: click-drag-done. Anything I do often should cost me one click, not three.<br>Setting a chord: drag the bar for its length, notes and chords are placed automatically; rhythm notes added: one click; the full staff visible or not — depending on what the song needs right now. Entering your own notes works directly, no menu detour, just press "N" on the keyboard and go. 1, 2, 3 notes, fast, simple. Chord anticipations, volta brackets with repeats: drag and done. Key, time signature, tempo — whatever it is, it\'s exactly one click away. Easy.<br>Or import an audio file, the tempo is detected, chords are suggested, I confirm or change. Intuitive, no detour.<br>And when the sheet is done, it goes to the band in seconds — everyone gets the version that fits: the singers their lead sheet with lyrics, the bassist the chords with rhythm notes, the pianist the full staff. Or a mix of all of it — one sheet becomes as many versions as the band has heads. And it all looks the way I know it.<br>With one click.',
-    'l-p10':'Finally it exists. Not because someone else built it — but because I could build it myself, with the help of a technology that just two years ago would have felt like science fiction to me. The beta for Mac arrives in July 2026, Windows will follow for sure. I\'d like to invite you to test the beta — <a href="notechart.html">sign up here</a>.',
-  },
-  es:{
-    'nav-home':'Inicio','nav-about':'Acerca','nav-privacy':'Privacidad','nav-dp':'Drone Pad','nav-dp-info':'Info','nav-dp-app':'Abrir app',
-    'l-title':'De músico para músicos — haakemusic.com',
-    'l-h1':'De músico para músicos.',
-    'l-credo':'Cada trabajo creativo muestra una parte de nuestra personalidad, de nuestra esencia. Nuestras ideas se hacen realidad. NoteChart es una parte de mi mundo — bienvenida, bienvenido.',
-    'l-p1':'Me llamo Thomas Haake. Llevo más de cuatro décadas haciendo música, en directo y en estudio.',
-    'l-p2':'Cuando empecé a principios de los 80, los lead sheets se escribían con papel y bolígrafo — todavía no había ordenadores. Cifrado de acordes arriba, letra abajo, algo de rítmica entre medias cuando hacía falta. Cada músico escribía su propio lead sheet — así era entonces, y en realidad lo sigue siendo hoy. Esos cuadernillos garabateados me han ido cogiendo cariño con los años. Están manoseados, manchados de café, honestos.',
-    'l-p3':'En el ordenador uso desde hace años, entre otras cosas, iReal Pro. Muy extendido en mi entorno. Pero nunca cumplió mis expectativas para un programa de lead sheets. La mezcla de lead sheet y app de estudio nunca me funcionó del todo, y para una notación más detallada de las canciones las posibilidades son demasiado estrechas, literalmente. Guitar Pro o <span style="hyphens:manual;-webkit-hyphens:manual">MuseScore</span> son herramientas estupendas — y, por desgracia, complicadas. Para un lead sheet rápido, cada vez la herramienta equivocada. Y deja de ser divertido cuando te come el tiempo.<br>Llevaba siglos esperando a que alguien construyera algo que estuviera justo en medio: intuitivo como un boceto rápido, pero con margen suficiente para anotar de verdad una canción. Los acordes en primer plano como en mis viejas hojas, pero la melodía allí donde realmente la necesitas.<br>Los músicos convivimos con malas herramientas y nos acostumbramos.',
-    'l-p4':'Que ahora lo construya yo mismo tiene que ver con la IA. No soy programador y ya no lo voy a ser. Pero cuando hace unos meses trabajé por primera vez con una IA y mi primer pequeño programa funcionó de verdad, quedó claro: aquí hay más.',
-    'l-p5':'Antes de NoteChart desarrollé dos pequeños programas: PatchDirector en 2016 y luego Drone Pad. Ambos funcionan, ambos están publicados. Mis habilidades como programador son modestas, pero sí sé hacer lo que he aprendido como músico durante décadas: escuchar con atención.',
-    'l-p6':'La IA Claude, con la que trabajo, encaja con mi afán de juego. Mi forma analítica de pensar, el amor casi terco por los pequeños detalles, y la paciencia para describir las cosas hasta que realmente son como me las imagino — todo eso me encaja a la perfección con la IA. Sinceramente, el trabajo me fascina.',
-    'l-p7':'Al principio traté a la IA como a un colega — con charla informal, con insinuaciones, con frases que un humano habría entendido al instante. Eso no funciona. La IA es martillo, sierra y alicates en una sola pieza, pero no un interlocutor. Lee lo que está escrito y nada entre líneas. Así que me acostumbré a escribir en abreviaturas escuetas — más precisas que las frases enteras, sin adornos, funcionales.<br>Yo describo, la IA construye. Esa es la división del trabajo.<br>Bloc de notas cerrado — humano todavía aquí — IA fuera.',
-    'l-p8':'Decir que he subestimado el trabajo es quedarse corto. No escribí ningún mapa mental ni hoja de ruta antes de empezar — simplemente arranqué. Mi idea del trabajo más intuitivo fluye directamente al programa. La lógica surge de lo que haría yo sobre el papel en una u otra situación. Los programadores profesionales lo hacen de otra manera, pero yo improviso como en la música. Y al final del día siempre tengo una canción — o he terminado un capítulo del programa. El resultado me convence y me asombra, igual que me asombra cuando vuelvo a escuchar una de mis canciones después de meses o años.',
-    'l-p9':'NoteChart va a ser la herramienta de lead sheets que ya en 1995 me habría gustado tener. Mientras trabajo encuentro todo donde lo necesito, en el momento justo — sin distracciones, concentrado, rápido.<br>La idea es sencilla: clic-arrastrar-listo. Todo lo que hago a menudo debe costarme un clic, no tres.<br>Poner un acorde: arrastras la barra para definir su duración, notas y acordes se colocan automáticamente; añadir rítmica: un clic; el pentagrama completo a veces visible, a veces no — según lo que pida la canción en cada momento. Poner notas propias va directo, sin desvío por menús, simplemente pulsar «N» en el teclado y listo. 1, 2, 3 notas, rápido, sencillo. Anticipaciones de acordes, barras de volta con repeticiones: arrastrar y listo. Tonalidad, compás, tempo — sea lo que sea, está a exactamente un clic. Fácil.<br>O importar un archivo de audio: se detecta el tempo, se proponen los acordes, yo confirmo o cambio. Intuitivo, sin rodeos.<br>Y cuando el lead sheet está listo, llega a los compañeros de banda en segundos — cada uno recibe la versión que le encaja: las cantantes su lead sheet con letra, la bajista los acordes con rítmica, el pianista el pentagrama completo. O una mezcla de todo eso — de un solo lead sheet salen tantas versiones como cabezas tiene la banda. Y todo tiene el aspecto que conozco.<br>Con un clic.',
-    'l-p10':'Por fin existe. No porque lo haya construido otra persona — sino porque puedo hacerlo yo, con la ayuda de una tecnología que hace dos años todavía me habría parecido ciencia ficción. En julio de 2026 llega la beta para Mac, Windows seguirá con seguridad. Te invito a probar la beta — <a href="notechart.html">apúntate aquí</a>.',
-  }
-};
-function setLang(lang){
-  ['de','en','es'].forEach(l=>document.getElementById('btn-'+l).classList.toggle('active',l===lang));
-  document.documentElement.lang=lang;
-  try{localStorage.setItem('haakemusic.lang',lang);}catch(e){}
-  const t=T[lang];
-  for(const[id,val]of Object.entries(t)){const el=document.getElementById(id);if(el)el.innerHTML=val;}
-}
-document.addEventListener('DOMContentLoaded',()=>{
-  let stored='en';
-  try{const s=localStorage.getItem('haakemusic.lang');if(s==='de'||s==='en'||s==='es')stored=s;}catch(e){}
-  setLang(stored);
-
-  const dd=document.querySelector('.nav-item.dropdown');
-  if(dd){
-    const trigger=dd.querySelector('.nav-link');
-    const menu=dd.querySelector('.nav-submenu');
-    trigger.addEventListener('click',e=>{e.preventDefault();menu.classList.toggle('open');});
-    document.addEventListener('click',e=>{if(!dd.contains(e.target))menu.classList.remove('open');});
-  }
-});
-</script>
 </body>
 </html>
