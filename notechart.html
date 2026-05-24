@@ -22,6 +22,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 .nav-link:hover{color:#fff;background:rgba(42,111,214,.2);border-color:rgba(90,154,240,.3)}
 .nav-link.active{color:#fff;background:rgba(42,111,214,.35);border-color:rgba(90,154,240,.5)}
 .nav-badge{display:inline-block;background:#2a6fd6;color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:50px;margin-left:4px;letter-spacing:.04em;vertical-align:middle;line-height:1.4}
+.nav-item{position:relative}
+.nav-item.dropdown>.nav-link{cursor:pointer}
+.nav-item.dropdown>.nav-link::after{content:' ▾';font-size:9px;opacity:.7;margin-left:2px}
+.nav-submenu{display:none;position:absolute;top:calc(100% + 6px);left:0;background:rgba(6,14,34,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(120,170,230,.15);border-radius:14px;padding:6px;min-width:170px;flex-direction:column;gap:2px;z-index:101;box-shadow:0 6px 24px rgba(0,0,0,.4)}
+.nav-submenu.open{display:flex}
+.nav-submenu .nav-link{padding:8px 14px;border-radius:10px;font-size:13px;white-space:nowrap}
 .hero{text-align:center;padding:64px 24px 56px}
 .hero-eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#7ab0e8;margin-bottom:18px;font-weight:700}
 .hero h1{font-size:clamp(40px,6vw,68px);font-weight:700;line-height:1.07;letter-spacing:-.02em;color:#fff;margin-bottom:18px}
@@ -89,9 +95,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
   <a class="nav-logo" href="index.html">haake<span>music</span>.com</a>
   <div class="nav-links">
     <a class="nav-link" href="index.html" id="nav-home">Home</a>
-    <a class="nav-link" href="dronepad.html">Drone Pad</a>
+    <div class="nav-item dropdown">
+      <a class="nav-link" href="dronepad.html" id="nav-dp">Drone Pad</a>
+      <div class="nav-submenu">
+        <a class="nav-link" href="dronepad.html" id="nav-dp-info">Info</a>
+        <a class="nav-link" href="dronepad-app.html" id="nav-dp-app">App starten</a>
+      </div>
+    </div>
     <a class="nav-link active" href="notechart.html">NoteChart<span class="nav-badge">Beta</span></a>
     <a class="nav-link" href="patchdirector.html">PatchDirector</a>
+    <a class="nav-link" href="ueber-mich.html" id="nav-about">Über</a>
     <a class="nav-link" href="privacy.html" id="nav-privacy">Privacy</a>
   </div>
 </nav>
@@ -245,7 +258,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 <script>
 const T = {
   de:{
-    'nav-home':'Home','nav-privacy':'Privacy',
+    'nav-home':'Home','nav-about':'Über','nav-privacy':'Privacy','nav-dp-info':'Info','nav-dp-app':'App starten',
     'l-eyebrow':'macOS · Beta Juni 2026',
     'l-sub':'Lead-Sheet-Software, die neu denkt — von null an, ohne Rücksicht auf das, was immer so war.',
     'l-note':'Beta startet im Juni 2026 — Warteliste ist offen.',
@@ -273,7 +286,7 @@ const T = {
     'l-cta-h':'Beta-Warteliste','l-cta-p':'NoteChart ist noch in der Entwicklung. Wer dabei sein möchte, kann sich jetzt eintragen.','l-cta2':'Jetzt eintragen',
   },
   en:{
-    'nav-home':'Home','nav-privacy':'Privacy',
+    'nav-home':'Home','nav-about':'About','nav-privacy':'Privacy','nav-dp-info':'Info','nav-dp-app':'Launch app',
     'l-eyebrow':'macOS · Beta June 2026',
     'l-sub':'Lead sheet software that thinks from scratch — no legacy, no compromises.',
     'l-note':'Beta starts June 2026 — waitlist is open.',
@@ -301,7 +314,7 @@ const T = {
     'l-cta-h':'Beta Waitlist','l-cta-p':'NoteChart is still in development. Sign up now to be among the first to try it.','l-cta2':'Sign up now',
   },
   es:{
-    'nav-home':'Inicio','nav-privacy':'Privacidad',
+    'nav-home':'Inicio','nav-about':'Acerca','nav-privacy':'Privacidad','nav-dp-info':'Info','nav-dp-app':'Abrir app',
     'l-eyebrow':'macOS · Beta junio 2026',
     'l-sub':'Software de lead sheets que piensa desde cero — sin legado, sin compromisos.',
     'l-note':'Beta en junio 2026 — la lista de espera está abierta.',
@@ -361,7 +374,21 @@ function setLang(lang){
   for(const[id,val]of Object.entries(t)){const el=document.getElementById(id);if(el)el.innerHTML=val;}
   updateCaption();
 }
-document.addEventListener('DOMContentLoaded',()=>setLang('de'));
+document.addEventListener('DOMContentLoaded',()=>{
+  setLang('de');
+  const dd=document.querySelector('.nav-item.dropdown');
+  if(dd){
+    const trigger=dd.querySelector('.nav-link');
+    const menu=dd.querySelector('.nav-submenu');
+    trigger.addEventListener('click',e=>{
+      e.preventDefault();
+      menu.classList.toggle('open');
+    });
+    document.addEventListener('click',e=>{
+      if(!dd.contains(e.target))menu.classList.remove('open');
+    });
+  }
+});
 </script>
 </body>
 </html>
