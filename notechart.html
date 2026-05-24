@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
 <meta charset="UTF-8">
 <link rel="icon" type="image/png" href="favicon.png">
@@ -22,13 +22,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 .nav-link:hover{color:#fff;background:rgba(42,111,214,.2);border-color:rgba(90,154,240,.3)}
 .nav-link.active{color:#fff;background:rgba(42,111,214,.35);border-color:rgba(90,154,240,.5)}
 .nav-badge{display:inline-block;background:#2a6fd6;color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:50px;margin-left:4px;letter-spacing:.04em;vertical-align:middle;line-height:1.4}
-.nav-item{position:relative}
-.nav-item.dropdown>.nav-link{cursor:pointer}
-.nav-item.dropdown>.nav-link::after{content:' ▾';font-size:9px;opacity:.7;margin-left:2px}
-.nav-submenu{display:none;position:absolute;top:calc(100% + 6px);left:0;background:rgba(6,14,34,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(120,170,230,.15);border-radius:14px;padding:6px;min-width:170px;flex-direction:column;gap:2px;z-index:101;box-shadow:0 6px 24px rgba(0,0,0,.4)}
-.nav-submenu.open{display:flex}
-.nav-submenu .nav-link{padding:8px 14px;border-radius:10px;font-size:13px;white-space:nowrap}
-
 .hero{text-align:center;padding:64px 24px 56px}
 .hero-eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#7ab0e8;margin-bottom:18px;font-weight:700}
 .hero h1{font-size:clamp(40px,6vw,68px);font-weight:700;line-height:1.07;letter-spacing:-.02em;color:#fff;margin-bottom:18px}
@@ -65,16 +58,30 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 .cta-section p{font-size:17px;color:#88aed0;margin-bottom:30px;line-height:1.6}
 .footer{text-align:center;padding:48px 24px 0;color:#2a4a6a;font-size:13px}
 .footer a{color:#3a6a9a;text-decoration:none}
-.screenshot-wrap{margin-top:48px;text-align:center}
-.screenshot-img{width:100%;max-width:1100px;border-radius:16px;border:1px solid rgba(120,170,230,.18);box-shadow:0 8px 48px rgba(0,0,0,.5);display:block;margin:0 auto}
-.screenshot-caption{margin-top:14px;font-size:13px;color:#7a9ab8;font-style:italic}
+.gallery{margin-top:48px}
+.gallery-main{position:relative;text-align:center}
+.gallery-main-img{width:100%;max-width:1100px;border-radius:16px;border:1px solid rgba(120,170,230,.18);box-shadow:0 8px 48px rgba(0,0,0,.5);display:block;margin:0 auto;cursor:zoom-in;transition:opacity .25s ease}
+.gallery-caption{margin-top:14px;font-size:13px;color:#7a9ab8;font-style:italic;min-height:1.2em}
+.gallery-thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:22px;max-width:1100px;margin-left:auto;margin-right:auto}
+.gallery-thumb{background:none;border:2px solid rgba(120,170,230,.18);border-radius:8px;padding:0;cursor:pointer;overflow:hidden;transition:all .2s ease;aspect-ratio:16/10;display:block}
+.gallery-thumb img{width:100%;height:100%;object-fit:cover;display:block;opacity:.55;transition:opacity .2s ease}
+.gallery-thumb:hover{border-color:rgba(120,170,230,.45)}
+.gallery-thumb:hover img{opacity:.85}
+.gallery-thumb.active{border-color:#5a9af0;box-shadow:0 0 0 1px #5a9af0,0 0 18px rgba(90,154,240,.35)}
+.gallery-thumb.active img{opacity:1}
+@media(max-width:640px){.gallery-thumbs{grid-template-columns:repeat(5,1fr);gap:6px}}
+.lightbox{display:none;position:fixed;inset:0;background:rgba(6,14,34,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:1000;cursor:zoom-out;align-items:center;justify-content:center;padding:24px}
+.lightbox.open{display:flex}
+.lightbox img{max-width:100%;max-height:100%;border-radius:8px;box-shadow:0 8px 48px rgba(0,0,0,.7)}
+.lightbox-close{position:absolute;top:18px;right:24px;background:rgba(255,255,255,.08);border:1.5px solid rgba(120,170,230,.35);color:#fff;width:40px;height:40px;border-radius:50%;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1}
+.lightbox-close:hover{background:rgba(42,111,214,.4)}
 </style>
 </head>
 <body>
 
 <div class="lang-bar">
-  <button class="lang-btn" id="btn-de" onclick="setLang('de')">DE</button>
-  <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+  <button class="lang-btn active" id="btn-de" onclick="setLang('de')">DE</button>
+  <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
   <button class="lang-btn" id="btn-es" onclick="setLang('es')">ES</button>
 </div>
 
@@ -82,25 +89,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
   <a class="nav-logo" href="index.html">haake<span>music</span>.com</a>
   <div class="nav-links">
     <a class="nav-link" href="index.html" id="nav-home">Home</a>
-    <div class="nav-item dropdown">
-      <a class="nav-link" href="dronepad.html" id="nav-dp">Drone Pad</a>
-      <div class="nav-submenu">
-        <a class="nav-link" href="dronepad.html" id="nav-dp-info">Info</a>
-        <a class="nav-link" href="dronepad-app.html" id="nav-dp-app">App starten</a>
-      </div>
-    </div>
+    <a class="nav-link" href="dronepad.html">Drone Pad</a>
     <a class="nav-link active" href="notechart.html">NoteChart<span class="nav-badge">Beta</span></a>
     <a class="nav-link" href="patchdirector.html">PatchDirector</a>
-    <a class="nav-link" href="ueber-mich.html" id="nav-about">Über</a>
     <a class="nav-link" href="privacy.html" id="nav-privacy">Privacy</a>
   </div>
 </nav>
 
 <div class="hero">
-  <p class="hero-eyebrow" id="l-eyebrow">macOS · Beta Juli 2026</p>
+  <p class="hero-eyebrow" id="l-eyebrow">macOS · Beta Juni 2026</p>
   <h1>Note<span>Chart</span></h1>
   <p class="hero-sub" id="l-sub">Lead-Sheet-Software, die neu denkt — von null an, ohne Rücksicht auf das, was immer so war.</p>
-  <p class="hero-note" id="l-note">Screenshots kommen in Kürze. Beta startet im Juli 2026 — Warteliste ist offen.</p>
+  <p class="hero-note" id="l-note">Screenshots kommen in Kürze. Beta startet im Juni 2026 — Warteliste ist offen.</p>
   <div class="cta-row">
     <a class="btn-primary" href="https://tally.so/r/D40QR5" target="_blank" rel="noopener" id="l-cta">Beta-Warteliste</a>
   </div>
@@ -114,9 +114,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
   <p class="lead" style="margin-top:16px" id="l-s1-p2">Nur Akkorde? Geht. Mit Rhythmus? Geht. Mit vollständiger Melodie? Auch das. So viele Seiten wie man braucht. NoteChart passt sich an — nicht umgekehrt.</p>
   <p class="lead" style="margin-top:16px;font-style:italic;color:#7a9ab8" id="l-s1-p3">Wer bisher mit iReal Pro unterwegs war: herzlich willkommen in 2026. Euer Abo läuft ja noch bis Ende des Monats.</p>
 
-  <div class="screenshot-wrap">
-    <img src="images/first_screenshot_notechart.png" alt="NoteChart Screenshot – erster Blick auf die Oberfläche" class="screenshot-img">
-    <p class="screenshot-caption" id="l-mock-title">Erster Screenshot der Arbeitsoberfläche. Klicken — ziehen — fertig.</p>
+  <div class="gallery">
+    <div class="gallery-main">
+      <img src="images/NC_working_area.png" alt="NoteChart Screenshot" class="gallery-main-img" id="gallery-main-img" onclick="openLightbox()">
+      <p class="gallery-caption" id="l-gal-cap"></p>
+    </div>
+    <div class="gallery-thumbs" id="gallery-thumbs">
+      <button class="gallery-thumb active" data-idx="0" onclick="showImage(0)"><img src="images/NC_working_area.png" alt=""></button>
+      <button class="gallery-thumb" data-idx="1" onclick="showImage(1)"><img src="images/NC_notes.png" alt=""></button>
+      <button class="gallery-thumb" data-idx="2" onclick="showImage(2)"><img src="images/NC_lyrics.png" alt=""></button>
+      <button class="gallery-thumb" data-idx="3" onclick="showImage(3)"><img src="images/NC_print_preview.png" alt=""></button>
+      <button class="gallery-thumb" data-idx="4" onclick="showImage(4)"><img src="images/NC_settings.png" alt=""></button>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="event.stopPropagation();closeLightbox()" aria-label="Close">×</button>
+    <img id="lightbox-img" src="" alt="">
   </div>
 
   <div class="features-grid">
@@ -230,10 +244,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 <script>
 const T = {
   de:{
-    'nav-home':'Home','nav-about':'Über','nav-privacy':'Privacy','nav-dp-info':'Info','nav-dp-app':'App starten',
-    'l-eyebrow':'macOS · Beta Juli 2026',
+    'nav-home':'Home','nav-privacy':'Privacy',
+    'l-eyebrow':'macOS · Beta Juni 2026',
     'l-sub':'Lead-Sheet-Software, die neu denkt — von null an, ohne Rücksicht auf das, was immer so war.',
-    'l-note':'Beta startet im Juli 2026 — Warteliste ist offen.',
+    'l-note':'Beta startet im Juni 2026 — Warteliste ist offen.',
     'l-cta':'Beta-Warteliste',
     'l-s1-label':'Konzept','l-s1-h2':'Alte Zöpfe neu flechten',
     'l-s1-p1':'Lead Sheets haben sich seit Jahrzehnten kaum verändert — und die Software auch nicht. NoteChart bringt ein vollständig neues Konzept mit, das von Grund auf für Musiker gedacht ist: schnell für Einsteiger, mächtig für Profis, ohne dass man sich durch Menüs kämpfen muss.',
@@ -245,7 +259,7 @@ const T = {
     'l-f4-h':'Audio-Import','l-f4-p':'Song reinziehen, BPM wird erkannt, Akkordvorschläge kommen automatisch — bestätigen oder korrigieren, fertig.',
     'l-f5-h':'PDF-Export','l-f5-p':'Druckfertige Charts, so viele Seiten wie nötig, mit wählbarem Layout und Kopfbereich.',
     'l-f6-h':'Kompatibel','l-f6-p':'MusicXML Import und Export. iReal Pro Nutzer exportieren ihre Charts als MusicXML — der Import in NoteChart funktioniert direkt.',
-    'l-mock-title':'Erster Screenshot der Arbeitsoberfläche. Klicken — ziehen — fertig.',
+    'l-gal-cap-0':'Arbeitsoberfläche','l-gal-cap-1':'Melodie-Notation pro Takt','l-gal-cap-2':'Lyrics direkt unter den Takten','l-gal-cap-3':'Druckvorschau — mehrseitig','l-gal-cap-4':'Einstellungen',
     'l-s2-label':'Im Detail','l-s2-h2':'Was NoteChart kann',
     'l-u1-h':'Akkord-Syntax vollständig','l-u1-p':'Von Cm über Cmaj7, Cdim7 und C7b9 bis zu Slash-Chords wie Bb/G — alle gängigen Schreibweisen werden erkannt und korrekt dargestellt.',
     'l-u2-h':'Strukturelemente','l-u2-p':'Wiederholungszeichen, Endungsklammern, Segno, Coda, Fine, Da Capo, N.C. — alles was ein echtes Chart braucht, ist vorhanden.',
@@ -258,10 +272,10 @@ const T = {
     'l-cta-h':'Beta-Warteliste','l-cta-p':'NoteChart ist noch in der Entwicklung. Wer dabei sein möchte, kann sich jetzt eintragen.','l-cta2':'Jetzt eintragen',
   },
   en:{
-    'nav-home':'Home','nav-about':'About','nav-privacy':'Privacy','nav-dp-info':'Info','nav-dp-app':'Launch app',
-    'l-eyebrow':'macOS · Beta July 2026',
+    'nav-home':'Home','nav-privacy':'Privacy',
+    'l-eyebrow':'macOS · Beta June 2026',
     'l-sub':'Lead sheet software that thinks from scratch — no legacy, no compromises.',
-    'l-note':'Beta starts July 2026 — waitlist is open.',
+    'l-note':'Beta starts June 2026 — waitlist is open.',
     'l-cta':'Join the Beta Waitlist',
     'l-s1-label':'Concept','l-s1-h2':'Time to rewrite the rulebook',
     'l-s1-p1':'Lead sheets haven\'t changed much in decades — and neither has the software. NoteChart brings a completely new concept built from the ground up for musicians: fast for beginners, powerful for professionals, without fighting through menus.',
@@ -273,7 +287,7 @@ const T = {
     'l-f4-h':'Audio import','l-f4-p':'Drop a song in, BPM gets detected, chord suggestions appear automatically — confirm or correct, done.',
     'l-f5-h':'PDF export','l-f5-p':'Print-ready charts, as many pages as needed, with selectable layout and header fields.',
     'l-f6-h':'Compatible','l-f6-p':'MusicXML import and export. iReal Pro users can export their charts as MusicXML — import into NoteChart works directly.',
-    'l-mock-title':'First screenshot of the workspace. Click — drag — done.',
+    'l-gal-cap-0':'Workspace','l-gal-cap-1':'Per-bar melody notation','l-gal-cap-2':'Lyrics right under the bars','l-gal-cap-3':'Print preview — multi-page','l-gal-cap-4':'Settings',
     'l-s2-label':'Details','l-s2-h2':'What NoteChart can do',
     'l-u1-h':'Full chord syntax','l-u1-p':'From Cm to Cmaj7, Cdim7 and C7b9, all the way to slash chords like Bb/G — all common notations are recognized and displayed correctly.',
     'l-u2-h':'Structure elements','l-u2-p':'Repeat signs, endings, segno, coda, fine, da capo, N.C. — everything a real chart needs is there.',
@@ -286,10 +300,10 @@ const T = {
     'l-cta-h':'Beta Waitlist','l-cta-p':'NoteChart is still in development. Sign up now to be among the first to try it.','l-cta2':'Sign up now',
   },
   es:{
-    'nav-home':'Inicio','nav-about':'Acerca','nav-privacy':'Privacidad','nav-dp-info':'Info','nav-dp-app':'Abrir app',
-    'l-eyebrow':'macOS · Beta julio 2026',
+    'nav-home':'Inicio','nav-privacy':'Privacidad',
+    'l-eyebrow':'macOS · Beta junio 2026',
     'l-sub':'Software de lead sheets que piensa desde cero — sin legado, sin compromisos.',
-    'l-note':'Beta en julio 2026 — la lista de espera está abierta.',
+    'l-note':'Beta en junio 2026 — la lista de espera está abierta.',
     'l-cta':'Lista de espera Beta',
     'l-s1-label':'Concepto','l-s1-h2':'Hora de reescribir las reglas',
     'l-s1-p1':'Los lead sheets no han cambiado mucho en décadas — y el software tampoco. NoteChart trae un concepto completamente nuevo, construido desde cero para músicos: rápido para principiantes, potente para profesionales, sin pelear con menús.',
@@ -301,7 +315,7 @@ const T = {
     'l-f4-h':'Importar audio','l-f4-p':'Arrastra una canción, el BPM se detecta, los acordes se sugieren automáticamente — confirma o corrige, listo.',
     'l-f5-h':'Exportar PDF','l-f5-p':'Charts listos para imprimir, tantas páginas como necesites, con diseño y encabezado configurables.',
     'l-f6-h':'Compatible','l-f6-p':'Importación y exportación MusicXML. Los usuarios de iReal Pro pueden exportar sus charts como MusicXML — la importación en NoteChart funciona directamente.',
-    'l-mock-title':'Primera captura de la interfaz de trabajo. Clic — arrastrar — listo.',
+    'l-gal-cap-0':'Interfaz de trabajo','l-gal-cap-1':'Notación de melodía por compás','l-gal-cap-2':'Letra debajo de los compases','l-gal-cap-3':'Vista previa de impresión — varias páginas','l-gal-cap-4':'Ajustes',
     'l-s2-label':'En detalle','l-s2-h2':'Qué puede hacer NoteChart',
     'l-u1-h':'Sintaxis de acordes completa','l-u1-p':'Desde Cm hasta Cmaj7, Cdim7 y C7b9, pasando por slash chords como Bb/G — todas las notaciones habituales se reconocen y se muestran correctamente.',
     'l-u2-h':'Elementos estructurales','l-u2-p':'Signos de repetición, casillas, segno, coda, fine, da capo, N.C. — todo lo que un chart real necesita está ahí.',
@@ -314,34 +328,39 @@ const T = {
     'l-cta-h':'Lista de espera Beta','l-cta-p':'NoteChart está aún en desarrollo. Apúntate ahora para ser de los primeros en probarlo.','l-cta2':'Apuntarse ahora',
   }
 };
+const GALLERY_IMAGES=['images/NC_working_area.png','images/NC_notes.png','images/NC_lyrics.png','images/NC_print_preview.png','images/NC_settings.png'];
+let currentImgIdx=0;
+function showImage(idx){
+  currentImgIdx=idx;
+  document.getElementById('gallery-main-img').src=GALLERY_IMAGES[idx];
+  document.querySelectorAll('.gallery-thumb').forEach((b,i)=>b.classList.toggle('active',i===idx));
+  updateCaption();
+}
+function updateCaption(){
+  const lang=document.documentElement.lang||'de';
+  const cap=T[lang]['l-gal-cap-'+currentImgIdx];
+  document.getElementById('l-gal-cap').textContent=cap||'';
+}
+function openLightbox(){
+  document.getElementById('lightbox-img').src=GALLERY_IMAGES[currentImgIdx];
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open');}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')closeLightbox();
+  if(document.getElementById('lightbox').classList.contains('open')){
+    if(e.key==='ArrowRight'){showImage((currentImgIdx+1)%5);openLightbox();}
+    if(e.key==='ArrowLeft'){showImage((currentImgIdx+4)%5);openLightbox();}
+  }
+});
 function setLang(lang){
   ['de','en','es'].forEach(l=>document.getElementById('btn-'+l).classList.toggle('active',l===lang));
   document.documentElement.lang=lang;
-  try{localStorage.setItem('haakemusic.lang',lang);}catch(e){}
   const t=T[lang];
   for(const[id,val]of Object.entries(t)){const el=document.getElementById(id);if(el)el.innerHTML=val;}
+  updateCaption();
 }
-document.addEventListener('DOMContentLoaded',()=>{
-  let stored='en';
-  try{const s=localStorage.getItem('haakemusic.lang');if(s==='de'||s==='en'||s==='es')stored=s;}catch(e){}
-  setLang(stored);
-});
-</script>
-
-<script>
-document.addEventListener('DOMContentLoaded',()=>{
-  const dd=document.querySelector('.nav-item.dropdown');
-  if(!dd)return;
-  const trigger=dd.querySelector('.nav-link');
-  const menu=dd.querySelector('.nav-submenu');
-  trigger.addEventListener('click',e=>{
-    e.preventDefault();
-    menu.classList.toggle('open');
-  });
-  document.addEventListener('click',e=>{
-    if(!dd.contains(e.target))menu.classList.remove('open');
-  });
-});
+document.addEventListener('DOMContentLoaded',()=>setLang('de'));
 </script>
 </body>
 </html>
