@@ -62,17 +62,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 .gallery-main{position:relative;text-align:center}
 .gallery-main-img{width:100%;max-width:990px;border-radius:16px;border:1px solid rgba(120,170,230,.18);box-shadow:0 8px 48px rgba(0,0,0,.5);display:block;margin:0 auto;cursor:zoom-in;transition:opacity .25s ease}
 .gallery-caption{margin-top:14px;font-size:13px;color:#7a9ab8;font-style:italic;min-height:1.2em}
-.gallery-thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:22px;max-width:990px;margin-left:auto;margin-right:auto}
+.gallery-thumbs{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:22px;max-width:990px;margin-left:auto;margin-right:auto}
 .gallery-thumb{background:none;border:2px solid rgba(120,170,230,.18);border-radius:8px;padding:0;cursor:pointer;overflow:hidden;transition:all .2s ease;aspect-ratio:16/10;display:block}
 .gallery-thumb img{width:100%;height:100%;object-fit:cover;display:block;opacity:.55;transition:opacity .2s ease}
 .gallery-thumb:hover{border-color:rgba(120,170,230,.45)}
 .gallery-thumb:hover img{opacity:.85}
 .gallery-thumb.active{border-color:#5a9af0;box-shadow:0 0 0 1px #5a9af0,0 0 18px rgba(90,154,240,.35)}
 .gallery-thumb.active img{opacity:1}
-@media(max-width:640px){.gallery-thumbs{grid-template-columns:repeat(5,1fr);gap:6px}}
-.lightbox{display:none;position:fixed;inset:0;background:rgba(6,14,34,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:1000;cursor:zoom-out;align-items:center;justify-content:center;padding:24px}
+@media(max-width:640px){.gallery-thumbs{grid-template-columns:repeat(6,1fr);gap:6px}}
+.lightbox{display:none;position:fixed;inset:0;background:rgba(6,14,34,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:1000;cursor:zoom-out;align-items:center;justify-content:center;padding:0}
 .lightbox.open{display:flex}
-.lightbox img{max-width:100%;max-height:100%;border-radius:8px;box-shadow:0 8px 48px rgba(0,0,0,.7)}
+.lightbox img{max-width:98vw;max-height:98vh;width:auto;height:auto;border-radius:8px;box-shadow:0 8px 48px rgba(0,0,0,.7)}
 .lightbox-close{position:absolute;top:18px;right:24px;background:rgba(255,255,255,.08);border:1.5px solid rgba(120,170,230,.35);color:#fff;width:40px;height:40px;border-radius:50%;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1}
 .lightbox-close:hover{background:rgba(42,111,214,.4)}
 </style>
@@ -122,9 +122,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
     <div class="gallery-thumbs" id="gallery-thumbs">
       <button class="gallery-thumb active" data-idx="0" onclick="showImage(0)"><img src="images/NC_working_area.png" alt=""></button>
       <button class="gallery-thumb" data-idx="1" onclick="showImage(1)"><img src="images/NC_notes.png" alt=""></button>
-      <button class="gallery-thumb" data-idx="2" onclick="showImage(2)"><img src="images/NC_lyrics.png" alt=""></button>
-      <button class="gallery-thumb" data-idx="3" onclick="showImage(3)"><img src="images/NC_print_preview.png" alt=""></button>
-      <button class="gallery-thumb" data-idx="4" onclick="showImage(4)"><img src="images/NC_settings.png" alt=""></button>
+      <button class="gallery-thumb" data-idx="2" onclick="showImage(2)"><img src="images/NC_rmk_single_bar.png" alt=""></button>
+      <button class="gallery-thumb" data-idx="3" onclick="showImage(3)"><img src="images/NC_lyrics.png" alt=""></button>
+      <button class="gallery-thumb" data-idx="4" onclick="showImage(4)"><img src="images/NC_print_preview.png" alt=""></button>
+      <button class="gallery-thumb" data-idx="5" onclick="showImage(5)"><img src="images/NC_settings.png" alt=""></button>
     </div>
   </div>
 
@@ -259,7 +260,7 @@ const T = {
     'l-f4-h':'Audio-Import','l-f4-p':'Song reinziehen, BPM wird erkannt, Akkordvorschläge kommen automatisch — bestätigen oder korrigieren, fertig.',
     'l-f5-h':'PDF-Export','l-f5-p':'Druckfertige Charts, so viele Seiten wie nötig, mit wählbarem Layout und Kopfbereich.',
     'l-f6-h':'Kompatibel','l-f6-p':'MusicXML Import und Export. iReal Pro Nutzer exportieren ihre Charts als MusicXML — der Import in NoteChart funktioniert direkt.',
-    'l-gal-cap-0':'Arbeitsoberfläche','l-gal-cap-1':'Melodie-Notation pro Takt','l-gal-cap-2':'Lyrics direkt unter den Takten','l-gal-cap-3':'Druckvorschau — mehrseitig','l-gal-cap-4':'Einstellungen',
+    'l-gal-cap-0':'Arbeitsoberfläche','l-gal-cap-1':'Melodie-Notation pro Takt','l-gal-cap-2':'Per-Takt-Einstellungen','l-gal-cap-3':'Lyrics direkt unter den Takten','l-gal-cap-4':'Druckvorschau — mehrseitig','l-gal-cap-5':'Einstellungen',
     'l-s2-label':'Im Detail','l-s2-h2':'Was NoteChart kann',
     'l-u1-h':'Akkord-Syntax vollständig','l-u1-p':'Von Cm über Cmaj7, Cdim7 und C7b9 bis zu Slash-Chords wie Bb/G — alle gängigen Schreibweisen werden erkannt und korrekt dargestellt.',
     'l-u2-h':'Strukturelemente','l-u2-p':'Wiederholungszeichen, Endungsklammern, Segno, Coda, Fine, Da Capo, N.C. — alles was ein echtes Chart braucht, ist vorhanden.',
@@ -287,7 +288,7 @@ const T = {
     'l-f4-h':'Audio import','l-f4-p':'Drop a song in, BPM gets detected, chord suggestions appear automatically — confirm or correct, done.',
     'l-f5-h':'PDF export','l-f5-p':'Print-ready charts, as many pages as needed, with selectable layout and header fields.',
     'l-f6-h':'Compatible','l-f6-p':'MusicXML import and export. iReal Pro users can export their charts as MusicXML — import into NoteChart works directly.',
-    'l-gal-cap-0':'Workspace','l-gal-cap-1':'Per-bar melody notation','l-gal-cap-2':'Lyrics right under the bars','l-gal-cap-3':'Print preview — multi-page','l-gal-cap-4':'Settings',
+    'l-gal-cap-0':'Workspace','l-gal-cap-1':'Per-bar melody notation','l-gal-cap-2':'Per-bar settings','l-gal-cap-3':'Lyrics right under the bars','l-gal-cap-4':'Print preview — multi-page','l-gal-cap-5':'Settings',
     'l-s2-label':'Details','l-s2-h2':'What NoteChart can do',
     'l-u1-h':'Full chord syntax','l-u1-p':'From Cm to Cmaj7, Cdim7 and C7b9, all the way to slash chords like Bb/G — all common notations are recognized and displayed correctly.',
     'l-u2-h':'Structure elements','l-u2-p':'Repeat signs, endings, segno, coda, fine, da capo, N.C. — everything a real chart needs is there.',
@@ -315,7 +316,7 @@ const T = {
     'l-f4-h':'Importar audio','l-f4-p':'Arrastra una canción, el BPM se detecta, los acordes se sugieren automáticamente — confirma o corrige, listo.',
     'l-f5-h':'Exportar PDF','l-f5-p':'Charts listos para imprimir, tantas páginas como necesites, con diseño y encabezado configurables.',
     'l-f6-h':'Compatible','l-f6-p':'Importación y exportación MusicXML. Los usuarios de iReal Pro pueden exportar sus charts como MusicXML — la importación en NoteChart funciona directamente.',
-    'l-gal-cap-0':'Interfaz de trabajo','l-gal-cap-1':'Notación de melodía por compás','l-gal-cap-2':'Letra debajo de los compases','l-gal-cap-3':'Vista previa de impresión — varias páginas','l-gal-cap-4':'Ajustes',
+    'l-gal-cap-0':'Interfaz de trabajo','l-gal-cap-1':'Notación de melodía por compás','l-gal-cap-2':'Ajustes por compás','l-gal-cap-3':'Letra debajo de los compases','l-gal-cap-4':'Vista previa de impresión — varias páginas','l-gal-cap-5':'Ajustes',
     'l-s2-label':'En detalle','l-s2-h2':'Qué puede hacer NoteChart',
     'l-u1-h':'Sintaxis de acordes completa','l-u1-p':'Desde Cm hasta Cmaj7, Cdim7 y C7b9, pasando por slash chords como Bb/G — todas las notaciones habituales se reconocen y se muestran correctamente.',
     'l-u2-h':'Elementos estructurales','l-u2-p':'Signos de repetición, casillas, segno, coda, fine, da capo, N.C. — todo lo que un chart real necesita está ahí.',
@@ -328,7 +329,7 @@ const T = {
     'l-cta-h':'Lista de espera Beta','l-cta-p':'NoteChart está aún en desarrollo. Apúntate ahora para ser de los primeros en probarlo.','l-cta2':'Apuntarse ahora',
   }
 };
-const GALLERY_IMAGES=['images/NC_working_area.png','images/NC_notes.png','images/NC_lyrics.png','images/NC_print_preview.png','images/NC_settings.png'];
+const GALLERY_IMAGES=['images/NC_working_area.png','images/NC_notes.png','images/NC_rmk_single_bar.png','images/NC_lyrics.png','images/NC_print_preview.png','images/NC_settings.png'];
 let currentImgIdx=0;
 function showImage(idx){
   currentImgIdx=idx;
@@ -349,8 +350,8 @@ function closeLightbox(){document.getElementById('lightbox').classList.remove('o
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape')closeLightbox();
   if(document.getElementById('lightbox').classList.contains('open')){
-    if(e.key==='ArrowRight'){showImage((currentImgIdx+1)%5);openLightbox();}
-    if(e.key==='ArrowLeft'){showImage((currentImgIdx+4)%5);openLightbox();}
+    if(e.key==='ArrowRight'){showImage((currentImgIdx+1)%6);openLightbox();}
+    if(e.key==='ArrowLeft'){showImage((currentImgIdx+5)%6);openLightbox();}
   }
 });
 function setLang(lang){
