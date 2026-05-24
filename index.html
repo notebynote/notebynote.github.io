@@ -73,15 +73,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
   <div class="nav-links">
     <a class="nav-link active" href="index.html" id="nav-home">Home</a>
     <div class="nav-item dropdown">
+      <a class="nav-link" href="notechart.html" id="nav-nc">NoteChart<span class="nav-badge">Beta</span></a>
+      <div class="nav-submenu">
+        <a class="nav-link" href="notechart.html" id="nav-nc-info">NoteChart</a>
+        <a class="nav-link" href="ueber-mich.html" id="nav-nc-why">Warum NoteChart</a>
+      </div>
+    </div>
+    <div class="nav-item dropdown">
       <a class="nav-link" href="dronepad.html" id="nav-dp">Drone Pad</a>
       <div class="nav-submenu">
         <a class="nav-link" href="dronepad.html" id="nav-dp-info">Info</a>
         <a class="nav-link" href="dronepad-app.html" id="nav-dp-app">App starten</a>
       </div>
     </div>
-    <a class="nav-link" href="notechart.html">NoteChart<span class="nav-badge">Beta</span></a>
     <a class="nav-link" href="patchdirector.html">PatchDirector</a>
-    <a class="nav-link" href="ueber-mich.html" id="nav-about">Über</a>
     <a class="nav-link" href="privacy.html" id="nav-privacy">Privacy</a>
   </div>
 </nav>
@@ -169,7 +174,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 <script>
 const T = {
   de: {
-    'nav-home':'Home','nav-about':'Über','nav-privacy':'Privacy','nav-dp-info':'Info','nav-dp-app':'App starten',
+    'nav-home':'Home','nav-privacy':'Privacy','nav-nc-info':'NoteChart','nav-nc-why':'Warum NoteChart','nav-dp-info':'Info','nav-dp-app':'App starten',
     'l-role':'Thomas Haake · Musiker und Entwickler für Musik-Tools',
     'l-bio':'Live-Bassist und Software-Entwickler für Tools, die uns Musiker*innen das Leben leichter machen — vom Üben der Intonation mit <a href="dronepad.html" style="color:#7ab0e8;text-decoration:none">Drone Pad</a>, über das Sound-Archiv <a href="patchdirector.html" style="color:#7ab0e8;text-decoration:none">PatchDirector</a>, bis zum revolutionären, neuen <a href="notechart.html" style="color:#7ab0e8;text-decoration:none">NoteChart</a> — Beta bald erhältlich.',
     'l-projects':'Projekte',
@@ -181,7 +186,7 @@ const T = {
     'l-pd-desc':'Sound-Archiv und Preset-Manager für virtuelle Instrumente und Hardware-Synthesizer. Sounds aufnehmen, taggen, in Gruppen organisieren und geschützt teilen. Läuft stabil auf Windows und macOS — Weiterentwicklung pausiert, Neuentwicklung wird geprüft.',
   },
   en: {
-    'nav-home':'Home','nav-about':'About','nav-privacy':'Privacy','nav-dp-info':'Info','nav-dp-app':'Launch app',
+    'nav-home':'Home','nav-privacy':'Privacy','nav-nc-info':'NoteChart','nav-nc-why':'Why NoteChart','nav-dp-info':'Info','nav-dp-app':'Launch app',
     'l-role':'Thomas Haake · Musician and Developer of Music Tools',
     'l-bio':'Live bassist and software developer building tools that make life easier for musicians — from intonation practice with <a href="dronepad.html" style="color:#7ab0e8;text-decoration:none">Drone Pad</a>, to the sound archive <a href="patchdirector.html" style="color:#7ab0e8;text-decoration:none">PatchDirector</a>, to the all-new <a href="notechart.html" style="color:#7ab0e8;text-decoration:none">NoteChart</a> — beta coming soon.',
     'l-projects':'Projects',
@@ -193,7 +198,7 @@ const T = {
     'l-pd-desc':'Sound archive and preset manager for virtual instruments and hardware synthesizers. Record, tag, organize and share sounds securely. Runs stable on Windows and macOS — development on hold, a rebuild is under review.',
   },
   es: {
-    'nav-home':'Inicio','nav-about':'Acerca','nav-privacy':'Privacidad','nav-dp-info':'Info','nav-dp-app':'Abrir app',
+    'nav-home':'Inicio','nav-privacy':'Privacidad','nav-nc-info':'NoteChart','nav-nc-why':'Por qué NoteChart','nav-dp-info':'Info','nav-dp-app':'Abrir app',
     'l-role':'Thomas Haake · Músico y Desarrollador de Herramientas Musicales',
     'l-bio':'Bajista en directo y desarrollador de software — herramientas que hacen la vida más fácil a los músicos: desde el entrenamiento de afinación con <a href="dronepad.html" style="color:#7ab0e8;text-decoration:none">Drone Pad</a>, pasando por el archivo de sonidos <a href="patchdirector.html" style="color:#7ab0e8;text-decoration:none">PatchDirector</a>, hasta el revolucionario <a href="notechart.html" style="color:#7ab0e8;text-decoration:none">NoteChart</a> — beta próximamente.',
     'l-projects':'Proyectos',
@@ -221,16 +226,21 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 <script>
 document.addEventListener('DOMContentLoaded',()=>{
-  const dd=document.querySelector('.nav-item.dropdown');
-  if(!dd)return;
-  const trigger=dd.querySelector('.nav-link');
-  const menu=dd.querySelector('.nav-submenu');
-  trigger.addEventListener('click',e=>{
-    e.preventDefault();
-    menu.classList.toggle('open');
+  const dds=document.querySelectorAll('.nav-item.dropdown');
+  if(!dds.length)return;
+  dds.forEach(dd=>{
+    const trigger=dd.querySelector('.nav-link');
+    const menu=dd.querySelector('.nav-submenu');
+    trigger.addEventListener('click',e=>{
+      e.preventDefault();
+      dds.forEach(other=>{if(other!==dd)other.querySelector('.nav-submenu').classList.remove('open');});
+      menu.classList.toggle('open');
+    });
   });
   document.addEventListener('click',e=>{
-    if(!dd.contains(e.target))menu.classList.remove('open');
+    dds.forEach(dd=>{
+      if(!dd.contains(e.target))dd.querySelector('.nav-submenu').classList.remove('open');
+    });
   });
 });
 </script>

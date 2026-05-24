@@ -56,15 +56,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
   <div class="nav-links">
     <a class="nav-link" href="index.html" id="nav-home">Home</a>
     <div class="nav-item dropdown">
+      <a class="nav-link active" href="notechart.html" id="nav-nc">NoteChart<span class="nav-badge">Beta</span></a>
+      <div class="nav-submenu">
+        <a class="nav-link" href="notechart.html" id="nav-nc-info">NoteChart</a>
+        <a class="nav-link" href="ueber-mich.html" id="nav-nc-why">Warum NoteChart</a>
+      </div>
+    </div>
+    <div class="nav-item dropdown">
       <a class="nav-link" href="dronepad.html" id="nav-dp">Drone Pad</a>
       <div class="nav-submenu">
         <a class="nav-link" href="dronepad.html" id="nav-dp-info">Info</a>
         <a class="nav-link" href="dronepad-app.html" id="nav-dp-app">App starten</a>
       </div>
     </div>
-    <a class="nav-link" href="notechart.html">NoteChart<span class="nav-badge">Beta</span></a>
     <a class="nav-link" href="patchdirector.html">PatchDirector</a>
-    <a class="nav-link active" href="ueber-mich.html" id="nav-about">Über</a>
     <a class="nav-link" href="privacy.html" id="nav-privacy">Privacy</a>
   </div>
 </nav>
@@ -100,7 +105,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 <script>
 const T = {
   de:{
-    'nav-home':'Home','nav-about':'Über','nav-privacy':'Privacy','nav-dp':'Drone Pad','nav-dp-info':'Info','nav-dp-app':'App starten',
+    'nav-home':'Home','nav-privacy':'Privacy','nav-nc':'NoteChart','nav-nc-info':'NoteChart','nav-nc-why':'Warum NoteChart','nav-dp':'Drone Pad','nav-dp-info':'Info','nav-dp-app':'App starten',
     'l-title':'Vom Musiker für Musiker — haakemusic.com',
     'l-h1':'Vom Musiker für Musiker.',
     'l-credo':'Jede kreative Arbeit zeigt einen Teil unserer Persönlichkeit, unseres Wesens. Unsere Ideen werden Realität. NoteChart ist ein Teil meiner Welt — willkommen.',
@@ -114,7 +119,7 @@ const T = {
     'l-p10':'Endlich gibt\'s das. Nicht weil jemand anders es gebaut hat — sondern weil ich es selber kann, mit Hilfe einer Technologie, die mir vor zwei Jahren noch wie Science-Fiction vorgekommen wäre. Im Juli 2026 kommt die Beta für Mac, Windows folgt sicher. Ich lade dich ein, die Beta-App zu testen — <a href="notechart.html">trage dich hier ein</a>.',
   },
   en:{
-    'nav-home':'Home','nav-about':'About','nav-privacy':'Privacy','nav-dp':'Drone Pad','nav-dp-info':'Info','nav-dp-app':'Launch app',
+    'nav-home':'Home','nav-privacy':'Privacy','nav-nc':'NoteChart','nav-nc-info':'NoteChart','nav-nc-why':'Why NoteChart','nav-dp':'Drone Pad','nav-dp-info':'Info','nav-dp-app':'Launch app',
     'l-title':'From a musician, for musicians — haakemusic.com',
     'l-h1':'From a musician, for musicians.',
     'l-credo':'Every piece of creative work shows a part of our personality, of our nature. Our ideas become real. NoteChart is a part of my world — welcome.',
@@ -128,7 +133,7 @@ const T = {
     'l-p10':'Finally it exists. Not because someone else built it — but because I could build it myself, with the help of a technology that just two years ago would have felt like science fiction to me. The beta for Mac arrives in July 2026, Windows will follow for sure. I\'d like to invite you to test the beta — <a href="notechart.html">sign up here</a>.',
   },
   es:{
-    'nav-home':'Inicio','nav-about':'Acerca','nav-privacy':'Privacidad','nav-dp':'Drone Pad','nav-dp-info':'Info','nav-dp-app':'Abrir app',
+    'nav-home':'Inicio','nav-privacy':'Privacidad','nav-nc':'NoteChart','nav-nc-info':'NoteChart','nav-nc-why':'Por qué NoteChart','nav-dp':'Drone Pad','nav-dp-info':'Info','nav-dp-app':'Abrir app',
     'l-title':'De músico para músicos — haakemusic.com',
     'l-h1':'De músico para músicos.',
     'l-credo':'Cada trabajo creativo muestra una parte de nuestra personalidad, de nuestra esencia. Nuestras ideas se hacen realidad. NoteChart es una parte de mi mundo — bienvenida, bienvenido.',
@@ -154,13 +159,19 @@ document.addEventListener('DOMContentLoaded',()=>{
   try{const s=localStorage.getItem('haakemusic.lang');if(s==='de'||s==='en'||s==='es')stored=s;}catch(e){}
   setLang(stored);
 
-  const dd=document.querySelector('.nav-item.dropdown');
-  if(dd){
+  const dds=document.querySelectorAll('.nav-item.dropdown');
+  dds.forEach(dd=>{
     const trigger=dd.querySelector('.nav-link');
     const menu=dd.querySelector('.nav-submenu');
-    trigger.addEventListener('click',e=>{e.preventDefault();menu.classList.toggle('open');});
-    document.addEventListener('click',e=>{if(!dd.contains(e.target))menu.classList.remove('open');});
-  }
+    trigger.addEventListener('click',e=>{
+      e.preventDefault();
+      dds.forEach(other=>{if(other!==dd)other.querySelector('.nav-submenu').classList.remove('open');});
+      menu.classList.toggle('open');
+    });
+  });
+  document.addEventListener('click',e=>{
+    dds.forEach(dd=>{if(!dd.contains(e.target))dd.querySelector('.nav-submenu').classList.remove('open');});
+  });
 });
 </script>
 </body>

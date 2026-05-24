@@ -185,15 +185,20 @@ canvas.viz{width:100%;height:72px;margin-top:6px;display:block}
   <div class="nav-links">
     <a class="nav-link" href="index.html" id="nav-home">Home</a>
     <div class="nav-item dropdown">
+      <a class="nav-link" href="notechart.html" id="nav-nc">NoteChart<span class="nav-badge">Beta</span></a>
+      <div class="nav-submenu">
+        <a class="nav-link" href="notechart.html" id="nav-nc-info">NoteChart</a>
+        <a class="nav-link" href="ueber-mich.html" id="nav-nc-why">Warum NoteChart</a>
+      </div>
+    </div>
+    <div class="nav-item dropdown">
       <a class="nav-link active" href="dronepad.html" id="nav-dp">Drone Pad</a>
       <div class="nav-submenu">
         <a class="nav-link" href="dronepad.html" id="nav-dp-info">Info</a>
-        <a class="nav-link active" href="dronepad-app.html" id="nav-dp-app">App starten</a>
+        <a class="nav-link" href="dronepad-app.html" id="nav-dp-app">App starten</a>
       </div>
     </div>
-    <a class="nav-link" href="notechart.html">NoteChart<span class="nav-badge">Beta</span></a>
     <a class="nav-link" href="patchdirector.html">PatchDirector</a>
-    <a class="nav-link" href="ueber-mich.html" id="nav-about">Über</a>
     <a class="nav-link" href="privacy.html" id="nav-privacy">Privacy</a>
   </div>
 </nav>
@@ -202,9 +207,9 @@ canvas.viz{width:100%;height:72px;margin-top:6px;display:block}
   function applyLang(lang){
     document.documentElement.lang=lang;
     const M={
-      de:{'nav-home':'Home','nav-about':'Über','nav-privacy':'Privacy','nav-dp':'Drone Pad','nav-dp-info':'Info','nav-dp-app':'App starten'},
-      en:{'nav-home':'Home','nav-about':'About','nav-privacy':'Privacy','nav-dp':'Drone Pad','nav-dp-info':'Info','nav-dp-app':'Launch app'},
-      es:{'nav-home':'Inicio','nav-about':'Acerca','nav-privacy':'Privacidad','nav-dp':'Drone Pad','nav-dp-info':'Info','nav-dp-app':'Abrir app'}
+      de:{'nav-home':'Home','nav-privacy':'Privacy','nav-nc':'NoteChart','nav-nc-info':'NoteChart','nav-nc-why':'Warum NoteChart','nav-dp':'Drone Pad','nav-dp-info':'Info','nav-dp-app':'App starten'},
+      en:{'nav-home':'Home','nav-privacy':'Privacy','nav-nc':'NoteChart','nav-nc-info':'NoteChart','nav-nc-why':'Why NoteChart','nav-dp':'Drone Pad','nav-dp-info':'Info','nav-dp-app':'Launch app'},
+      es:{'nav-home':'Inicio','nav-privacy':'Privacidad','nav-nc':'NoteChart','nav-nc-info':'NoteChart','nav-nc-why':'Por qué NoteChart','nav-dp':'Drone Pad','nav-dp-info':'Info','nav-dp-app':'Abrir app'}
     };
     const t=M[lang]||M.de;
     for(const[id,val]of Object.entries(t)){const el=document.getElementById(id);if(el)el.textContent=val;}
@@ -212,13 +217,19 @@ canvas.viz{width:100%;height:72px;margin-top:6px;display:block}
   let stored='en';
   try{const s=localStorage.getItem('haakemusic.lang');if(s==='de'||s==='en'||s==='es')stored=s;}catch(e){}
   applyLang(stored);
-  const dd=document.querySelector('.nav-item.dropdown');
-  if(dd){
+  const dds=document.querySelectorAll('.nav-item.dropdown');
+  dds.forEach(dd=>{
     const trigger=dd.querySelector('.nav-link');
     const menu=dd.querySelector('.nav-submenu');
-    trigger.addEventListener('click',e=>{e.preventDefault();menu.classList.toggle('open');});
-    document.addEventListener('click',e=>{if(!dd.contains(e.target))menu.classList.remove('open');});
-  }
+    trigger.addEventListener('click',e=>{
+      e.preventDefault();
+      dds.forEach(other=>{if(other!==dd)other.querySelector('.nav-submenu').classList.remove('open');});
+      menu.classList.toggle('open');
+    });
+  });
+  document.addEventListener('click',e=>{
+    dds.forEach(dd=>{if(!dd.contains(e.target))dd.querySelector('.nav-submenu').classList.remove('open');});
+  });
 })();
 </script>
 <div class="app">

@@ -132,15 +132,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
   <div class="nav-links">
     <a class="nav-link" href="index.html" id="nav-home">Home</a>
     <div class="nav-item dropdown">
+      <a class="nav-link" href="notechart.html" id="nav-nc">NoteChart<span class="nav-badge">Beta</span></a>
+      <div class="nav-submenu">
+        <a class="nav-link" href="notechart.html" id="nav-nc-info">NoteChart</a>
+        <a class="nav-link" href="ueber-mich.html" id="nav-nc-why">Warum NoteChart</a>
+      </div>
+    </div>
+    <div class="nav-item dropdown">
       <a class="nav-link active" href="dronepad.html" id="nav-dp">Drone Pad</a>
       <div class="nav-submenu">
-        <a class="nav-link active" href="dronepad.html" id="nav-dp-info">Info</a>
+        <a class="nav-link" href="dronepad.html" id="nav-dp-info">Info</a>
         <a class="nav-link" href="dronepad-app.html" id="nav-dp-app">App starten</a>
       </div>
     </div>
-    <a class="nav-link" href="notechart.html">NoteChart<span class="nav-badge">Beta</span></a>
     <a class="nav-link" href="patchdirector.html">PatchDirector</a>
-    <a class="nav-link" href="ueber-mich.html" id="nav-about">Über</a>
     <a class="nav-link" href="privacy.html" id="nav-privacy">Privacy</a>
   </div>
 </nav>
@@ -753,7 +758,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 <script>
 const T = {
   de:{
-    'nav-home':'Home','nav-about':'Über','nav-privacy':'Privacy','nav-dp-info':'Info','nav-dp-app':'App starten',
+    'nav-home':'Home','nav-privacy':'Privacy','nav-nc-info':'NoteChart','nav-nc-why':'Warum NoteChart','nav-dp-info':'Info','nav-dp-app':'App starten',
     'l-h1':'Dein persönlicher<br>Intonations-Assistent',
     'l-sub':'Ein stimmreiner Drohnen-Synthesizer für Musiker, die auf genaue Intonation angewiesen sind — und für alle, die Klang als Meditation erleben.',
     'l-cta1-label':'Im Browser öffnen','l-cta2':'Kontakt','l-cta-mac-label':'Mac App Store','l-cta-ios-label':'iOS App im App Store',
@@ -811,7 +816,7 @@ const T = {
     suc:'✓ &nbsp;Danke — deine Nachricht wurde gesendet. Wir melden uns bald!'
   },
   en:{
-    'nav-home':'Home','nav-about':'About','nav-privacy':'Privacy','nav-dp-info':'Info','nav-dp-app':'Launch app',
+    'nav-home':'Home','nav-privacy':'Privacy','nav-nc-info':'NoteChart','nav-nc-why':'Why NoteChart','nav-dp-info':'Info','nav-dp-app':'Launch app',
     'l-h1':'Your Personal<br>Intonation Assistant',
     'l-sub':'A pitch-pure drone synthesizer for musicians who depend on precise intonation — and for everyone who experiences sound as meditation.',
     'l-cta1-label':'Open App in Browser','l-cta2':'Contact','l-cta-mac-label':'Mac App Store','l-cta-ios-label':'iOS App on the App Store',
@@ -869,7 +874,7 @@ const T = {
     suc:'✓ &nbsp;Thank you — your message has been sent. We\'ll be in touch soon!'
   },
   es:{
-    'nav-home':'Inicio','nav-about':'Acerca','nav-privacy':'Privacidad','nav-dp-info':'Info','nav-dp-app':'Abrir app',
+    'nav-home':'Inicio','nav-privacy':'Privacidad','nav-nc-info':'NoteChart','nav-nc-why':'Por qué NoteChart','nav-dp-info':'Info','nav-dp-app':'Abrir app',
     'l-h1':'Tu asistente personal<br>de afinación',
     'l-sub':'Un sintetizador de drones puro en afinación para músicos que dependen de una entonación precisa — y para todos los que experimentan el sonido como meditación.',
     'l-cta1-label':'Abrir en el navegador','l-cta2':'Contacto','l-cta-mac-label':'Mac App Store','l-cta-ios-label':'App iOS en el App Store',
@@ -1039,16 +1044,21 @@ function submitContact(){
 
 <script>
 document.addEventListener('DOMContentLoaded',()=>{
-  const dd=document.querySelector('.nav-item.dropdown');
-  if(!dd)return;
-  const trigger=dd.querySelector('.nav-link');
-  const menu=dd.querySelector('.nav-submenu');
-  trigger.addEventListener('click',e=>{
-    e.preventDefault();
-    menu.classList.toggle('open');
+  const dds=document.querySelectorAll('.nav-item.dropdown');
+  if(!dds.length)return;
+  dds.forEach(dd=>{
+    const trigger=dd.querySelector('.nav-link');
+    const menu=dd.querySelector('.nav-submenu');
+    trigger.addEventListener('click',e=>{
+      e.preventDefault();
+      dds.forEach(other=>{if(other!==dd)other.querySelector('.nav-submenu').classList.remove('open');});
+      menu.classList.toggle('open');
+    });
   });
   document.addEventListener('click',e=>{
-    if(!dd.contains(e.target))menu.classList.remove('open');
+    dds.forEach(dd=>{
+      if(!dd.contains(e.target))dd.querySelector('.nav-submenu').classList.remove('open');
+    });
   });
 });
 </script>
