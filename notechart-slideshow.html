@@ -128,6 +128,24 @@
       margin: 1vh 0;
     }
     .placeholder b { color: var(--text-dim); }
+    .shot {
+      max-width: 70vw;
+      max-height: 55vh;
+      margin: 1vh 0;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,0.2);
+      object-fit: contain;
+      display: block;
+    }
+    .shot-row {
+      display: flex;
+      gap: 1.5vw;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin: 1vh 0;
+    }
+    .shot-row .shot { margin: 0; max-height: 45vh; }
     .two-col {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -226,9 +244,9 @@
     Nicht im Paket: Audio-Playback, MIDI, MusicXML. Die Beta macht ein
     gedrucktes Sheet, sonst nichts.
   </p>
-  <div class="placeholder">
-    <b>Screenshot:</b> NoteChart-Hauptfenster mit fertigem Beispiel-Sheet
-  </div>
+  <img class="shot" src="images/quicktour-overview.png"
+       alt="NoteChart-Hauptfenster mit Beispiel-Sheet">
+
 </section>
 
 <!-- ===== 3. KAPITEL: SCHNELL ANFANGEN ===== -->
@@ -271,8 +289,11 @@
             Zoomen.</li>
       </ul>
     </div>
-    <div class="placeholder" style="margin:0;">
-      <b>Screenshot:</b> Top-Toolbar + Song-Toolbar beschriftet
+    <div class="shot-row">
+      <img class="shot" src="images/quicktour-top-toolbar.png"
+           alt="Obere Toolbar">
+      <img class="shot" src="images/quicktour-song-toolbar.png"
+           alt="Linke Song-Toolbar">
     </div>
   </div>
 </section>
@@ -305,9 +326,9 @@
     Mit dem <kbd>♩</kbd>-Knopf oben blendest du eine Rhythmus-Linie
     ein, die dem Balken folgt.
   </p>
-  <div class="placeholder">
-    <b>Screenshot:</b> Sheet in Modus A mit 4 Akkord-Balken
-  </div>
+  <img class="shot" src="images/slideshow-modus-a.png"
+       alt="Sheet in Modus A mit Akkord-Balken">
+
 </section>
 
 <!-- ===== 8. MODUS B ===== -->
@@ -321,9 +342,9 @@
     Optional zeichnet NoteChart automatisch passende Töne aus dem
     Akkord — als Grundton oder als Dreiklang (experimentell).
   </p>
-  <div class="placeholder">
-    <b>Screenshot:</b> Sheet in Modus B mit Notenlinien
-  </div>
+  <img class="shot" src="images/slideshow-modus-b.png"
+       alt="Sheet in Modus B mit 5-Linien-System">
+
 </section>
 
 <!-- ===== 9. KOMPASS ===== -->
@@ -344,9 +365,9 @@
     Triffst du eine bestehende Note, hängt sich der Kompass dran —
     Pfeile ändern dann die Note, statt eine neue zu setzen.
   </p>
-  <div class="placeholder">
-    <b>Screenshot:</b> Kompass-Cursor mit Preview-Note
-  </div>
+  <img class="shot" src="images/quicktour-kompass.png"
+       alt="Kompass-Cursor mit Preview-Note im Notensystem">
+
 </section>
 
 <!-- ===== 10. PDF ===== -->
@@ -363,9 +384,10 @@
         Beide Knöpfe sitzen ganz rechts in der Top-Toolbar.
       </p>
     </div>
-    <div class="placeholder" style="margin:0;">
-      <b>Screenshot:</b> Sheet im Edit-Look ↔ Druck-Vorschau
-    </div>
+    <img class="shot" src="images/quicktour-print-vorher-nachher.png"
+         alt="Sheet im Edit-Look links, Druck-Vorschau rechts"
+         style="margin:0;">
+
   </div>
 </section>
 
@@ -551,9 +573,9 @@
     <em>„Manuelle Noten entfernen"</em>, falls du wieder zum
     Akkord-Default zurück willst.
   </p>
-  <div class="placeholder">
-    <b>Screenshot:</b> Takt mit M-Badge oben rechts
-  </div>
+  <img class="shot" src="images/slideshow-m-badge.png"
+       alt="Takt mit M-Badge oben rechts">
+
 </section>
 
 <!-- ===== 20. EINSTELLUNGEN ===== -->
