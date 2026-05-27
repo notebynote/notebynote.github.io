@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <title>NoteChart — Lead Sheet in ein paar Minuten</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    :root {
+      --bg:       rgb(41, 42, 51);
+      --panel:    rgb(69, 71, 80);
+      --bar:      rgb(80, 88, 112);
+      --sheet:    rgb(245, 245, 245);
+      --text:     #f1f1f4;
+      --text-dim: #a8aab5;
+      --text-mut: #777a85;
+      --accent:   rgb(100, 162, 255);
+      --accent-l: rgba(100, 162, 255, 0.22);
+      --danger:   #e05050;
+      --good:     #6dce7a;
+      --border:   rgba(255,255,255,0.12);
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      width: 100%; height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      overflow: hidden;
+    }
+    .slide {
+      position: absolute; inset: 0;
+      display: none;
+      padding: 6vh 8vw 8vh 8vw;
+      flex-direction: column;
+      justify-content: center;
+      animation: fadein 0.25s ease;
+    }
+    .slide.active { display: flex; }
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(4px); }
+      to   { opacity: 1; transform: none; }
+    }
+    h1 {
+      font-size: 4.6vw;
+      font-weight: 600;
+      margin: 0 0 1.5vh 0;
+      line-height: 1.05;
+    }
+    h2 {
+      font-size: 2.6vw;
+      font-weight: 600;
+      margin: 0 0 3vh 0;
+      color: var(--accent);
+      line-height: 1.15;
+    }
+    h3 {
+      font-size: 1.6vw;
+      font-weight: 600;
+      margin: 0 0 1.2vh 0;
+      color: var(--text);
+    }
+    p, li {
+      font-size: 1.55vw;
+      line-height: 1.45;
+      color: var(--text-dim);
+      margin: 0.6vh 0;
+    }
+    ul { padding-left: 1.6vw; margin: 0; }
+    ul li { margin: 0.9vh 0; }
+    strong { color: var(--text); font-weight: 600; }
+    em { font-style: normal; color: var(--accent); font-weight: 500; }
+    code, kbd {
+      font-family: "SF Mono", Menlo, Consolas, monospace;
+      font-size: 0.9em;
+    }
+    kbd {
+      display: inline-block;
+      padding: 0.2em 0.55em;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      border-radius: 4px;
+      color: var(--text);
+      min-width: 1.6em;
+      text-align: center;
+      line-height: 1.2;
+    }
+    code {
+      padding: 0.1em 0.4em;
+      background: rgba(255,255,255,0.06);
+      border-radius: 3px;
+      color: var(--accent);
+    }
+    table {
+      border-collapse: collapse;
+      margin: 1.6vh 0;
+      font-size: 1.4vw;
+    }
+    td, th {
+      padding: 0.7vh 1.2vw;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-dim);
+    }
+    th { color: var(--text); font-weight: 600; }
+    td:first-child { color: var(--text); }
+    .lead {
+      font-size: 1.9vw;
+      color: var(--text);
+      max-width: 50em;
+      margin-bottom: 3vh;
+    }
+    .cover {
+      align-items: center; justify-content: center; text-align: center;
+    }
+    .cover h1 { font-size: 7vw; color: var(--accent); margin-bottom: 2vh; }
+    .cover .sub { font-size: 2.2vw; color: var(--text-dim); }
+    .cover .tiny { font-size: 1.1vw; color: var(--text-mut); margin-top: 6vh; }
+    .placeholder {
+      border: 1px dashed var(--border);
+      background: rgba(255,255,255,0.03);
+      padding: 6vh 4vw;
+      text-align: center;
+      border-radius: 8px;
+      color: var(--text-mut);
+      font-size: 1.2vw;
+      max-width: 70vw;
+      margin: 1vh 0;
+    }
+    .placeholder b { color: var(--text-dim); }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4vw;
+      align-items: start;
+    }
+    .three-col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5vw;
+    }
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2.5vh 1.8vw;
+      background: rgba(255,255,255,0.02);
+    }
+    .card h3 { color: var(--accent); margin-top: 0; }
+    .nav {
+      position: fixed;
+      bottom: 1.8vh; right: 2vw;
+      font-size: 1.1vw;
+      color: var(--text-mut);
+      letter-spacing: 0.04em;
+      user-select: none;
+    }
+    .nav .counter { color: var(--text-dim); }
+    .hint {
+      position: fixed;
+      bottom: 1.8vh; left: 2vw;
+      font-size: 0.95vw;
+      color: var(--text-mut);
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.15em 0.7em;
+      background: var(--accent-l);
+      color: var(--accent);
+      border-radius: 4px;
+      font-size: 0.7em;
+      font-weight: 600;
+      margin-left: 0.5em;
+      vertical-align: middle;
+    }
+    .chapter {
+      align-items: flex-start;
+      justify-content: center;
+    }
+    .chapter h1 {
+      color: var(--text-dim);
+      font-weight: 400;
+      font-size: 2vw;
+      margin: 0;
+    }
+    .chapter h2 {
+      font-size: 5vw;
+      color: var(--text);
+      margin: 1.5vh 0 0 0;
+    }
+    .chapter .pre {
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      font-size: 1.2vw;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 1vh;
+    }
+    /* Print: alle Slides untereinander */
+    @media print {
+      .slide {
+        position: relative; display: flex !important;
+        page-break-after: always;
+        height: 100vh;
+      }
+      .nav, .hint { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== 1. COVER ===== -->
+<section class="slide cover active">
+  <h1>NoteChart</h1>
+  <div class="sub">Lead Sheets schreiben, ohne Schnickschnack.</div>
+  <div class="tiny">Beta v1.0 · macOS · Pfeiltasten zum Blättern</div>
+</section>
+
+<!-- ===== 2. WORUM GEHT'S? ===== -->
+<section class="slide">
+  <h2>Worum geht's hier?</h2>
+  <p class="lead">
+    Du baust ein <strong>Lead Sheet</strong> — Akkorde, ein bisschen Form,
+    auf Wunsch eine grobe Melodie. Drucken, einstecken, spielen.
+  </p>
+  <p>
+    Nicht im Paket: Audio-Playback, MIDI, MusicXML. Die Beta macht ein
+    gedrucktes Sheet, sonst nichts.
+  </p>
+  <div class="placeholder">
+    <b>Screenshot:</b> NoteChart-Hauptfenster mit fertigem Beispiel-Sheet
+  </div>
+</section>
+
+<!-- ===== 3. KAPITEL: SCHNELL ANFANGEN ===== -->
+<section class="slide chapter">
+  <div class="pre">Teil 1</div>
+  <h1>Quick-Tour</h1>
+  <h2>Dein erstes Sheet in zwei Minuten.</h2>
+</section>
+
+<!-- ===== 4. 5-SCHRITTE ===== -->
+<section class="slide">
+  <h2>So baust du ein Sheet</h2>
+  <ol style="font-size:1.6vw; line-height:1.6; padding-left:1.4vw;">
+    <li><strong>App starten.</strong> Ein leeres Blatt liegt da.</li>
+    <li><strong>Titel setzen</strong> — oben auf „Unbenannt" klicken,
+        Titel, Tempo, Tonart, Taktart eintippen, Fenster zu.</li>
+    <li><strong>Erster Akkord</strong> — klick ins Blatt und zieh
+        einen Balken auf. <code>Cmaj7</code> tippen, <kbd>Enter</kbd>.</li>
+    <li><strong>Weiter mit <kbd>Tab</kbd></strong> — gleich langer
+        Balken, nächster Akkord. 4 Takte, 12 Takte, egal.</li>
+    <li><strong>Speichern</strong> mit <kbd>⌘S</kbd>.</li>
+  </ol>
+  <p style="margin-top:3vh;">
+    <em>Klassiker:</em> <code>C</code> · <code>G</code> ·
+    <code>Am</code> · <code>F</code> — vier Tab-Drücke, fertig.
+  </p>
+</section>
+
+<!-- ===== 5. WO IST WAS ===== -->
+<section class="slide">
+  <h2>Wo ist was?</h2>
+  <div class="two-col">
+    <div>
+      <ul>
+        <li><strong>Oben</strong> — alles Globale: Modus, Zoom,
+            Raster, Tempo, PDF.</li>
+        <li><strong>Links</strong> — deine Werkzeuge: Lyrics,
+            Noten, Wdh., Section, Volta, Da Capo …</li>
+        <li><strong>Mitte</strong> — dein Blatt. Mausrad zum
+            Zoomen.</li>
+      </ul>
+    </div>
+    <div class="placeholder" style="margin:0;">
+      <b>Screenshot:</b> Top-Toolbar + Song-Toolbar beschriftet
+    </div>
+  </div>
+</section>
+
+<!-- ===== 6. ZEHN TASTEN ===== -->
+<section class="slide">
+  <h2>Die zehn Tasten, die du brauchst</h2>
+  <table>
+    <tr><td><kbd>Tab</kbd></td><td>nächster Akkord-Balken</td></tr>
+    <tr><td><kbd>Enter</kbd></td><td>markieren / bestätigen</td></tr>
+    <tr><td><kbd>Esc</kbd></td><td>abbrechen</td></tr>
+    <tr><td><kbd>⌘Z</kbd> / <kbd>⇧⌘Z</kbd></td><td>rückgängig / wiederherstellen</td></tr>
+    <tr><td><kbd>Backspace</kbd></td><td>löschen</td></tr>
+    <tr><td><kbd>V</kbd></td><td>Volta</td></tr>
+    <tr><td><kbd>E</kbd></td><td>Section-Label</td></tr>
+    <tr><td><kbd>R</kbd></td><td>Wiederholungs-Strich</td></tr>
+    <tr><td><kbd>T</kbd> / <kbd>S</kbd></td><td>Text / Schere</td></tr>
+    <tr><td><kbd>K</kbd></td><td>Kompass (Noten mit Pfeiltasten)</td></tr>
+  </table>
+</section>
+
+<!-- ===== 7. MODUS A ===== -->
+<section class="slide">
+  <h2>Modus A — schmal und schnell</h2>
+  <p class="lead">
+    Akkord-Balken, kein Notensystem. Sieht schon nach vier Takten
+    aufgeräumt aus. Das ist der Default.
+  </p>
+  <p>
+    Mit dem <kbd>♩</kbd>-Knopf oben blendest du eine Rhythmus-Linie
+    ein, die dem Balken folgt.
+  </p>
+  <div class="placeholder">
+    <b>Screenshot:</b> Sheet in Modus A mit 4 Akkord-Balken
+  </div>
+</section>
+
+<!-- ===== 8. MODUS B ===== -->
+<section class="slide">
+  <h2>Modus B — klassisch mit fünf Linien</h2>
+  <p class="lead">
+    5-Linien-System mit echten Tonhöhen. Oben in der Toolbar von
+    <kbd>A</kbd> auf <kbd>B</kbd> flippen.
+  </p>
+  <p>
+    Optional zeichnet NoteChart automatisch passende Töne aus dem
+    Akkord — als Grundton oder als Dreiklang (experimentell).
+  </p>
+  <div class="placeholder">
+    <b>Screenshot:</b> Sheet in Modus B mit Notenlinien
+  </div>
+</section>
+
+<!-- ===== 9. KOMPASS ===== -->
+<section class="slide">
+  <h2>Kompass — Noten setzen ohne Maus <span class="badge">neu</span></h2>
+  <p class="lead">
+    Drück <kbd>K</kbd> in Modus B. Klick einmal aufs Notensystem —
+    die Preview-Note schwebt da.
+  </p>
+  <ul>
+    <li><kbd>←</kbd> <kbd>→</kbd> verschiebt in der Zeit, Takt für
+        Takt durch</li>
+    <li><kbd>↑</kbd> <kbd>↓</kbd> verschiebt die Tonhöhe</li>
+    <li><kbd>Enter</kbd> setzt die Note, Kompass springt weiter</li>
+    <li><kbd>Esc</kbd> raus</li>
+  </ul>
+  <p>
+    Triffst du eine bestehende Note, hängt sich der Kompass dran —
+    Pfeile ändern dann die Note, statt eine neue zu setzen.
+  </p>
+  <div class="placeholder">
+    <b>Screenshot:</b> Kompass-Cursor mit Preview-Note
+  </div>
+</section>
+
+<!-- ===== 10. PDF ===== -->
+<section class="slide">
+  <h2>PDF rausziehen</h2>
+  <div class="two-col">
+    <div>
+      <ul>
+        <li><strong>◎</strong> schaltet die Druck-Vorschau direkt
+            im Blatt um.</li>
+        <li><strong>↓</strong> speichert das Sheet als PDF.</li>
+      </ul>
+      <p>
+        Beide Knöpfe sitzen ganz rechts in der Top-Toolbar.
+      </p>
+    </div>
+    <div class="placeholder" style="margin:0;">
+      <b>Screenshot:</b> Sheet im Edit-Look ↔ Druck-Vorschau
+    </div>
+  </div>
+</section>
+
+<!-- ===== 11. KAPITEL: VERTIEFT ===== -->
+<section class="slide chapter">
+  <div class="pre">Teil 2</div>
+  <h1>Ein bisschen tiefer</h1>
+  <h2>Akkorde, Form, Noten, Layout.</h2>
+</section>
+
+<!-- ===== 12. AKKORD-SYNTAX ===== -->
+<section class="slide">
+  <h2>Akkord-Syntax</h2>
+  <p class="lead">
+    Reihenfolge: <em>Grundton → b/# → Typ → Zahl → /Basston</em>.
+  </p>
+  <table style="font-size:1.3vw;">
+    <tr><td><code>C</code> · <code>Cm</code> · <code>Bb</code> · <code>F#m</code></td>
+        <td>Dur, Moll, B-Dur, Fis-Moll</td></tr>
+    <tr><td><code>G7</code> · <code>Cmaj7</code> · <code>Cm(maj7)</code></td>
+        <td>Septakkorde</td></tr>
+    <tr><td><code>Csus2</code> · <code>Csus4</code></td>
+        <td>Suspended</td></tr>
+    <tr><td><code>Cdim</code> · <code>Caug</code> · <code>Cm7b5</code></td>
+        <td>Vermindert, übermäßig, halbvermindert</td></tr>
+    <tr><td><code>C7b9</code> · <code>C7#9</code> · <code>C7#5</code></td>
+        <td>Alterationen</td></tr>
+    <tr><td><code>C6/9</code> · <code>Cadd9</code> · <code>Bb/G</code></td>
+        <td>Erweiterungen, Slash-Chord</td></tr>
+    <tr><td><code>N.C.</code></td><td>No Chord</td></tr>
+  </table>
+  <p style="margin-top:2vh; color:var(--text-mut);">
+    Englische Schreibweise, bitte — H / Es / Fis kommen erst später.
+  </p>
+</section>
+
+<!-- ===== 13. BALKEN-OPS ===== -->
+<section class="slide">
+  <h2>Akkord-Balken — mehr Tricks</h2>
+  <div class="three-col">
+    <div class="card">
+      <h3>Resize</h3>
+      <p>Linker oder rechter Rand des Balkens hat eine Drag-Zone.
+         Beim Loslassen snappt's aufs Raster.</p>
+    </div>
+    <div class="card">
+      <h3>Cross-Bar</h3>
+      <p>Ein Balken darf über den Taktstrich gehen. Akkord-Name
+         steht nur im ersten Takt.</p>
+    </div>
+    <div class="card">
+      <h3>Auftakt (A)</h3>
+      <p>Taste <kbd>A</kbd> zyklt einen kleinen Stub des Akkords in
+         den Vortakt — für Synkopen.</p>
+    </div>
+    <div class="card">
+      <h3>Schere (S)</h3>
+      <p>Tool aktivieren, auf einen Balken klicken → wird am
+         Klick-Punkt geteilt.</p>
+    </div>
+    <div class="card">
+      <h3>Rechtsklick</h3>
+      <p>Ausschneiden, Kopieren, Im PDF ausblenden, „Als Textblock
+         (AT)" aussetzen.</p>
+    </div>
+    <div class="card">
+      <h3>Selektieren</h3>
+      <p>Klick = Auswahl. Drag im leeren Bereich = Rubberband.
+         <kbd>Backspace</kbd> löscht.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 14. DARSTELLUNG-POPUP ===== -->
+<section class="slide">
+  <h2>Darstellung-Popup — sechs Varianten</h2>
+  <p class="lead">
+    Auge-Symbol oben in der Song-Toolbar öffnet das Popup.
+  </p>
+  <ol style="columns: 2; column-gap: 4vw; font-size: 1.4vw; line-height: 1.7;">
+    <li>Modus A — ohne Noten</li>
+    <li>Modus A — mit (Rhythmus-)Noten</li>
+    <li>Modus B — ohne Noten</li>
+    <li>Modus B — mit autom. Akkord (Grundton)</li>
+    <li>Modus B — mit autom. Dreiklang <em>(experimentell)</em></li>
+    <li>Slashes <em>(noch nicht in v1)</em></li>
+  </ol>
+  <p>
+    <strong>Pro Takt überschreiben:</strong> Rechtsklick in einen
+    Takt → <em>Darstellung:</em> → gewünschten Modus wählen.
+  </p>
+</section>
+
+<!-- ===== 15. NOTEN IN MODUS B ===== -->
+<section class="slide">
+  <h2>Manuelle Noten in Modus B</h2>
+  <ul style="font-size:1.45vw;">
+    <li><kbd>N</kbd> öffnet die Notenpalette (links Noten/Pause/Triole, rechts Raster).</li>
+    <li>Notenwerte: <kbd>1</kbd> Ganze · <kbd>2</kbd> Halbe ·
+        <kbd>4</kbd> Viertel · <kbd>8</kbd> Achtel ·
+        <kbd>6</kbd> 1/16.</li>
+    <li><kbd>0</kbd> macht aus dem aktiven Wert eine Pause —
+        also <kbd>4</kbd> dann <kbd>0</kbd> = Viertel-Pause.</li>
+    <li><kbd>Shift</kbd>+Ziffer setzt das Raster auf denselben Wert.</li>
+    <li><strong>Hover</strong> zeigt die Vorschau — grün, wenn sie
+        zum Akkord passt.</li>
+    <li><strong>Klick</strong> setzt. <strong>Shift+Klick</strong>
+        = Haltebogen. <strong>Alt+Klick</strong> = löschen.</li>
+  </ul>
+</section>
+
+<!-- ===== 16. TRIOLEN ===== -->
+<section class="slide">
+  <h2>Triolen</h2>
+  <p class="lead">
+    Notenwert wählen, dann <kbd>3</kbd>. Die nächsten drei Klicks
+    gehören zur Triole — die ⌜3⌝-Klammer erscheint automatisch.
+  </p>
+  <table>
+    <tr><th>Aktiver Wert</th><th>+ 3</th><th>Ergebnis</th></tr>
+    <tr><td>Viertel (4)</td><td><kbd>3</kbd></td><td>Viertel-Triole</td></tr>
+    <tr><td>Achtel (8)</td><td><kbd>3</kbd></td><td>Achtel-Triole</td></tr>
+    <tr><td>Sechzehntel (6)</td><td><kbd>3</kbd></td><td>1/16-Triole</td></tr>
+  </table>
+  <p style="color: var(--text-mut);">
+    Esc oder ein neuer Notenwert bricht den Triolen-Modus ab.
+  </p>
+</section>
+
+<!-- ===== 17. FORM-TOOLS ===== -->
+<section class="slide">
+  <h2>Form-Strukturen</h2>
+  <p class="lead">
+    Immer das gleiche Schema: <em>Tool aktivieren → schwebender
+    Cursor → auf Takt klicken → fertig</em>. <kbd>Esc</kbd> bricht
+    ab, gleicher Shortcut nochmal schaltet aus.
+  </p>
+  <table style="font-size:1.35vw;">
+    <tr><th>Tool</th><th>Shortcut</th><th>Wofür</th></tr>
+    <tr><td>Wiederholungen</td><td><kbd>R</kbd></td><td><code>‖:</code> Anfang oder <code>:‖</code> Ende</td></tr>
+    <tr><td>Section-Label</td><td><kbd>E</kbd></td><td>A / B / Intro / Bridge / Chorus …</td></tr>
+    <tr><td>Volta</td><td><kbd>V</kbd></td><td>1. + 2. Endung über zwei Takt-Bereiche</td></tr>
+    <tr><td>Da Capo</td><td><kbd>D</kbd></td><td>D.C. / D.S. / al Fine / al Coda / Fine</td></tr>
+    <tr><td>Segno / Coda</td><td><kbd>G</kbd> / <kbd>C</kbd></td><td>Sprung-Marker</td></tr>
+    <tr><td>No Chord</td><td><kbd>X</kbd></td><td>akkordfreier Takt</td></tr>
+    <tr><td>Strich</td><td><kbd>I</kbd></td><td>Doppel- oder Final-Strich</td></tr>
+  </table>
+</section>
+
+<!-- ===== 18. TEXT + LYRICS ===== -->
+<section class="slide">
+  <h2>Text und Lyrics</h2>
+  <div class="two-col">
+    <div class="card">
+      <h3>Freier Text (T)</h3>
+      <p>
+        Aufs Blatt klicken → Edit-Box. Enter committet,
+        <kbd>⇧</kbd>+Enter ist Zeilenumbruch. Rechtsklick gibt dir
+        die Größe (Klein / Mittel / Groß).
+      </p>
+      <p>Die Box bleibt am Takt verankert.</p>
+    </div>
+    <div class="card">
+      <h3>Lyrics (L)</h3>
+      <p>
+        Song-weites Flyout. Takte trennst du mit <code> : </code>,
+        leere Takte mit <code> : : </code>. Max. 4 Tokens pro Zeile.
+      </p>
+      <p><kbd>⌘</kbd>+Enter übernimmt.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 19. M-BADGE ===== -->
+<section class="slide">
+  <h2>Manuelle Noten → M-Badge</h2>
+  <p class="lead">
+    Wenn ein Takt manuell eingegebene Noten enthält, zeigt NoteChart
+    oben rechts ein kleines <strong>„M"</strong>.
+  </p>
+  <p>
+    Daneben sitzt ein <kbd>?</kbd> mit Erklärung — und ein Knopf
+    <em>„Manuelle Noten entfernen"</em>, falls du wieder zum
+    Akkord-Default zurück willst.
+  </p>
+  <div class="placeholder">
+    <b>Screenshot:</b> Takt mit M-Badge oben rechts
+  </div>
+</section>
+
+<!-- ===== 20. EINSTELLUNGEN ===== -->
+<section class="slide">
+  <h2>Einstellungen <kbd>⌘,</kbd></h2>
+  <ul style="font-size:1.45vw;">
+    <li><strong>Notenstil</strong>: Klassisch (Ovale), Bravura,
+        Petaluma (handgeschrieben), Sebastian.</li>
+    <li><strong>Sprache</strong>: DE / EN / ES / IT als
+        Flaggen-Button.</li>
+    <li><strong>Druck-Variante</strong>: Formal (Real Book) oder
+        Handschriftlich.</li>
+    <li><strong>Zeilen-Dichte im Druck</strong>: Kompakt oder
+        Erweitert (lässt Platz für Notizen).</li>
+    <li><strong>Default-Tempo</strong> für neue Songs.</li>
+    <li><strong>Shortcut-Hints</strong> an Toolbar-Buttons an/aus.</li>
+    <li><strong>M-Badge</strong> an/aus.</li>
+  </ul>
+</section>
+
+<!-- ===== 21. WAS NOCH NICHT GEHT ===== -->
+<section class="slide">
+  <h2>Was noch nicht geht</h2>
+  <p class="lead">Damit du nicht suchst — alles für nach v1.0:</p>
+  <ul style="font-size:1.45vw;">
+    <li>Kein Sound. Play- und Metronom-Knöpfe sind da, aber stumm.</li>
+    <li>Kein MIDI, kein MusicXML.</li>
+    <li>Deutsche Akkordnamen (H, Es, Fis …) noch nicht — bitte
+        englisch tippen.</li>
+    <li>Lupe und Loop sind in der Spec drin, aber noch nicht in
+        der Beta.</li>
+    <li><kbd>⌘+</kbd> / <kbd>⌘−</kbd> klemmt auf DE-Tastatur —
+        Zoom-Slider in der Toolbar nehmen.</li>
+  </ul>
+</section>
+
+<!-- ===== 22. LOS GEHT'S ===== -->
+<section class="slide cover">
+  <h1 style="font-size:5.5vw;">Los geht's.</h1>
+  <div class="sub">
+    Bei Fragen: <strong>Datei → Shortcuts…</strong> in der App.
+  </div>
+  <div class="tiny" style="margin-top: 5vh;">
+    Vollständige Anleitung: <code>docs/notechart-bedienungsanleitung.md</code><br>
+    Kurz und knackig: <code>docs/notechart-quicktour.md</code> ·
+    <code>docs/notechart-5min.md</code>
+  </div>
+</section>
+
+<!-- ===== NAVIGATION ===== -->
+<div class="nav">
+  <span class="counter"><span id="cur">1</span> / <span id="total">22</span></span>
+</div>
+<div class="hint">
+  ← → blättern · F = Vollbild · P = Drucken
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll(".slide"));
+  let idx = 0;
+  const cur = document.getElementById("cur");
+  const total = document.getElementById("total");
+  total.textContent = slides.length;
+
+  function go(n) {
+    idx = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, i) => s.classList.toggle("active", i === idx));
+    cur.textContent = idx + 1;
+    location.hash = "#" + (idx + 1);
+  }
+  function next() { go(idx + 1); }
+  function prev() { go(idx - 1); }
+
+  document.addEventListener("keydown", (e) => {
+    switch (e.key) {
+      case "ArrowRight":
+      case "PageDown":
+      case " ":
+        next(); e.preventDefault(); break;
+      case "ArrowLeft":
+      case "PageUp":
+        prev(); e.preventDefault(); break;
+      case "Home": go(0); e.preventDefault(); break;
+      case "End":  go(slides.length - 1); e.preventDefault(); break;
+      case "f": case "F":
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+        else document.exitFullscreen();
+        break;
+      case "p": case "P":
+        window.print(); e.preventDefault(); break;
+    }
+  });
+  document.addEventListener("click", (e) => {
+    // Klick im rechten Drittel = vor, sonst zurück
+    const w = window.innerWidth;
+    if (e.clientX > w * 0.66) next();
+    else if (e.clientX < w * 0.33) prev();
+  });
+
+  // Direktsprung über #N im URL-Hash
+  const h = parseInt(location.hash.replace("#", ""), 10);
+  if (!isNaN(h) && h >= 1 && h <= slides.length) go(h - 1);
+</script>
+
+</body>
+</html>
