@@ -245,7 +245,8 @@
     gedrucktes Sheet, sonst nichts.
   </p>
   <img class="shot" src="images/quicktour-overview.png"
-       alt="NoteChart-Hauptfenster mit Beispiel-Sheet">
+       alt="NoteChart-Hauptfenster mit Beispiel-Sheet"
+       style="max-height: 68vh; max-width: 85vw;">
 
 </section>
 
@@ -278,23 +279,22 @@
 <!-- ===== 5. WO IST WAS ===== -->
 <section class="slide">
   <h2>Wo ist was?</h2>
-  <div class="two-col">
-    <div>
-      <ul>
-        <li><strong>Oben</strong> — alles Globale: Modus, Zoom,
-            Raster, Tempo, PDF.</li>
-        <li><strong>Links</strong> — deine Werkzeuge: Lyrics,
-            Noten, Wdh., Section, Volta, Da Capo …</li>
-        <li><strong>Mitte</strong> — dein Blatt. Mausrad zum
-            Zoomen.</li>
-      </ul>
-    </div>
-    <div class="shot-row">
-      <img class="shot" src="images/quicktour-top-toolbar.png"
-           alt="Obere Toolbar">
-      <img class="shot" src="images/quicktour-song-toolbar.png"
-           alt="Linke Song-Toolbar">
-    </div>
+  <img class="shot" src="images/quicktour-top-toolbar.png"
+       alt="Obere Toolbar"
+       style="max-width: 84vw; max-height: 14vh; margin-bottom: 2vh;">
+  <div style="display: grid; grid-template-columns: 1fr auto;
+              gap: 4vw; align-items: center; max-width: 84vw;">
+    <ul>
+      <li><strong>Oben</strong> — alles Globale: Modus, Zoom,
+          Raster, Tempo, PDF.</li>
+      <li><strong>Links</strong> — deine Werkzeuge: Lyrics,
+          Noten, Wdh., Section, Volta, Da Capo …</li>
+      <li><strong>Mitte</strong> — dein Blatt. Mausrad zum
+          Zoomen.</li>
+    </ul>
+    <img class="shot" src="images/quicktour-song-toolbar.png"
+         alt="Linke Song-Toolbar"
+         style="max-height: 55vh; margin: 0;">
   </div>
 </section>
 
@@ -350,45 +350,40 @@
 <!-- ===== 9. KOMPASS ===== -->
 <section class="slide">
   <h2>Kompass — Noten setzen ohne Maus <span class="badge">neu</span></h2>
-  <p class="lead">
-    Drück <kbd>K</kbd> in Modus B. Klick einmal aufs Notensystem —
-    die Preview-Note schwebt da.
-  </p>
-  <ul>
-    <li><kbd>←</kbd> <kbd>→</kbd> verschiebt in der Zeit, Takt für
-        Takt durch</li>
-    <li><kbd>↑</kbd> <kbd>↓</kbd> verschiebt die Tonhöhe</li>
-    <li><kbd>Enter</kbd> setzt die Note, Kompass springt weiter</li>
-    <li><kbd>Esc</kbd> raus</li>
-  </ul>
-  <p>
-    Triffst du eine bestehende Note, hängt sich der Kompass dran —
-    Pfeile ändern dann die Note, statt eine neue zu setzen.
-  </p>
-  <img class="shot" src="images/quicktour-kompass.png"
-       alt="Kompass-Cursor mit Preview-Note im Notensystem">
-
+  <div class="two-col" style="grid-template-columns: 1fr 1.1fr;">
+    <div>
+      <p class="lead">
+        Drück <kbd>K</kbd> in Modus B. Klick einmal aufs Notensystem —
+        die Preview-Note schwebt da.
+      </p>
+      <ul>
+        <li><kbd>←</kbd> <kbd>→</kbd> verschiebt in der Zeit</li>
+        <li><kbd>↑</kbd> <kbd>↓</kbd> verschiebt die Tonhöhe</li>
+        <li><kbd>Enter</kbd> setzt, Kompass springt weiter</li>
+        <li><kbd>Esc</kbd> raus</li>
+      </ul>
+      <p>
+        Triffst du eine bestehende Note, hängt sich der Kompass dran —
+        Pfeile ändern dann die Note, statt eine neue zu setzen.
+      </p>
+    </div>
+    <img class="shot" src="images/quicktour-kompass.png"
+         alt="Kompass-Cursor mit Preview-Note im Notensystem"
+         style="max-height: 60vh; margin: 0;">
+  </div>
 </section>
 
 <!-- ===== 10. PDF ===== -->
 <section class="slide">
   <h2>PDF rausziehen</h2>
-  <div class="two-col">
-    <div>
-      <ul>
-        <li><strong>◎</strong> schaltet die Druck-Vorschau direkt
-            im Blatt um.</li>
-        <li><strong>↓</strong> speichert das Sheet als PDF.</li>
-      </ul>
-      <p>
-        Beide Knöpfe sitzen ganz rechts in der Top-Toolbar.
-      </p>
-    </div>
-    <img class="shot" src="images/quicktour-print-vorher-nachher.png"
-         alt="Sheet im Edit-Look links, Druck-Vorschau rechts"
-         style="margin:0;">
-
-  </div>
+  <p>
+    <strong>◎</strong> schaltet die Druck-Vorschau direkt im Blatt um ·
+    <strong>↓</strong> speichert als PDF. Beide ganz rechts in der
+    Top-Toolbar.
+  </p>
+  <img class="shot" src="images/quicktour-print-vorher-nachher.png"
+       alt="Sheet im Edit-Look links, Druck-Vorschau rechts"
+       style="max-height: 65vh; max-width: 84vw; margin-top: 2vh;">
 </section>
 
 <!-- ===== 11. KAPITEL: VERTIEFT ===== -->
@@ -484,19 +479,24 @@
 <!-- ===== 15. NOTEN IN MODUS B ===== -->
 <section class="slide">
   <h2>Manuelle Noten in Modus B</h2>
-  <ul style="font-size:1.45vw;">
-    <li><kbd>N</kbd> öffnet die Notenpalette (links Noten/Pause/Triole, rechts Raster).</li>
-    <li>Notenwerte: <kbd>1</kbd> Ganze · <kbd>2</kbd> Halbe ·
-        <kbd>4</kbd> Viertel · <kbd>8</kbd> Achtel ·
-        <kbd>6</kbd> 1/16.</li>
-    <li><kbd>0</kbd> macht aus dem aktiven Wert eine Pause —
-        also <kbd>4</kbd> dann <kbd>0</kbd> = Viertel-Pause.</li>
-    <li><kbd>Shift</kbd>+Ziffer setzt das Raster auf denselben Wert.</li>
-    <li><strong>Hover</strong> zeigt die Vorschau — grün, wenn sie
-        zum Akkord passt.</li>
-    <li><strong>Klick</strong> setzt. <strong>Shift+Klick</strong>
-        = Haltebogen. <strong>Alt+Klick</strong> = löschen.</li>
-  </ul>
+  <div class="two-col" style="grid-template-columns: 1.2fr 1fr;">
+    <ul style="font-size:1.35vw;">
+      <li><kbd>N</kbd> öffnet die Notenpalette (links Noten/Pause/Triole, rechts Raster).</li>
+      <li>Notenwerte: <kbd>1</kbd> Ganze · <kbd>2</kbd> Halbe ·
+          <kbd>4</kbd> Viertel · <kbd>8</kbd> Achtel ·
+          <kbd>6</kbd> 1/16.</li>
+      <li><kbd>0</kbd> macht aus dem aktiven Wert eine Pause —
+          also <kbd>4</kbd> dann <kbd>0</kbd> = Viertel-Pause.</li>
+      <li><kbd>Shift</kbd>+Ziffer setzt das Raster auf denselben Wert.</li>
+      <li><strong>Hover</strong> zeigt die Vorschau — grün, wenn sie
+          zum Akkord passt.</li>
+      <li><strong>Klick</strong> setzt. <strong>Shift+Klick</strong>
+          = Haltebogen. <strong>Alt+Klick</strong> = löschen.</li>
+    </ul>
+    <img class="shot" src="images/slideshow-noten.png"
+         alt="Notenpalette mit Notenwerten und Raster"
+         style="max-height: 60vh; margin: 0;">
+  </div>
 </section>
 
 <!-- ===== 16. TRIOLEN ===== -->
