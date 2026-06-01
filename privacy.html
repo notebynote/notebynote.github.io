@@ -108,6 +108,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
   </div>
 
   <div class="priv-section">
+    <h2 id="l-h-video">Eingebettete Videos (YouTube)</h2>
+    <p id="l-video">Auf der Startseite (haakemusic.com) sind NoteChart-Videos eingebettet. Sie werden nicht automatisch geladen: Zunächst siehst du nur ein Vorschaubild ohne jede Verbindung zu YouTube oder Google. Erst wenn du ein Video aktiv anklickst, wird es über die Domain <code>youtube-nocookie.com</code> (erweiterter Datenschutzmodus) geladen. Dabei werden Daten – z. B. deine IP-Adresse und Geräteinformationen – an YouTube bzw. Google (Google Ireland Limited, Irland; ggf. Google LLC, USA) übertragen, und YouTube kann Cookies setzen. Rechtsgrundlage ist deine Einwilligung durch den Klick auf das Video (Art. 6 Abs. 1 lit. a DSGVO). Vor dem Klick werden keine Daten an Google übertragen. Mehr dazu in der <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" style="color:#7ab0e8">Datenschutzerklärung von Google</a>.</p>
+  </div>
+
+  <div class="priv-section">
     <h2 id="l-h-children">Kinder</h2>
     <p id="l-children">Da keinerlei Daten erfasst werden, bestehen keine besonderen Risiken für Kinder unter 13 Jahren. Die App richtet sich an Musiker, Lehrer und alle klanginteressierten Nutzer.</p>
   </div>
@@ -121,7 +126,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 <div class="footer">
   <div class="footer-meta">
     <span>© 2025 Thomas Haake · haakemusic.com · <a href="index.html#impressum">Impressum</a></span>
-    <span id="l-updated">Zuletzt aktualisiert: April 2025</span>
+    <span id="l-updated">Zuletzt aktualisiert: Juni 2026</span>
   </div>
 </div>
 
@@ -135,9 +140,10 @@ const T = {
     'l-h-local':'Lokale Verarbeitung','l-local':'Alle Funktionen der App – Klangsynthese, Einstellungen, Benutzeroberfläche – laufen ausschließlich lokal auf dem Gerät des Nutzers. Es besteht keine Verbindung zu externen Servern.',
     'l-h-third':'Drittanbieter','l-third':'Drone Pad verwendet keine Drittanbieter-SDKs, Analyse-Frameworks, Werbedienste oder sonstige externe Dienste, die Daten erfassen könnten.',
     'l-h-website':'Website (haakemusic.com)','l-website':'Die Website haakemusic.com erfasst keine personenbezogenen Daten und setzt keine Tracking-Cookies. Die einzige lokal gespeicherte Information ist die zuletzt gewählte Sprache der Website (DE/EN/ES). Sie wird im <em>localStorage</em> deines Browsers unter dem Schlüssel <code>haakemusic.lang</code> gespeichert, damit deine Sprachwahl beim Seitenwechsel erhalten bleibt. Diese Speicherung ist technisch erforderlich für die gewünschte Funktion (Sprachauswahl) und enthält keine personenbezogenen Daten. Du kannst sie jederzeit im Browser löschen.',
+    'l-h-video':'Eingebettete Videos (YouTube)','l-video':'Auf der Startseite (haakemusic.com) sind NoteChart-Videos eingebettet. Sie werden nicht automatisch geladen: Zunächst siehst du nur ein Vorschaubild ohne jede Verbindung zu YouTube oder Google. Erst wenn du ein Video aktiv anklickst, wird es über die Domain <code>youtube-nocookie.com</code> (erweiterter Datenschutzmodus) geladen. Dabei werden Daten – z. B. deine IP-Adresse und Geräteinformationen – an YouTube bzw. Google (Google Ireland Limited, Irland; ggf. Google LLC, USA) übertragen, und YouTube kann Cookies setzen. Rechtsgrundlage ist deine Einwilligung durch den Klick auf das Video (Art. 6 Abs. 1 lit. a DSGVO). Vor dem Klick werden keine Daten an Google übertragen. Mehr dazu in der <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" style="color:#7ab0e8">Datenschutzerklärung von Google</a>.',
     'l-h-children':'Kinder','l-children':'Da keinerlei Daten erfasst werden, bestehen keine besonderen Risiken für Kinder unter 13 Jahren. Die App richtet sich an Musiker, Lehrer und alle klanginteressierten Nutzer.',
     'l-h-contact':'Kontakt','l-contact':'<a href="mailto:thomas.haake@gmail.com" style="color:#7ab0e8">thomas.haake@gmail.com</a><br><a href="https://haakemusic.com" style="color:#7ab0e8">haakemusic.com</a>',
-    'l-updated':'Zuletzt aktualisiert: April 2025',
+    'l-updated':'Zuletzt aktualisiert: Juni 2026',
   },
   en:{
     'nav-home':'Home','nav-privacy':'Privacy','nav-nc-info':'NoteChart','nav-nc-why':'Why NoteChart','nav-dp-info':'Info','nav-dp-app':'Launch app',
@@ -147,9 +153,10 @@ const T = {
     'l-h-local':'Local processing','l-local':'All app functions — sound synthesis, settings, user interface — run exclusively on the user\'s device. There is no connection to external servers.',
     'l-h-third':'Third parties','l-third':'Drone Pad uses no third-party SDKs, analytics frameworks, advertising services or any other external services that could collect data.',
     'l-h-website':'Website (haakemusic.com)','l-website':'The haakemusic.com website does not collect any personal data and sets no tracking cookies. The only locally stored information is your most recently selected website language (DE/EN/ES). It is saved in your browser\'s <em>localStorage</em> under the key <code>haakemusic.lang</code>, so your language choice persists across pages. This storage is strictly necessary for the requested function (language selection) and contains no personal data. You can clear it at any time in your browser.',
+    'l-h-video':'Embedded videos (YouTube)','l-video':'The home page (haakemusic.com) embeds NoteChart videos. They are not loaded automatically: at first you only see a preview image with no connection to YouTube or Google. Only when you actively click a video is it loaded via the <code>youtube-nocookie.com</code> domain (privacy-enhanced mode). This transmits data – e.g. your IP address and device information – to YouTube / Google (Google Ireland Limited, Ireland; possibly Google LLC, USA), and YouTube may set cookies. The legal basis is your consent given by clicking the video (Art. 6(1)(a) GDPR). No data is sent to Google before you click. For details see the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" style="color:#7ab0e8">Google privacy policy</a>.',
     'l-h-children':'Children','l-children':'Since no data is collected, there are no particular risks for children under 13. The app is aimed at musicians, teachers and anyone interested in sound.',
     'l-h-contact':'Contact','l-contact':'<a href="mailto:thomas.haake@gmail.com" style="color:#7ab0e8">thomas.haake@gmail.com</a><br><a href="https://haakemusic.com" style="color:#7ab0e8">haakemusic.com</a>',
-    'l-updated':'Last updated: April 2025',
+    'l-updated':'Last updated: June 2026',
   },
   es:{
     'nav-home':'Inicio','nav-privacy':'Privacidad','nav-nc-info':'NoteChart','nav-nc-why':'Por qué NoteChart','nav-dp-info':'Info','nav-dp-app':'Abrir app',
@@ -159,9 +166,10 @@ const T = {
     'l-h-local':'Procesamiento local','l-local':'Todas las funciones de la app — síntesis de sonido, ajustes, interfaz de usuario — se ejecutan exclusivamente en el dispositivo del usuario. No hay conexión a servidores externos.',
     'l-h-third':'Terceros','l-third':'Drone Pad no utiliza SDKs de terceros, marcos de análisis, servicios publicitarios ni ningún otro servicio externo que pueda recopilar datos.',
     'l-h-website':'Sitio web (haakemusic.com)','l-website':'El sitio web haakemusic.com no recopila datos personales y no establece cookies de seguimiento. La única información almacenada localmente es el idioma del sitio web seleccionado más recientemente (DE/EN/ES). Se guarda en el <em>localStorage</em> de tu navegador bajo la clave <code>haakemusic.lang</code>, para que tu elección de idioma se mantenga al cambiar de página. Este almacenamiento es estrictamente necesario para la función solicitada (selección de idioma) y no contiene datos personales. Puedes borrarlo en cualquier momento en tu navegador.',
+    'l-h-video':'Vídeos integrados (YouTube)','l-video':'En la página de inicio (haakemusic.com) hay vídeos de NoteChart integrados. No se cargan automáticamente: al principio solo ves una imagen de vista previa, sin ninguna conexión con YouTube o Google. Solo cuando haces clic activamente en un vídeo se carga a través del dominio <code>youtube-nocookie.com</code> (modo de privacidad mejorada). Esto transmite datos – p. ej. tu dirección IP e información del dispositivo – a YouTube / Google (Google Ireland Limited, Irlanda; posiblemente Google LLC, EE. UU.), y YouTube puede establecer cookies. La base jurídica es tu consentimiento al hacer clic en el vídeo (art. 6.1.a RGPD). Antes del clic no se envía ningún dato a Google. Más información en la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" style="color:#7ab0e8">política de privacidad de Google</a>.',
     'l-h-children':'Menores','l-children':'Dado que no se recopilan datos, no existen riesgos particulares para menores de 13 años. La app está dirigida a músicos, profesores y cualquier persona interesada en el sonido.',
     'l-h-contact':'Contacto','l-contact':'<a href="mailto:thomas.haake@gmail.com" style="color:#7ab0e8">thomas.haake@gmail.com</a><br><a href="https://haakemusic.com" style="color:#7ab0e8">haakemusic.com</a>',
-    'l-updated':'Última actualización: abril 2025',
+    'l-updated':'Última actualización: junio 2026',
   }
 };
 function setLang(lang){

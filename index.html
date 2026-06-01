@@ -55,6 +55,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 .platform{font-size:12px;color:#507090;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:5px 12px}
 .project-arrow{color:#3a6a9a;font-size:22px;transition:transform .2s,color .2s;align-self:center;flex-shrink:0}
 .project-card:hover .project-arrow{transform:translateX(4px);color:#7ab0e8}
+.videos-section{max-width:960px;margin:0 auto;padding:80px 24px 0}
+.videos-intro{font-size:15px;color:#88aed0;line-height:1.7;margin-bottom:32px;max-width:640px}
+.video-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+@media(max-width:720px){.video-grid{grid-template-columns:1fr}}
+.video-card{position:relative;border-radius:16px;overflow:hidden;border:1px solid rgba(120,170,230,.14);background:linear-gradient(135deg,#10325f 0%,#0a1f3f 100%);aspect-ratio:16/9;cursor:pointer;transition:border-color .2s,transform .2s}
+.video-card::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 28%,rgba(90,240,176,.12),transparent 62%);pointer-events:none}
+.video-card:hover{border-color:rgba(90,240,176,.4);transform:translateY(-2px)}
+.video-ph{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:18px;z-index:1}
+.video-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:62px;height:62px;border-radius:50%;background:rgba(90,240,176,.16);border:2px solid #5af0b0;display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s;z-index:1}
+.video-card:hover .video-play{background:rgba(90,240,176,.28);transform:translate(-50%,-50%) scale(1.06)}
+.video-play svg{width:24px;height:24px;margin-left:3px;fill:#5af0b0}
+.video-num{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5af0b0;margin-bottom:6px}
+.video-title{font-size:14px;font-weight:600;color:#dceaf7;line-height:1.4}
+.video-card iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:2}
+.video-note{font-size:12px;color:#3a6a9a;line-height:1.6;margin-top:20px;max-width:640px}
+.video-note a{color:#5a8ab0;text-decoration:none}
+.video-note a:hover{color:#7ab0e8}
 .footer{text-align:center;padding:64px 24px 0;color:#2a4a6a;font-size:13px}
 .footer a{color:#3a6a9a;text-decoration:none}
 .footer a:hover{color:#7ab0e8}
@@ -98,9 +115,61 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
   <p class="hero-bio" id="l-bio">Live-Bassist und Software-Entwickler für Tools, die uns Musiker*innen das Leben leichter machen — vom Üben der Intonation mit <a href="dronepad.html" style="color:#7ab0e8;text-decoration:none">Drone Pad</a>, über das Sound-Archiv <a href="patchdirector.html" style="color:#7ab0e8;text-decoration:none">PatchDirector</a>, bis zum revolutionären, neuen <a href="notechart.html" style="color:#7ab0e8;text-decoration:none">NoteChart</a> — Beta bald erhältlich.</p>
 </div>
 
+<div class="videos-section">
+  <p class="section-label" id="l-videos-label">NoteChart in Aktion</p>
+  <div class="divider" style="background:linear-gradient(to right,#2ab080,#5af0b0)"></div>
+  <p class="videos-intro" id="l-videos-intro">Vier kurze Quickies zeigen NoteChart in der Pre-Beta — von den ersten Akkorden bis zu druckfertigen PDF-Layouts.</p>
+  <div class="video-grid">
+    <div class="video-card" data-yt="a95uTixCinE" onclick="loadVideo(this)">
+      <div class="video-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="video-ph">
+        <div class="video-num">Quickie #1</div>
+        <div class="video-title">Chords, cut, drag, automatic base notes, staff…</div>
+      </div>
+    </div>
+    <div class="video-card" data-yt="VzoXfgH259A" onclick="loadVideo(this)">
+      <div class="video-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="video-ph">
+        <div class="video-num">Quickie #2</div>
+        <div class="video-title">Volta, segno, coda, staff…</div>
+      </div>
+    </div>
+    <div class="video-card" data-yt="y-ThieFXzSQ" onclick="loadVideo(this)">
+      <div class="video-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="video-ph">
+        <div class="video-num">Quickie #3</div>
+        <div class="video-title">Settings, PDF preview</div>
+      </div>
+    </div>
+    <div class="video-card" data-yt="vTRFOjghytE" onclick="loadVideo(this)">
+      <div class="video-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="video-ph">
+        <div class="video-num">Quickie #4</div>
+        <div class="video-title">All 5 PDF layouts, ready to print</div>
+      </div>
+    </div>
+  </div>
+  <p class="video-note" id="l-videos-note">Hinweis: Erst beim Klick wird das Video von YouTube (youtube-nocookie.com) geladen; dabei werden Daten an Google übertragen. Details in der <a href="privacy.html">Datenschutzerklärung</a>.</p>
+</div>
+
 <div class="projects-section">
   <p class="section-label" id="l-projects">Projekte</p>
   <div class="divider"></div>
+
+  <a class="project-card project-card--notechart" href="notechart.html">
+    <div>
+      <div class="project-meta">
+        <span class="project-name">NoteChart</span>
+        <span class="project-tag tag-beta" id="l-tag-beta">Beta · Warteliste</span>
+      </div>
+      <p class="project-desc" id="l-nc-desc">Lead-Sheet-Software mit einem vollständig neuen Konzept — nur Akkorde, mit Rhythmus, mit Melodie, ganz wie gewünscht, so viele Seiten wie man braucht. Für Einsteiger direkt verständlich, für Profis vollständig. Beta im Juli 2026.</p>
+      <div class="project-platforms">
+        <span class="platform" id="l-nc-p1">macOS (in Entwicklung)</span>
+        <span class="platform" id="l-nc-p2">iOS · Android · Windows geplant</span>
+      </div>
+    </div>
+    <span class="project-arrow">→</span>
+  </a>
 
   <a class="project-card project-card--dronepad" href="dronepad.html">
     <div>
@@ -113,21 +182,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
         <span class="platform">macOS App Store</span>
         <span class="platform">iOS App Store</span>
         <span class="platform" id="l-webapp">Web App</span>
-      </div>
-    </div>
-    <span class="project-arrow">→</span>
-  </a>
-
-  <a class="project-card project-card--notechart" href="notechart.html">
-    <div>
-      <div class="project-meta">
-        <span class="project-name">NoteChart</span>
-        <span class="project-tag tag-beta" id="l-tag-beta">Beta · Warteliste</span>
-      </div>
-      <p class="project-desc" id="l-nc-desc">Lead-Sheet-Software mit einem vollständig neuen Konzept — nur Akkorde, mit Rhythmus, mit Melodie, ganz wie gewünscht, so viele Seiten wie man braucht. Für Einsteiger direkt verständlich, für Profis vollständig. Beta im Juli 2026.</p>
-      <div class="project-platforms">
-        <span class="platform" id="l-nc-p1">macOS (in Entwicklung)</span>
-        <span class="platform" id="l-nc-p2">iOS · Android · Windows geplant</span>
       </div>
     </div>
     <span class="project-arrow">→</span>
@@ -178,6 +232,9 @@ const T = {
     'l-role':'Thomas Haake · Musiker und Entwickler für Musik-Tools',
     'l-bio':'Live-Bassist und Software-Entwickler für Tools, die uns Musiker*innen das Leben leichter machen — vom Üben der Intonation mit <a href="dronepad.html" style="color:#7ab0e8;text-decoration:none">Drone Pad</a>, über das Sound-Archiv <a href="patchdirector.html" style="color:#7ab0e8;text-decoration:none">PatchDirector</a>, bis zum revolutionären, neuen <a href="notechart.html" style="color:#7ab0e8;text-decoration:none">NoteChart</a> — Beta bald erhältlich.',
     'l-projects':'Projekte',
+    'l-videos-label':'NoteChart in Aktion',
+    'l-videos-intro':'Vier kurze Quickies zeigen NoteChart in der Pre-Beta — von den ersten Akkorden bis zu druckfertigen PDF-Layouts.',
+    'l-videos-note':'Hinweis: Erst beim Klick wird das Video von YouTube (youtube-nocookie.com) geladen; dabei werden Daten an Google übertragen. Details in der <a href="privacy.html">Datenschutzerklärung</a>.',
     'l-tag-live':'Live','l-tag-beta':'Beta · Warteliste','l-tag-wip':'Ruhend · Neuentwicklung geprüft',
     'l-dp-desc':'Ein stimmreiner Drohnen-Synthesizer für Intonationstraining und meditativen Klang. Mehrere Töne gleichzeitig, wählbare Stimmung, LFO, Reverb und zehn Farbthemen. Als Web-App und im App Store.',
     'l-webapp':'Web App',
@@ -190,6 +247,9 @@ const T = {
     'l-role':'Thomas Haake · Musician and Developer of Music Tools',
     'l-bio':'Live bassist and software developer building tools that make life easier for musicians — from intonation practice with <a href="dronepad.html" style="color:#7ab0e8;text-decoration:none">Drone Pad</a>, to the sound archive <a href="patchdirector.html" style="color:#7ab0e8;text-decoration:none">PatchDirector</a>, to the all-new <a href="notechart.html" style="color:#7ab0e8;text-decoration:none">NoteChart</a> — beta coming soon.',
     'l-projects':'Projects',
+    'l-videos-label':'NoteChart in Action',
+    'l-videos-intro':'Four short Quickies show NoteChart in pre-beta — from the first chords to print-ready PDF layouts.',
+    'l-videos-note':'Note: the video loads from YouTube (youtube-nocookie.com) only when you click; this transmits data to Google. Details in the <a href="privacy.html">privacy policy</a>.',
     'l-tag-live':'Live','l-tag-beta':'Beta · Waitlist','l-tag-wip':'On Hold · Rebuild Under Review',
     'l-dp-desc':'A pure-tuned drone synthesizer for intonation training and meditative sound. Multiple voices simultaneously, selectable tuning, LFO, reverb and ten color themes. Available as a web app and in the App Store.',
     'l-webapp':'Web App',
@@ -202,6 +262,9 @@ const T = {
     'l-role':'Thomas Haake · Músico y Desarrollador de Herramientas Musicales',
     'l-bio':'Bajista en directo y desarrollador de software — herramientas que hacen la vida más fácil a los músicos: desde el entrenamiento de afinación con <a href="dronepad.html" style="color:#7ab0e8;text-decoration:none">Drone Pad</a>, pasando por el archivo de sonidos <a href="patchdirector.html" style="color:#7ab0e8;text-decoration:none">PatchDirector</a>, hasta el revolucionario <a href="notechart.html" style="color:#7ab0e8;text-decoration:none">NoteChart</a> — beta próximamente.',
     'l-projects':'Proyectos',
+    'l-videos-label':'NoteChart en acción',
+    'l-videos-intro':'Cuatro Quickies cortos muestran NoteChart en pre-beta — desde los primeros acordes hasta diseños PDF listos para imprimir.',
+    'l-videos-note':'Aviso: el vídeo se carga desde YouTube (youtube-nocookie.com) solo al hacer clic; esto transmite datos a Google. Más información en la <a href="privacy.html">política de privacidad</a>.',
     'l-tag-live':'Disponible','l-tag-beta':'Beta · Lista de espera','l-tag-wip':'En pausa · Nueva versión en estudio',
     'l-dp-desc':'Un sintetizador de drones de afinación pura para el entrenamiento de entonación y el sonido meditativo. Varias voces simultáneas, afinación seleccionable, LFO, reverb y diez temas de color. Disponible como app web y en el App Store.',
     'l-webapp':'App Web',
@@ -243,6 +306,22 @@ document.addEventListener('DOMContentLoaded',()=>{
     });
   });
 });
+</script>
+<script>
+function loadVideo(card){
+  if(card.dataset.loaded)return;
+  const id=card.getAttribute('data-yt');
+  if(!id)return;
+  card.dataset.loaded='1';
+  const f=document.createElement('iframe');
+  f.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0';
+  f.title=(card.querySelector('.video-title')||{}).textContent||'NoteChart';
+  f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';
+  f.allowFullscreen=true;
+  card.appendChild(f);
+  const p=card.querySelector('.video-play');if(p)p.style.display='none';
+  const ph=card.querySelector('.video-ph');if(ph)ph.style.display='none';
+}
 </script>
 </body>
 </html>
