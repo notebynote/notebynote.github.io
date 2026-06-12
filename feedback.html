@@ -370,11 +370,40 @@ try{
   var saved = localStorage.getItem('nc-fb-lang');
   if(saved === 'en' || saved === 'de'){ setLang(saved); }
 }catch(e){}
-// Danke-Banner nach erfolgreichem Versand (?sent=1)
+// Danke-Banner nach erfolgreichem Versand (?sent=1) — Fallback ohne JS
 if(location.search.indexOf('sent=1') !== -1){
   var b = document.getElementById('sent-banner');
   if(b){ b.classList.add('show'); window.scrollTo({top:0,behavior:'smooth'}); }
 }
+
+// AJAX-Versand: Formular im Hintergrund abschicken, eigenes Danke-Banner
+// zeigen, NIE auf Formsprees Standardseite springen. Fällt bei JS-/Netz-
+// Fehler auf den normalen POST (mit _next-Redirect) zurück.
+(function(){
+  var form = document.querySelector('form[action*="formspree.io"]');
+  if(!form) return;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var data = new FormData(form);
+    fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(function(res){
+      if(res.ok){
+        var banner = document.getElementById('sent-banner');
+        if(banner){ banner.classList.add('show'); }
+        form.reset();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        // Formspree-Fehler (z.B. Formular noch nicht aktiviert) → normaler POST
+        form.submit();
+      }
+    }).catch(function(){
+      form.submit(); // Netzwerkfehler → normaler POST-Fallback
+    });
+  });
+})();
 </script>
 </body>
 </html>
