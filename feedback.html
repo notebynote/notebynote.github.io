@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NoteChart Feedback — haakemusic.com</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;700&display=swap">
+<!--
+  NoteChart Beta-Feedback. EIN Formular, ein durchgehender Kasten. Drei Tiefen-Stufen
+  nur als Trenner-Überschriften darin; je weiter runter, desto mehr beantwortet der User.
+  Versand über Formspree (Form-ID xzdqjoja → Postfach von Thomas).
+-->
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;color:#fff;background:linear-gradient(to bottom,#1a3a6b 0%,#0a1a3a 60%,#060e22 100%);min-height:100vh;padding:0 0 100px}
+
+/* --- Navigation (wie Hauptseite) --- */
+.site-nav{display:flex;align-items:center;justify-content:space-between;padding:12px 28px;background:rgba(6,14,34,0.7);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(120,170,230,.1);position:sticky;top:0;z-index:100}
+.site-nav .nav-logo{font-family:'Barlow',sans-serif;font-weight:700;font-size:15px;color:#fff;text-decoration:none;letter-spacing:.02em}
+.site-nav .nav-logo span{font-weight:300;color:#a0c0e0}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-link{color:#7ab0e8;font-size:13px;font-weight:600;text-decoration:none;padding:7px 16px;border-radius:50px;border:1.5px solid transparent;transition:all .18s;letter-spacing:.03em}
+.nav-link:hover{color:#fff;background:rgba(42,111,214,.2);border-color:rgba(90,154,240,.3)}
+.nav-link.active{color:#fff;background:rgba(42,111,214,.35);border-color:rgba(90,154,240,.5)}
+.nav-badge{display:inline-block;background:#2a6fd6;color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:50px;margin-left:4px;letter-spacing:.04em;vertical-align:middle;line-height:1.4}
+
+/* --- Kopf --- */
+.hero{text-align:center;padding:56px 24px 8px}
+.hero-eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#7ab0e8;margin-bottom:16px;font-weight:700}
+.hero h1{font-size:clamp(34px,5vw,56px);font-weight:700;line-height:1.08;letter-spacing:-.02em;color:#fff;margin-bottom:16px}
+.hero h1 span{color:#7ab0e8}
+.hero-sub{font-size:clamp(16px,2vw,19px);color:#c0d8f0;max-width:680px;margin:0 auto;line-height:1.6;font-weight:300}
+.hero-hint{font-size:13px;color:#5a7a9a;margin-top:14px;font-style:italic}
+
+/* --- Sprach-Umschalter --- */
+.lang-toggle{display:flex;justify-content:center;gap:8px;margin:22px auto 0;position:sticky;top:60px;z-index:90}
+.lang-toggle .lang-btn{background:rgba(6,14,34,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1.5px solid rgba(120,170,230,.35);color:#a0c0e0;border-radius:50px;padding:8px 22px;font-size:13px;font-weight:700;cursor:pointer;transition:all .18s;letter-spacing:.06em}
+.lang-toggle .lang-btn:hover{background:rgba(42,111,214,.25);color:#fff}
+body.lang-de #btn-de,body.lang-en #btn-en{background:rgba(42,111,214,.5);border-color:#5a9af0;color:#fff}
+
+/* Sprach-Sichtbarkeit — NUR als Kind des Body schalten, damit die
+   Regel nie den Body selbst trifft (body trägt ebenfalls lang-de/lang-en) */
+body.lang-de .lang-en{display:none}
+body.lang-en .lang-de{display:none}
+
+/* --- EIN Formular, ein Kasten --- */
+.section{max-width:760px;margin:0 auto;padding:40px 24px 0}
+.fb-card{background:rgba(255,255,255,.04);border:1px solid rgba(120,170,230,.14);border-radius:16px;padding:30px 28px}
+
+.q{margin-bottom:22px}
+.q:last-child{margin-bottom:0}
+.q-label{font-size:15px;color:#e6f0fb;font-weight:500;margin-bottom:10px;line-height:1.5}
+.q-num{color:#5a9af0;font-weight:700;margin-right:7px}
+
+/* Stufen-Trenner INNERHALB des einen Formulars */
+.tier-head{margin:38px 0 24px;padding-top:28px;border-top:1px solid rgba(120,170,230,.18)}
+.tier-head.first{margin-top:26px;padding-top:0;border-top:none}
+.tier-label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#7ab0e8;margin-bottom:8px;font-weight:700}
+.tier-head h3{font-size:clamp(20px,2.6vw,25px);font-weight:700;color:#fff;margin-bottom:6px;line-height:1.2}
+.tier-desc{font-size:14.5px;color:#9fc0e2;line-height:1.62}
+.tier-scale{font-size:12.5px;color:#5a7a9a;font-style:italic;margin-top:9px}
+.scale-note{font-size:12.5px;color:#5a7a9a;font-style:italic;margin:18px 0 26px}
+
+/* Bewertungs-Pillen 1–5 */
+.rating{display:inline-flex;gap:7px;flex-wrap:wrap}
+.rating input{position:absolute;opacity:0;width:0;height:0;pointer-events:none}
+.rating label{display:inline-flex;align-items:center;justify-content:center;width:42px;height:38px;border-radius:10px;background:rgba(255,255,255,.05);border:1.5px solid rgba(120,170,230,.22);color:#a0c0e0;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s}
+.rating label:hover{background:rgba(42,111,214,.25);color:#fff}
+.rating input:checked+label{background:#2a6fd6;border-color:#5a9af0;color:#fff;box-shadow:0 0 14px rgba(60,140,255,.35)}
+
+/* Text-Eingaben */
+.fb-input,.fb-textarea{width:100%;background:rgba(6,14,34,.5);border:1.5px solid rgba(120,170,230,.22);border-radius:10px;color:#fff;font-size:14px;font-family:inherit;padding:11px 13px;transition:border-color .15s}
+.fb-input:focus,.fb-textarea:focus{outline:none;border-color:#5a9af0;background:rgba(6,14,34,.7)}
+.fb-input::placeholder,.fb-textarea::placeholder{color:#506a86}
+.fb-textarea{min-height:88px;resize:vertical;line-height:1.55}
+
+.fb-email .q-label{margin-bottom:10px}
+
+.fb-send-wrap{text-align:center;padding:34px 24px 0}
+.btn-primary{background:#2a6fd6;color:#fff;border:2px solid #4a8af0;padding:14px 40px;border-radius:50px;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:.01em;transition:all .2s}
+.btn-primary:hover{background:#3a80e6;box-shadow:0 0 28px rgba(60,140,255,.4)}
+.send-note{font-size:12.5px;color:#5a7a9a;margin-top:14px;font-style:italic}
+
+.sent-banner{display:none;max-width:760px;margin:24px auto 0;padding:16px 22px;background:rgba(63,170,110,.16);border:1px solid rgba(63,170,110,.4);border-radius:14px;color:#bfe6d2;font-size:15px;text-align:center}
+.sent-banner.show{display:block}
+
+.footer{text-align:center;padding:56px 24px 0;color:#2a4a6a;font-size:13px}
+.footer a{color:#3a6a9a;text-decoration:none}
+</style>
+</head>
+<body class="lang-de">
+
+<nav class="site-nav">
+  <a class="nav-logo" href="index.html">haake<span>music</span>.com</a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link" href="notechart.html">NoteChart<span class="nav-badge">Beta</span></a>
+    <a class="nav-link active" href="feedback.html">Feedback</a>
+    <a class="nav-link" href="privacy.html">Privacy</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <p class="hero-eyebrow">NoteChart Beta</p>
+  <h1><span class="lang-de" style="color:#fff">Dein </span><span class="lang-en" style="color:#fff">Your </span><span>Feedback</span></h1>
+  <p class="hero-sub">
+    <span class="lang-de">Danke, dass du NoteChart testest! Du musst nichts komplett ausfüllen — fang einfach oben an. Und je weiter du nach unten kommst, desto mehr hilfst du mir, NoteChart besser zu machen.</span>
+    <span class="lang-en">Thanks for testing NoteChart! You don't have to fill in everything — just start at the top. And the further down you go, the more you help me make NoteChart better.</span>
+  </p>
+  <p class="hero-hint">
+    <span class="lang-de">Alle Felder sind optional. Jede einzelne Antwort hilft.</span>
+    <span class="lang-en">All fields are optional. Every single answer helps.</span>
+  </p>
+</div>
+
+<div class="lang-toggle">
+  <button class="lang-btn" id="btn-de" onclick="setLang('de')">DE</button>
+  <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+</div>
+
+<div class="sent-banner" id="sent-banner">
+  <span class="lang-de">Vielen Dank! Dein Feedback ist angekommen. 🎵</span>
+  <span class="lang-en">Thank you! Your feedback has arrived. 🎵</span>
+</div>
+
+<form action="https://formspree.io/f/xzdqjoja" method="POST">
+  <input type="hidden" name="_subject" value="NoteChart Beta-Feedback">
+  <input type="hidden" name="_next" value="https://haakemusic.com/feedback.html?sent=1">
+
+  <div class="section">
+    <div class="fb-card">
+
+      <!-- E-Mail -->
+      <div class="fb-email">
+        <div class="q-label"><span class="lang-de">Deine E-Mail (falls ich nachfragen darf)</span><span class="lang-en">Your email (in case I may follow up)</span></div>
+        <input class="fb-input" type="email" name="E-Mail" placeholder="name@example.com">
+      </div>
+
+      <p class="scale-note"><span class="lang-de">Bei den Bewertungen: 1 = niedrig · 5 = hoch</span><span class="lang-en">For the ratings: 1 = low · 5 = high</span></p>
+
+      <div class="q"><div class="q-label"><span class="q-num">1</span><span class="lang-de">Wie ist dein Gesamteindruck von NoteChart?</span><span class="lang-en">Your overall impression of NoteChart?</span></div>
+        <div class="rating">
+          <input type="radio" id="q1-1" name="Gesamteindruck" value="1"><label for="q1-1">1</label>
+          <input type="radio" id="q1-2" name="Gesamteindruck" value="2"><label for="q1-2">2</label>
+          <input type="radio" id="q1-3" name="Gesamteindruck" value="3"><label for="q1-3">3</label>
+          <input type="radio" id="q1-4" name="Gesamteindruck" value="4"><label for="q1-4">4</label>
+          <input type="radio" id="q1-5" name="Gesamteindruck" value="5"><label for="q1-5">5</label>
+        </div>
+      </div>
+
+      <div class="q"><div class="q-label"><span class="q-num">2</span><span class="lang-de">Wie schnell kamst du ohne Anleitung zurecht?</span><span class="lang-en">How quickly did you get going without a manual?</span></div>
+        <div class="rating">
+          <input type="radio" id="q2-1" name="Einstieg" value="1"><label for="q2-1">1</label>
+          <input type="radio" id="q2-2" name="Einstieg" value="2"><label for="q2-2">2</label>
+          <input type="radio" id="q2-3" name="Einstieg" value="3"><label for="q2-3">3</label>
+          <input type="radio" id="q2-4" name="Einstieg" value="4"><label for="q2-4">4</label>
+          <input type="radio" id="q2-5" name="Einstieg" value="5"><label for="q2-5">5</label>
+        </div>
+      </div>
+
+      <div class="q"><div class="q-label"><span class="q-num">3</span><span class="lang-de">Wie fühlt sich die Akkord-Eingabe an?</span><span class="lang-en">How does chord entry feel?</span></div>
+        <div class="rating">
+          <input type="radio" id="q3-1" name="Akkord-Eingabe" value="1"><label for="q3-1">1</label>
+          <input type="radio" id="q3-2" name="Akkord-Eingabe" value="2"><label for="q3-2">2</label>
+          <input type="radio" id="q3-3" name="Akkord-Eingabe" value="3"><label for="q3-3">3</label>
+          <input type="radio" id="q3-4" name="Akkord-Eingabe" value="4"><label for="q3-4">4</label>
+          <input type="radio" id="q3-5" name="Akkord-Eingabe" value="5"><label for="q3-5">5</label>
+        </div>
+      </div>
+
+      <div class="q"><div class="q-label"><span class="q-num">4</span><span class="lang-de">Wie gefällt dir das Lead-Sheet-Layout am Bildschirm?</span><span class="lang-en">How do you like the on-screen lead-sheet layout?</span></div>
+        <div class="rating">
+          <input type="radio" id="q4-1" name="Layout" value="1"><label for="q4-1">1</label>
+          <input type="radio" id="q4-2" name="Layout" value="2"><label for="q4-2">2</label>
+          <input type="radio" id="q4-3" name="Layout" value="3"><label for="q4-3">3</label>
+          <input type="radio" id="q4-4" name="Layout" value="4"><label for="q4-4">4</label>
+          <input type="radio" id="q4-5" name="Layout" value="5"><label for="q4-5">5</label>
+        </div>
+      </div>
+
+      <div class="q"><div class="q-label"><span class="q-num">5</span><span class="lang-de">Wie gut ist der PDF-Export?</span><span class="lang-en">How good is the PDF export?</span></div>
+        <div class="rating">
+          <input type="radio" id="q5-1" name="PDF-Export" value="1"><label for="q5-1">1</label>
+          <input type="radio" id="q5-2" name="PDF-Export" value="2"><label for="q5-2">2</label>
+          <input type="radio" id="q5-3" name="PDF-Export" value="3"><label for="q5-3">3</label>
+          <input type="radio" id="q5-4" name="PDF-Export" value="4"><label for="q5-4">4</label>
+          <input type="radio" id="q5-5" name="PDF-Export" value="5"><label for="q5-5">5</label>
+        </div>
+      </div>
+
+      <div class="q"><div class="q-label"><span class="q-num">6</span><span class="lang-de">Würdest du NoteChart weiterempfehlen?</span><span class="lang-en">Would you recommend NoteChart?</span></div>
+        <div class="rating">
+          <input type="radio" id="q6-1" name="Weiterempfehlung" value="1"><label for="q6-1">1</label>
+          <input type="radio" id="q6-2" name="Weiterempfehlung" value="2"><label for="q6-2">2</label>
+          <input type="radio" id="q6-3" name="Weiterempfehlung" value="3"><label for="q6-3">3</label>
+          <input type="radio" id="q6-4" name="Weiterempfehlung" value="4"><label for="q6-4">4</label>
+          <input type="radio" id="q6-5" name="Weiterempfehlung" value="5"><label for="q6-5">5</label>
+        </div>
+      </div>
+
+      <div class="q"><div class="q-label"><span class="q-num">7</span><span class="lang-de">Hat etwas nicht funktioniert oder ist abgestürzt? Was?</span><span class="lang-en">Did anything not work or crash? What?</span></div>
+        <textarea class="fb-textarea" name="Fehler / Absturz"></textarea>
+      </div>
+
+      <div class="q"><div class="q-label"><span class="q-num">8</span><span class="lang-de">Welches eine Feature fehlt dir am meisten?</span><span class="lang-en">Which one feature do you miss most?</span></div>
+        <input class="fb-input" type="text" name="Fehlendes Feature">
+      </div>
+
+      <div class="q"><div class="q-label"><span class="q-num">9</span><span class="lang-de">Was benutzt du heute stattdessen? (iReal Pro, MuseScore, Papier …)</span><span class="lang-en">What do you use today instead? (iReal Pro, MuseScore, paper …)</span></div>
+        <input class="fb-input" type="text" name="Bisheriges Tool">
+      </div>
+
+      <div class="q"><div class="q-label"><span class="q-num">10</span><span class="lang-de">Wie fandest du den ersten Start / das Onboarding?</span><span class="lang-en">How was the first launch / onboarding?</span></div>
+        <div class="rating">
+          <input type="radio" id="q10-1" name="Onboarding" value="1"><label for="q10-1">1</label>
+          <input type="radio" id="q10-2" name="Onboarding" value="2"><label for="q10-2">2</label>
+          <input type="radio" id="q10-3" name="Onboarding" value="3"><label for="q10-3">3</label>
+          <input type="radio" id="q10-4" name="Onboarding" value="4"><label for="q10-4">4</label>
+          <input type="radio" id="q10-5" name="Onboarding" value="5"><label for="q10-5">5</label>
+        </div>
+      </div>
+
+      <div class="q"><div class="q-label"><span class="q-num">11</span><span class="lang-de">Modus B / Notensatz — verständlich und brauchbar?</span><span class="lang-en">Mode B / notation — clear and usable?</span></div>
+        <div class="rating">
+          <input type="radio" id="q11-1" name="Modus B / Notensatz" value="1"><label for="q11-1">1</label>
+          <input type="radio" id="q11-2" name="Modus B / Notensatz" value="2"><label for="q11-2">2</label>
+          <input type="radio" id="q11-3" name="Modus B / Notensatz" value="3"><label for="q11-3">3</label>
+          <input type="radio" id="q11-4" name="Modus B / Notensatz" value="4"><label for="q11-4">4</label>
+          <input type="radio" id="q11-5" name="Modus B / Notensatz" value="5"><label for="q11-5">5</label>
+        </div>
+      </div>
+
+      <div class="q"><div class="q-label"><span class="q-num">12</span><span class="lang-de">Speichern &amp; Laden (.nct) — reibungslos?</span><span class="lang-en">Saving &amp; loading (.nct) — smooth?</span></div>
+        <div class="rating">
+          <input type="radio" id="q12-1" name="Speichern/Laden" value="1"><label for="q12-1">1</label>
+          <input type="radio" id="q12-2" name="Speichern/Laden" value="2"><label for="q12-2">2</label>
+          <input type="radio" id="q12-3" name="Speichern/Laden" value="3"><label for="q12-3">3</label>
+          <input type="radio" id="q12-4" name="Speichern/Laden" value="4"><label for="q12-4">4</label>
+          <input type="radio" id="q12-5" name="Speichern/Laden" value="5"><label for="q12-5">5</label>
+        </div>
+      </div>
+
+      <div class="q"><div class="q-label"><span class="q-num">13</span><span class="lang-de">MusicXML-Import/-Export — wie lief der Austausch mit anderen Programmen?</span><span class="lang-en">MusicXML import/export — how was the exchange with other software?</span></div>
+        <div class="rating">
+          <input type="radio" id="q13-1" name="MusicXML" value="1"><label for="q13-1">1</label>
+          <input type="radio" id="q13-2" name="MusicXML" value="2"><label for="q13-2">2</label>
+          <input type="radio" id="q13-3" name="MusicXML" value="3"><label for="q13-3">3</label>
+          <input type="radio" id="q13-4" name="MusicXML" value="4"><label for="q13-4">4</label>
+          <input type="radio" id="q13-5" name="MusicXML" value="5"><label for="q13-5">5</label>
+        </div>
+      </div>
+
+      <div class="q"><div class="q-label"><span class="q-num">14</span><span class="lang-de">Tastatur-Shortcuts — intuitiv genug?</span><span class="lang-en">Keyboard shortcuts — intuitive enough?</span></div>
+        <div class="rating">
+          <input type="radio" id="q14-1" name="Shortcuts" value="1"><label for="q14-1">1</label>
+          <input type="radio" id="q14-2" name="Shortcuts" value="2"><label for="q14-2">2</label>
+          <input type="radio" id="q14-3" name="Shortcuts" value="3"><label for="q14-3">3</label>
+          <input type="radio" id="q14-4" name="Shortcuts" value="4"><label for="q14-4">4</label>
+          <input type="radio" id="q14-5" name="Shortcuts" value="5"><label for="q14-5">5</label>
+        </div>
+      </div>
+
+      <div class="q"><div class="q-label"><span class="q-num">15</span><span class="lang-de">Performance &amp; Stabilität in deiner Nutzung?</span><span class="lang-en">Performance &amp; stability in your use?</span></div>
+        <div class="rating">
+          <input type="radio" id="q15-1" name="Performance" value="1"><label for="q15-1">1</label>
+          <input type="radio" id="q15-2" name="Performance" value="2"><label for="q15-2">2</label>
+          <input type="radio" id="q15-3" name="Performance" value="3"><label for="q15-3">3</label>
+          <input type="radio" id="q15-4" name="Performance" value="4"><label for="q15-4">4</label>
+          <input type="radio" id="q15-5" name="Performance" value="5"><label for="q15-5">5</label>
+        </div>
+      </div>
+
+      <div class="q"><div class="q-label"><span class="q-num">16</span><span class="lang-de">Wofür nutzt du NoteChart (Band, Unterricht, eigenes Üben …)?</span><span class="lang-en">What do you use NoteChart for (band, teaching, personal practice …)?</span></div>
+        <input class="fb-input" type="text" name="Einsatzzweck">
+      </div>
+
+      <div class="q"><div class="q-label"><span class="q-num">17</span><span class="lang-de">Was hat dich am meisten überrascht — positiv oder negativ?</span><span class="lang-en">What surprised you most — positively or negatively?</span></div>
+        <textarea class="fb-textarea" name="Überraschung"></textarea>
+      </div>
+
+      <div class="q"><div class="q-label"><span class="q-num">18</span><span class="lang-de">Wie gut bildet NoteChart komplexe Akkorde ab (Alterationen, Slash-Akkorde, N.C.)?</span><span class="lang-en">How well does NoteChart handle complex chords (alterations, slash chords, N.C.)?</span></div>
+        <div class="rating">
+          <input type="radio" id="q18-1" name="Komplexe Akkorde" value="1"><label for="q18-1">1</label>
+          <input type="radio" id="q18-2" name="Komplexe Akkorde" value="2"><label for="q18-2">2</label>
+          <input type="radio" id="q18-3" name="Komplexe Akkorde" value="3"><label for="q18-3">3</label>
+          <input type="radio" id="q18-4" name="Komplexe Akkorde" value="4"><label for="q18-4">4</label>
+          <input type="radio" id="q18-5" name="Komplexe Akkorde" value="5"><label for="q18-5">5</label>
+        </div>
+      </div>
+
+      <div class="q"><div class="q-label"><span class="q-num">19</span><span class="lang-de">Taktarten &amp; Compound-Metren (6/8 etc.) — korrekt und bequem?</span><span class="lang-en">Time signatures &amp; compound metres (6/8 etc.) — correct and convenient?</span></div>
+        <div class="rating">
+          <input type="radio" id="q19-1" name="Taktarten" value="1"><label for="q19-1">1</label>
+          <input type="radio" id="q19-2" name="Taktarten" value="2"><label for="q19-2">2</label>
+          <input type="radio" id="q19-3" name="Taktarten" value="3"><label for="q19-3">3</label>
+          <input type="radio" id="q19-4" name="Taktarten" value="4"><label for="q19-4">4</label>
+          <input type="radio" id="q19-5" name="Taktarten" value="5"><label for="q19-5">5</label>
+        </div>
+      </div>
+
+      <div class="q"><div class="q-label"><span class="q-num">20</span><span class="lang-de">Voltas, Wiederholungen, Segno/Coda/D.C. — vollständig genug?</span><span class="lang-en">Voltas, repeats, Segno/Coda/D.C. — complete enough?</span></div>
+        <div class="rating">
+          <input type="radio" id="q20-1" name="Wiederholungen/Marker" value="1"><label for="q20-1">1</label>
+          <input type="radio" id="q20-2" name="Wiederholungen/Marker" value="2"><label for="q20-2">2</label>
+          <input type="radio" id="q20-3" name="Wiederholungen/Marker" value="3"><label for="q20-3">3</label>
+          <input type="radio" id="q20-4" name="Wiederholungen/Marker" value="4"><label for="q20-4">4</label>
+          <input type="radio" id="q20-5" name="Wiederholungen/Marker" value="5"><label for="q20-5">5</label>
+        </div>
+      </div>
+
+      <div class="q"><div class="q-label"><span class="q-num">21</span><span class="lang-de">Print-Look im Vergleich zu einem echten Real-Book / Lead-Sheet?</span><span class="lang-en">Print look compared to a real Real Book / lead sheet?</span></div>
+        <div class="rating">
+          <input type="radio" id="q21-1" name="Print-Look" value="1"><label for="q21-1">1</label>
+          <input type="radio" id="q21-2" name="Print-Look" value="2"><label for="q21-2">2</label>
+          <input type="radio" id="q21-3" name="Print-Look" value="3"><label for="q21-3">3</label>
+          <input type="radio" id="q21-4" name="Print-Look" value="4"><label for="q21-4">4</label>
+          <input type="radio" id="q21-5" name="Print-Look" value="5"><label for="q21-5">5</label>
+        </div>
+      </div>
+
+      <div class="q"><div class="q-label"><span class="q-num">22</span><span class="lang-de">Transposition genutzt? Ergebnis brauchbar?</span><span class="lang-en">Used transposition? Result usable?</span></div>
+        <div class="rating">
+          <input type="radio" id="q22-1" name="Transposition" value="1"><label for="q22-1">1</label>
+          <input type="radio" id="q22-2" name="Transposition" value="2"><label for="q22-2">2</label>
+          <input type="radio" id="q22-3" name="Transposition" value="3"><label for="q22-3">3</label>
+          <input type="radio" id="q22-4" name="Transposition" value="4"><label for="q22-4">4</label>
+          <input type="radio" id="q22-5" name="Transposition" value="5"><label for="q22-5">5</label>
+        </div>
+      </div>
+
+      <div class="q"><div class="q-label"><span class="q-num">23</span><span class="lang-de">Welche 3 Features hätten für dich höchste Priorität?</span><span class="lang-en">Which 3 features would be your top priority?</span></div>
+        <textarea class="fb-textarea" name="Top-3-Features"></textarea>
+      </div>
+
+      <div class="q"><div class="q-label"><span class="q-num">24</span><span class="lang-de">Was wäre dir NoteChart als fertige Version wert?</span><span class="lang-en">What would the finished version be worth to you?</span></div>
+        <input class="fb-input" type="text" name="Preisvorstellung">
+      </div>
+
+      <div class="q"><div class="q-label"><span class="q-num">25</span><span class="lang-de">Was sollte ich auf keinen Fall verändern?</span><span class="lang-en">What should I definitely not change?</span></div>
+        <textarea class="fb-textarea" name="Nicht verändern"></textarea>
+      </div>
+
+      <div class="q"><div class="q-label"><span class="q-num">26</span><span class="lang-de">Dein freier Kommentar</span><span class="lang-en">Your free comment</span></div>
+        <textarea class="fb-textarea" name="Kommentar" style="min-height:120px"></textarea>
+      </div>
+
+    </div>
+
+    <div class="fb-send-wrap">
+      <button class="btn-primary" type="submit"><span class="lang-de">Feedback senden</span><span class="lang-en">Send feedback</span></button>
+      <p class="send-note"><span class="lang-de">Danke, dass du dir die Zeit genommen hast! 🙏</span><span class="lang-en">Thank you for taking the time! 🙏</span></p>
+    </div>
+  </div>
+</form>
+
+<div class="footer">
+  <p>© 2025 Thomas Haake · <a href="index.html">haakemusic.com</a> · <a href="index.html#impressum">Impressum</a> · <a href="privacy.html">Privacy</a></p>
+</div>
+
+<script>
+function setLang(l){
+  document.body.classList.remove('lang-de','lang-en');
+  document.body.classList.add('lang-' + l);
+  try{ localStorage.setItem('nc-fb-lang', l); }catch(e){}
+}
+// Gespeicherte Sprache wiederherstellen
+try{
+  var saved = localStorage.getItem('nc-fb-lang');
+  if(saved === 'en' || saved === 'de'){ setLang(saved); }
+}catch(e){}
+// Danke-Banner nach erfolgreichem Versand (?sent=1)
+if(location.search.indexOf('sent=1') !== -1){
+  var b = document.getElementById('sent-banner');
+  if(b){ b.classList.add('show'); window.scrollTo({top:0,behavior:'smooth'}); }
+}
+</script>
+</body>
+</html>
