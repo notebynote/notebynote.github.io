@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lead Sheet Maker für Mac &amp; Windows — NoteChart</title>
-<meta name="description" content="NoteChart ist ein moderner Lead Sheet Maker für Mac und Windows: Akkorde, Rhythmus und Melodie, PDF-Export und MusicXML. Einfach für Einsteiger, vollständig für Profis.">
+<title>Lead Sheet Maker für Mac — NoteChart</title>
+<meta name="description" content="NoteChart ist ein moderner Lead Sheet Maker für Mac: Akkorde, Rhythmus und Melodie, PDF-Export und MusicXML. Einfach für Einsteiger, vollständig für Profis.">
 <link rel="canonical" href="https://haakemusic.com/notechart.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Lead Sheet Maker für Mac &amp; Windows — NoteChart">
+<meta property="og:title" content="Lead Sheet Maker für Mac — NoteChart">
 <meta property="og:description" content="Ein moderner Lead Sheet Maker: Akkorde, Rhythmus, Melodie, PDF-Export und MusicXML.">
 <meta property="og:url" content="https://haakemusic.com/notechart.html">
 <meta property="og:image" content="https://haakemusic.com/images/NC_working_area.png">
@@ -92,6 +92,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 .lightbox img{max-width:98vw;max-height:98vh;width:auto;height:auto;border-radius:8px;box-shadow:0 8px 48px rgba(0,0,0,.7)}
 .lightbox-close{position:absolute;top:18px;right:24px;background:rgba(255,255,255,.08);border:1.5px solid rgba(120,170,230,.35);color:#fff;width:40px;height:40px;border-radius:50%;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1}
 .lightbox-close:hover{background:rgba(42,111,214,.4)}
+  /* FAQ */
+  .faq{max-width:760px;margin:0 auto}
+  .faq-item{background:rgba(255,255,255,.05);border:1px solid rgba(120,170,230,.14);border-radius:14px;margin-bottom:12px;overflow:hidden}
+  .faq-item summary{list-style:none;cursor:pointer;padding:18px 22px;font-size:16px;font-weight:600;color:#fff;display:flex;justify-content:space-between;align-items:center;gap:16px}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:"+";font-size:22px;font-weight:400;color:#7ab0e8;flex:none}
+  .faq-item[open] summary::after{content:"−"}
+  .faq-a{padding:0 22px 20px;font-size:14.5px;line-height:1.7;color:#88aed0}
 </style>
 </head>
 <body>
@@ -262,6 +270,42 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
   </div>
 </div>
 
+<div class="section">
+  <p class="section-label" id="l-faq-label">FAQ</p>
+  <div class="divider"></div>
+  <h2 id="l-faq-h2">Häufige Fragen</h2>
+  <div class="faq">
+    <details class="faq-item">
+      <summary id="l-faq1-q">Was ist ein Lead-Sheet-Maker?</summary>
+      <div class="faq-a" id="l-faq1-a">Ein Lead-Sheet-Maker ist ein Werkzeug, mit dem du Lead Sheets erstellst — Notenblätter aus Akkorden, Rhythmus und optionaler Melodie. NoteChart ist ein moderner Lead-Sheet-Maker für Mac, der genau das schnell und intuitiv macht.</div>
+    </details>
+    <details class="faq-item">
+      <summary id="l-faq2-q">Für wen ist NoteChart gedacht?</summary>
+      <div class="faq-a" id="l-faq2-a">Für Musiker, Bands und Lehrer. Ob schnelles Chord Chart für die Probe, vollständiges Lead Sheet für den Auftritt oder Material für den Musikunterricht — NoteChart passt sich deinem Tempo an.</div>
+    </details>
+    <details class="faq-item">
+      <summary id="l-faq3-q">Auf welchen Plattformen läuft NoteChart?</summary>
+      <div class="faq-a" id="l-faq3-a">NoteChart startet auf macOS und ist aktuell in der Beta. Versionen für iOS, Android und Windows sind geplant.</div>
+    </details>
+    <details class="faq-item">
+      <summary id="l-faq4-q">Welche Formate kann ich importieren und exportieren?</summary>
+      <div class="faq-a" id="l-faq4-a">NoteChart exportiert druckfertige PDFs und unterstützt MusicXML Import und Export — so lassen sich auch Charts aus iReal Pro übernehmen. Projekte werden im eigenen .nct-Format gespeichert.</div>
+    </details>
+    <details class="faq-item">
+      <summary id="l-faq5-q">Kann ich nur Akkorde notieren oder auch die Melodie?</summary>
+      <div class="faq-a" id="l-faq5-a">Beides. Du legst ein reines Chord Chart an oder schaltest pro Takt Rhythmus und vollständige Melodie zu — die Notation erscheint nur dort, wo du sie brauchst.</div>
+    </details>
+    <details class="faq-item">
+      <summary id="l-faq6-q">Was kostet NoteChart?</summary>
+      <div class="faq-a" id="l-faq6-a">NoteChart ist derzeit in der Beta-Phase. Die Testerliste ist offen — trag dich ein, um dabei zu sein.</div>
+    </details>
+  </div>
+</div>
+
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Was ist ein Lead-Sheet-Maker?", "acceptedAnswer": {"@type": "Answer", "text": "Ein Lead-Sheet-Maker ist ein Werkzeug, mit dem du Lead Sheets erstellst — Notenblätter aus Akkorden, Rhythmus und optionaler Melodie. NoteChart ist ein moderner Lead-Sheet-Maker für Mac, der genau das schnell und intuitiv macht."}}, {"@type": "Question", "name": "Für wen ist NoteChart gedacht?", "acceptedAnswer": {"@type": "Answer", "text": "Für Musiker, Bands und Lehrer. Ob schnelles Chord Chart für die Probe, vollständiges Lead Sheet für den Auftritt oder Material für den Musikunterricht — NoteChart passt sich deinem Tempo an."}}, {"@type": "Question", "name": "Auf welchen Plattformen läuft NoteChart?", "acceptedAnswer": {"@type": "Answer", "text": "NoteChart startet auf macOS und ist aktuell in der Beta. Versionen für iOS, Android und Windows sind geplant."}}, {"@type": "Question", "name": "Welche Formate kann ich importieren und exportieren?", "acceptedAnswer": {"@type": "Answer", "text": "NoteChart exportiert druckfertige PDFs und unterstützt MusicXML Import und Export — so lassen sich auch Charts aus iReal Pro übernehmen. Projekte werden im eigenen .nct-Format gespeichert."}}, {"@type": "Question", "name": "Kann ich nur Akkorde notieren oder auch die Melodie?", "acceptedAnswer": {"@type": "Answer", "text": "Beides. Du legst ein reines Chord Chart an oder schaltest pro Takt Rhythmus und vollständige Melodie zu — die Notation erscheint nur dort, wo du sie brauchst."}}, {"@type": "Question", "name": "Was kostet NoteChart?", "acceptedAnswer": {"@type": "Answer", "text": "NoteChart ist derzeit in der Beta-Phase. Die Testerliste ist offen — trag dich ein, um dabei zu sein."}}]}
+</script>
+
 <div class="cta-section">
   <h2 id="l-cta-h">Beta-Testerliste</h2>
   <p id="l-cta-p">Die Beta ist jetzt live. Wer dabei sein möchte, kann sich jetzt eintragen.</p>
@@ -275,6 +319,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue'
 <script>
 const T = {
   de:{
+    'l-faq-label':'FAQ','l-faq-h2':'Häufige Fragen',
+    'l-faq1-q':'Was ist ein Lead-Sheet-Maker?','l-faq1-a':'Ein Lead-Sheet-Maker ist ein Werkzeug, mit dem du Lead Sheets erstellst — Notenblätter aus Akkorden, Rhythmus und optionaler Melodie. NoteChart ist ein moderner Lead-Sheet-Maker für Mac, der genau das schnell und intuitiv macht.',
+    'l-faq2-q':'Für wen ist NoteChart gedacht?','l-faq2-a':'Für Musiker, Bands und Lehrer. Ob schnelles Chord Chart für die Probe, vollständiges Lead Sheet für den Auftritt oder Material für den Musikunterricht — NoteChart passt sich deinem Tempo an.',
+    'l-faq3-q':'Auf welchen Plattformen läuft NoteChart?','l-faq3-a':'NoteChart startet auf macOS und ist aktuell in der Beta. Versionen für iOS, Android und Windows sind geplant.',
+    'l-faq4-q':'Welche Formate kann ich importieren und exportieren?','l-faq4-a':'NoteChart exportiert druckfertige PDFs und unterstützt MusicXML Import und Export — so lassen sich auch Charts aus iReal Pro übernehmen. Projekte werden im eigenen .nct-Format gespeichert.',
+    'l-faq5-q':'Kann ich nur Akkorde notieren oder auch die Melodie?','l-faq5-a':'Beides. Du legst ein reines Chord Chart an oder schaltest pro Takt Rhythmus und vollständige Melodie zu — die Notation erscheint nur dort, wo du sie brauchst.',
+    'l-faq6-q':'Was kostet NoteChart?','l-faq6-a':'NoteChart ist derzeit in der Beta-Phase. Die Testerliste ist offen — trag dich ein, um dabei zu sein.',
     'nav-home':'Home','nav-privacy':'Privacy','nav-feedback':'Feedback','nav-nc-info':'NoteChart','nav-nc-why':'Warum NoteChart','nav-dp-info':'Info','nav-dp-app':'App starten',
     'l-eyebrow':'macOS · Beta ist live',
     'l-sub':'Der Lead-Sheet-Maker, der neu denkt — von null an, ohne Rücksicht auf das, was immer so war.',
@@ -303,6 +354,13 @@ const T = {
     'l-cta-h':'Beta-Testerliste','l-cta-p':'Die Beta ist jetzt live. Wer dabei sein möchte, kann sich jetzt eintragen.','l-cta2':'Jetzt eintragen',
   },
   en:{
+    'l-faq-label':'FAQ','l-faq-h2':'Frequently asked questions',
+    'l-faq1-q':'What is a lead sheet maker?','l-faq1-a':'A lead sheet maker is a tool for creating lead sheets — music charts made of chords, rhythm and optional melody. NoteChart is a modern lead sheet maker for Mac that does exactly that, fast and intuitively.',
+    'l-faq2-q':'Who is NoteChart for?','l-faq2-a':'For musicians, bands and teachers. Whether it is a quick chord chart for rehearsal, a full lead sheet for the gig, or material for music class — NoteChart adapts to your pace.',
+    'l-faq3-q':'Which platforms does NoteChart run on?','l-faq3-a':'NoteChart launches on macOS and is currently in beta. Versions for iOS, Android and Windows are planned.',
+    'l-faq4-q':'Which formats can I import and export?','l-faq4-a':'NoteChart exports print-ready PDFs and supports MusicXML import and export, so you can bring in charts from iReal Pro. Projects are saved in the native .nct format.',
+    'l-faq5-q':'Can I write chords only, or the melody too?','l-faq5-a':'Both. Create a plain chord chart, or enable rhythm and full melody per bar — notation appears only where you need it.',
+    'l-faq6-q':'How much does NoteChart cost?','l-faq6-a':'NoteChart is currently in beta. The tester list is open — sign up to take part.',
     'nav-home':'Home','nav-privacy':'Privacy','nav-feedback':'Feedback','nav-nc-info':'NoteChart','nav-nc-why':'Why NoteChart','nav-dp-info':'Info','nav-dp-app':'Launch app',
     'l-eyebrow':'macOS · Beta is live',
     'l-sub':'The lead sheet maker that thinks from scratch — no legacy, no compromises.',
@@ -331,6 +389,13 @@ const T = {
     'l-cta-h':'Beta Tester List','l-cta-p':'The beta is now live. Sign up now to be among the first to try it.','l-cta2':'Sign up now',
   },
   es:{
+    'l-faq-label':'FAQ','l-faq-h2':'Preguntas frecuentes',
+    'l-faq1-q':'¿Qué es un Lead Sheet Maker?','l-faq1-a':'Un Lead Sheet Maker es una herramienta para crear lead sheets — partituras con acordes, ritmo y melodía opcional. NoteChart es un Lead Sheet Maker moderno para Mac que hace justo eso, de forma rápida e intuitiva.',
+    'l-faq2-q':'¿Para quién es NoteChart?','l-faq2-a':'Para músicos, bandas y profesores. Ya sea un chord chart rápido para el ensayo, un lead sheet completo para el concierto o material para la clase de música — NoteChart se adapta a tu ritmo.',
+    'l-faq3-q':'¿En qué plataformas funciona NoteChart?','l-faq3-a':'NoteChart se lanza en macOS y actualmente está en beta. Están previstas versiones para iOS, Android y Windows.',
+    'l-faq4-q':'¿Qué formatos puedo importar y exportar?','l-faq4-a':'NoteChart exporta PDFs listos para imprimir y admite importación y exportación de MusicXML, así puedes traer charts de iReal Pro. Los proyectos se guardan en el formato propio .nct.',
+    'l-faq5-q':'¿Puedo escribir solo acordes o también la melodía?','l-faq5-a':'Ambos. Crea un chord chart simple o activa el ritmo y la melodía completa por compás — la notación aparece solo donde la necesitas.',
+    'l-faq6-q':'¿Cuánto cuesta NoteChart?','l-faq6-a':'NoteChart está actualmente en beta. La lista de testers está abierta — apúntate para participar.',
     'nav-home':'Inicio','nav-privacy':'Privacidad','nav-feedback':'Feedback','nav-nc-info':'NoteChart','nav-nc-why':'Por qué NoteChart','nav-dp-info':'Info','nav-dp-app':'Abrir app',
     'l-eyebrow':'macOS · Beta disponible',
     'l-sub':'El Lead Sheet Maker que piensa desde cero — sin legado, sin compromisos.',
