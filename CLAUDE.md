@@ -9,7 +9,7 @@ Hostet Landing-Pages für Drone Pad und (geplant) NoteChart sowie Privacy-Policy
 
 - **Statisch**: reines HTML, kein Framework, kein Build-Step
 - **Hosting**: GitHub Pages
-- **Repo-Name**: `notebynote.github.io` (lokaler Ordner heißt `github-web`)
+- **Repo-Name**: `notebynote.github.io` (lokaler Ordnername identisch)
 - **Domain**: `haakemusic.com` via `CNAME`-Datei
 
 ## Wichtige Dateien
