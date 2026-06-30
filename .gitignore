@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Apple Pages-Quelldateien (gehören nicht ins Web-Repo)
+*.pages
+
+# Alte Backup-ZIPs
+files.zip
